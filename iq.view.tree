@@ -1,0 +1,30 @@
+$hyoo_iq $mol_page
+	title \IQ: {score}
+	Brain $hyoo_iq_neuron
+	history?val /boolean
+	plugins /
+		<= Left_key $mol_hotkey
+			key * left?event <=> left?event
+		<= Right_key $mol_hotkey
+			key * right?event <=> right?event
+	body /
+		<= History $mol_chart
+			Legend null
+			graphs /
+				<= Score $mol_plot_line
+					series_y <= score_series?val /number
+				<= Mark_vert $mol_plot_ruler_vert
+					title \
+				<= Mark_hor $mol_plot_ruler_hor
+					title \
+		<= Description $mol_text
+			text \
+				\Click buttons to maximize your score!
+		<= Choices $mol_view
+			sub /
+				<= Left $mol_button_minor
+					title \Left
+					click?event <=> left?event null
+				<= Right $mol_button_minor
+					title \Right
+					click?event <=> right?event null
