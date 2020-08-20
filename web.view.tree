@@ -438,6 +438,10 @@ $mol_plot_ruler_hor $mol_plot_ruler
 	label_pos_y!v <= title_pos_y
 	background_width \100%
 
+$mol_button_typed $mol_button
+
+$mol_button_minor $mol_button_typed
+
 $mol_list $mol_view
 	render_visible_only true
 	render_over 0.5
@@ -453,10 +457,6 @@ $mol_float $mol_view
 	style *
 		^
 		minHeight \auto
-
-$mol_button_typed $mol_button
-
-$mol_button_minor $mol_button_typed
 
 $mol_check $mol_button_minor
 	attr *
@@ -670,9 +670,6 @@ $hyoo_iq $mol_page
 					title \
 				<= Mark_hor $mol_plot_ruler_hor
 					title \
-		<= Description $mol_text
-			text \
-				\Click buttons to maximize your score!
 		<= Choices $mol_view
 			sub /
 				<= Left $mol_button_minor
@@ -681,3 +678,6 @@ $hyoo_iq $mol_page
 				<= Right $mol_button_minor
 					title \Right
 					click?event <=> right?event null
+		<= Description $mol_text
+			text \
+				\Click buttons to maximize your score!

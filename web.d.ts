@@ -1886,6 +1886,22 @@ declare namespace $.$$ {
 }
 
 declare namespace $ {
+    class $mol_button_typed extends $mol_button {
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+    class $mol_button_minor extends $mol_button_typed {
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
     class $mol_list extends $mol_view {
         render_visible_only(): boolean;
         render_over(): number;
@@ -1943,22 +1959,6 @@ declare namespace $ {
         style(): {
             minHeight: string;
         };
-    }
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
-    class $mol_button_typed extends $mol_button {
-    }
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
-    class $mol_button_minor extends $mol_button_typed {
     }
 }
 
@@ -2485,12 +2485,12 @@ declare namespace $ {
         score_series(val?: any, force?: $mol_mem_force): any;
         Mark_vert(): $$.$mol_plot_ruler_vert;
         Mark_hor(): $$.$mol_plot_ruler_hor;
-        Description(): $$.$mol_text;
         Choices(): $mol_view;
         Left(): $mol_button_minor;
         left(event?: any, force?: $mol_mem_force): any;
         Right(): $mol_button_minor;
         right(event?: any, force?: $mol_mem_force): any;
+        Description(): $$.$mol_text;
     }
 }
 

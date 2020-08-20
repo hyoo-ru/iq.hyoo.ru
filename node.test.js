@@ -5947,6 +5947,38 @@ var $;
 "use strict";
 var $;
 (function ($) {
+    class $mol_button_typed extends $.$mol_button {
+    }
+    $.$mol_button_typed = $mol_button_typed;
+})($ || ($ = {}));
+//typed.view.tree.js.map
+;
+"use strict";
+var $;
+(function ($) {
+    $.$mol_style_attach("mol/button/typed/typed.view.css", "[mol_button_typed] {\n\tdisplay: inline-block;\n\talign-content: center;\n\talign-items: center;\n\tvertical-align: middle;\n\ttext-align: center;\n\tpadding: .5rem .75rem;\n\tborder-radius: var(--mol_skin_round);\n}\n\n[mol_button_typed][disabled] {\n\tcolor: var(--mol_theme_text);\n\tpointer-events: none;\n}\n\n[mol_button_typed]:hover ,\n[mol_button_typed]:focus {\n\tcursor: pointer;\n\tbackground-color: var(--mol_theme_hover);\n}\n");
+})($ || ($ = {}));
+//typed.view.css.js.map
+;
+"use strict";
+var $;
+(function ($) {
+    class $mol_button_minor extends $.$mol_button_typed {
+    }
+    $.$mol_button_minor = $mol_button_minor;
+})($ || ($ = {}));
+//minor.view.tree.js.map
+;
+"use strict";
+var $;
+(function ($) {
+    $.$mol_style_attach("mol/button/minor/minor.view.css", "[mol_button_minor] {\n\tcolor: var(--mol_theme_control);\n}\n");
+})($ || ($ = {}));
+//minor.view.css.js.map
+;
+"use strict";
+var $;
+(function ($) {
     class $mol_list extends $.$mol_view {
         render_visible_only() {
             return true;
@@ -6212,38 +6244,6 @@ var $;
     $.$mol_style_attach("mol/float/float.view.css", "[mol_float] {\n\tposition: sticky;\n\ttop: 0;\n\tleft: 0;\n\tz-index: 1;\n\topacity: 1;\n\ttransition: opacity .25s ease-in;\n\tdisplay: block;\n\tbackground: var(--mol_theme_back);\n\tbox-shadow: 0 0 .5rem hsla(0,0%,0%,.25);\n}\n\n");
 })($ || ($ = {}));
 //float.view.css.js.map
-;
-"use strict";
-var $;
-(function ($) {
-    class $mol_button_typed extends $.$mol_button {
-    }
-    $.$mol_button_typed = $mol_button_typed;
-})($ || ($ = {}));
-//typed.view.tree.js.map
-;
-"use strict";
-var $;
-(function ($) {
-    $.$mol_style_attach("mol/button/typed/typed.view.css", "[mol_button_typed] {\n\tdisplay: inline-block;\n\talign-content: center;\n\talign-items: center;\n\tvertical-align: middle;\n\ttext-align: center;\n\tpadding: .5rem .75rem;\n\tborder-radius: var(--mol_skin_round);\n}\n\n[mol_button_typed][disabled] {\n\tcolor: var(--mol_theme_text);\n\tpointer-events: none;\n}\n\n[mol_button_typed]:hover ,\n[mol_button_typed]:focus {\n\tcursor: pointer;\n\tbackground-color: var(--mol_theme_hover);\n}\n");
-})($ || ($ = {}));
-//typed.view.css.js.map
-;
-"use strict";
-var $;
-(function ($) {
-    class $mol_button_minor extends $.$mol_button_typed {
-    }
-    $.$mol_button_minor = $mol_button_minor;
-})($ || ($ = {}));
-//minor.view.tree.js.map
-;
-"use strict";
-var $;
-(function ($) {
-    $.$mol_style_attach("mol/button/minor/minor.view.css", "[mol_button_minor] {\n\tcolor: var(--mol_theme_control);\n}\n");
-})($ || ($ = {}));
-//minor.view.css.js.map
 ;
 "use strict";
 var $;
@@ -7823,7 +7823,7 @@ var $;
             })(new this.$.$mol_hotkey());
         }
         body() {
-            return [this.History(), this.Description(), this.Choices()];
+            return [this.History(), this.Choices(), this.Description()];
         }
         History() {
             return ((obj) => {
@@ -7853,12 +7853,6 @@ var $;
                 return obj;
             })(new this.$.$mol_plot_ruler_hor());
         }
-        Description() {
-            return ((obj) => {
-                obj.text = () => "Click buttons to maximize your score!";
-                return obj;
-            })(new this.$.$mol_text());
-        }
         Choices() {
             return ((obj) => {
                 obj.sub = () => [this.Left(), this.Right()];
@@ -7884,6 +7878,12 @@ var $;
         }
         right(event, force) {
             return (event !== void 0) ? event : null;
+        }
+        Description() {
+            return ((obj) => {
+                obj.text = () => "Click buttons to maximize your score!";
+                return obj;
+            })(new this.$.$mol_text());
         }
     }
     __decorate([
@@ -7915,9 +7915,6 @@ var $;
     ], $hyoo_iq.prototype, "Mark_hor", null);
     __decorate([
         $.$mol_mem
-    ], $hyoo_iq.prototype, "Description", null);
-    __decorate([
-        $.$mol_mem
     ], $hyoo_iq.prototype, "Choices", null);
     __decorate([
         $.$mol_mem
@@ -7931,6 +7928,9 @@ var $;
     __decorate([
         $.$mol_mem
     ], $hyoo_iq.prototype, "right", null);
+    __decorate([
+        $.$mol_mem
+    ], $hyoo_iq.prototype, "Description", null);
     $.$hyoo_iq = $hyoo_iq;
 })($ || ($ = {}));
 //iq.view.tree.js.map
