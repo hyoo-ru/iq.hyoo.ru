@@ -6967,6 +6967,25 @@ var $;
 "use strict";
 var $;
 (function ($) {
+    class $mol_button_major extends $.$mol_button_typed {
+        attr() {
+            return (Object.assign(Object.assign({}, super.attr()), { "mol_theme": "$mol_theme_accent" }));
+        }
+    }
+    $.$mol_button_major = $mol_button_major;
+})($ || ($ = {}));
+//major.view.tree.js.map
+;
+"use strict";
+var $;
+(function ($) {
+    $.$mol_style_attach("mol/button/major/major.view.css", "[mol_button_major][disabled] {\n\topacity: .5;\n}\n");
+})($ || ($ = {}));
+//major.view.css.js.map
+;
+"use strict";
+var $;
+(function ($) {
     class $mol_list extends $.$mol_view {
         render_visible_only() {
             return true;
@@ -8515,7 +8534,7 @@ var $;
                 obj.title = () => "Left";
                 obj.click = (event) => this.left(event);
                 return obj;
-            })(new this.$.$mol_button_minor());
+            })(new this.$.$mol_button_major());
         }
         left(event, force) {
             return (event !== void 0) ? event : null;
@@ -8525,7 +8544,7 @@ var $;
                 obj.title = () => "Right";
                 obj.click = (event) => this.right(event);
                 return obj;
-            })(new this.$.$mol_button_minor());
+            })(new this.$.$mol_button_major());
         }
         right(event, force) {
             return (event !== void 0) ? event : null;
@@ -8595,22 +8614,20 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    const { per } = $.$mol_style_unit;
+    const { per, rem } = $.$mol_style_unit;
     $.$mol_style_define($.$hyoo_iq, {
-        History: {
-            padding: 0,
-            Plot: {
-                margin: 0,
-            },
-        },
         Description: {
             margin: 'auto',
         },
         Choices: {
-            $mol_button: {
-                flex: {
-                    basis: per(50),
-                    shrink: 1,
+            margin: [0, rem(.75)],
+            '>': {
+                $mol_button: {
+                    flex: {
+                        basis: per(50),
+                        shrink: 1,
+                    },
+                    margin: [0, rem(.75)],
                 },
             },
         },

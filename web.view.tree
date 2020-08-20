@@ -499,6 +499,11 @@ $mol_plot_ruler_hor $mol_plot_ruler
 	label_pos_y!v <= title_pos_y
 	background_width \100%
 
+$mol_button_major $mol_button_typed
+	attr *
+		^
+		mol_theme \$mol_theme_accent
+
 $mol_list $mol_view
 	render_visible_only true
 	render_over 0.5
@@ -696,10 +701,10 @@ $hyoo_iq $mol_page
 					title \
 		<= Choices $mol_view
 			sub /
-				<= Left $mol_button_minor
+				<= Left $mol_button_major
 					title \Left
 					click?event <=> left?event null
-				<= Right $mol_button_minor
+				<= Right $mol_button_major
 					title \Right
 					click?event <=> right?event null
 		<= Description $mol_text

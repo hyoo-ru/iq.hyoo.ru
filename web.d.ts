@@ -2214,6 +2214,21 @@ declare namespace $.$$ {
 }
 
 declare namespace $ {
+    class $mol_button_major extends $mol_button_typed {
+        attr(): {
+            mol_theme: string;
+            disabled: boolean;
+            role: string;
+            tabindex: number;
+            title: string;
+        };
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
     class $mol_list extends $mol_view {
         render_visible_only(): boolean;
         render_over(): number;
@@ -2683,9 +2698,9 @@ declare namespace $ {
         Mark_vert(): $$.$mol_plot_ruler_vert;
         Mark_hor(): $$.$mol_plot_ruler_hor;
         Choices(): $mol_view;
-        Left(): $mol_button_minor;
+        Left(): $mol_button_major;
         left(event?: any, force?: $mol_mem_force): any;
-        Right(): $mol_button_minor;
+        Right(): $mol_button_major;
         right(event?: any, force?: $mol_mem_force): any;
         Description(): $$.$mol_text;
     }
