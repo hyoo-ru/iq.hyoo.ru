@@ -18,9 +18,9 @@ $hyoo_iq $mol_page
 			graphs /
 				<= Score $mol_plot_line
 					series_y <= score_series?val /number
-				<= Mark_vert $mol_plot_ruler_vert
+				<= Ruler_vert $mol_plot_ruler_vert
 					title \
-				<= Mark_hor $mol_plot_ruler_hor
+				<= Ruler_hor $mol_plot_ruler_hor
 					title \
 		<= Choices $mol_view
 			sub /
