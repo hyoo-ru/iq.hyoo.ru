@@ -3,7 +3,7 @@
 	"$hyoo_iq_left_title": "Left",
 	"$hyoo_iq_right_title": "Right",
 	"$hyoo_iq_title_result": "IQ: {score}",
-	"$hyoo_iq_title_wait": "IQ: need 200 clicks",
+	"$hyoo_iq_title_wait": "IQ: need {required} clicks",
 	"$mol_lights_toggle_hint": "Toggle lights",
 	"$mol_link_source_hint": "Source code"
 }

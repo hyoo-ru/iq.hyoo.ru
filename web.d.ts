@@ -2239,6 +2239,7 @@ declare namespace $ {
     class $hyoo_iq extends $mol_page {
         title_result(): string;
         title_wait(): string;
+        required(): number;
         Brain(): $hyoo_iq_neuron;
         history(val?: any, force?: $mol_mem_force): any;
         plugins(): readonly any[];

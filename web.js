@@ -6796,6 +6796,9 @@ var $;
         title_wait() {
             return this.$.$mol_locale.text("$hyoo_iq_title_wait");
         }
+        required() {
+            return 200;
+        }
         Brain() {
             return ((obj) => {
                 return obj;
@@ -6995,11 +6998,11 @@ var $;
     (function ($$) {
         class $hyoo_iq extends $.$hyoo_iq {
             title() {
-                if (this.history().length > 200) {
+                if (this.history().length > this.required()) {
                     return super.title_result().replace('{score}', this.score().toFixed(0));
                 }
                 else {
-                    return super.title_wait();
+                    return super.title_wait().replace('{required}', this.required().toString());
                 }
             }
             right() {
