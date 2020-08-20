@@ -24,10 +24,10 @@ $hyoo_iq $mol_page
 					title \
 		<= Choices $mol_view
 			sub /
-				<= Left $mol_button_minor
+				<= Left $mol_button_major
 					title \Left
 					click?event <=> left?event null
-				<= Right $mol_button_minor
+				<= Right $mol_button_major
 					title \Right
 					click?event <=> right?event null
 		<= Description $mol_text
