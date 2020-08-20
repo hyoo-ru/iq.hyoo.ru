@@ -1121,6 +1121,134 @@ declare namespace $.$$ {
 }
 
 declare namespace $ {
+    class $mol_state_local<Value> extends $mol_object {
+        static 'native()': Pick<Storage, 'getItem' | 'setItem' | 'removeItem'>;
+        static native(): Storage | {
+            getItem(key: string): any;
+            setItem(key: string, value: string): void;
+            removeItem(key: string): void;
+        };
+        static value<Value>(key: string, next?: Value, force?: $mol_mem_force): Value | null;
+        prefix(): string;
+        value(key: string, next?: Value): Value | null;
+    }
+}
+
+declare namespace $ {
+}
+
+declare var $node: any;
+
+declare namespace $ {
+    type $mol_charset_encoding = 'utf8' | 'ibm866' | 'iso-8859-2' | 'iso-8859-3' | 'iso-8859-4' | 'iso-8859-5' | 'iso-8859-6' | 'iso-8859-7' | 'iso-8859-8' | 'iso-8859-8i' | 'iso-8859-10' | 'iso-8859-13' | 'iso-8859-14' | 'iso-8859-15' | 'iso-8859-16' | 'koi8-r' | 'koi8-u' | 'koi8-r' | 'macintosh' | 'windows-874' | 'windows-1250' | 'windows-1251' | 'windows-1252' | 'windows-1253' | 'windows-1254' | 'windows-1255' | 'windows-1256' | 'windows-1257' | 'windows-1258' | 'x-mac-cyrillic' | 'gbk' | 'gb18030' | 'hz-gb-2312' | 'big5' | 'euc-jp' | 'iso-2022-jp' | 'shift-jis' | 'euc-kr' | 'iso-2022-kr';
+    function $mol_charset_decode(value: Uint8Array, code?: $mol_charset_encoding): string;
+}
+
+declare namespace $ {
+    function $mol_charset_encode(value: string): Uint8Array;
+}
+
+declare namespace $ {
+    type $mol_file_type = 'file' | 'dir' | 'link';
+    interface $mol_file_stat {
+        type: $mol_file_type;
+        size: number;
+        atime: Date;
+        mtime: Date;
+        ctime: Date;
+    }
+    class $mol_file_not_found extends Error {
+    }
+    abstract class $mol_file extends $mol_object {
+        static absolute(path: string): $mol_file;
+        static relative(path: string): $mol_file;
+        path(): string;
+        parent(): $mol_file;
+        abstract stat(next?: $mol_file_stat, force?: $mol_mem_force): $mol_file_stat;
+        reset(): void;
+        version(): string;
+        abstract ensure(next?: boolean): boolean;
+        watcher(): {
+            destructor(): void;
+        };
+        exists(next?: boolean, force?: $mol_mem_force): boolean;
+        type(): $mol_file_type;
+        name(): string;
+        ext(): string;
+        abstract buffer(next?: Uint8Array, force?: $mol_mem_force): Uint8Array;
+        text(next?: string, force?: $mol_mem_force): string;
+        fail(error: Error): void;
+        buffer_cached(buffer: Uint8Array): void;
+        text_cached(content: string): void;
+        abstract sub(): $mol_file[];
+        abstract resolve(path: string): $mol_file;
+        abstract relate(base?: $mol_file): string;
+        abstract append(next: Uint8Array | string): void;
+        find(include?: RegExp, exclude?: RegExp): $mol_file[];
+        size(): number;
+    }
+}
+
+declare namespace $ {
+    function $mol_dom_parse(text: string, type?: SupportedType): Document;
+}
+
+declare namespace $ {
+    class $mol_fetch_response extends $mol_object2 {
+        readonly native: Response;
+        constructor(native: Response);
+        headers(): Headers;
+        mime(): string | null;
+        stream(): ReadableStream<Uint8Array> | null;
+        text(): string;
+        json(): unknown;
+        buffer(): ArrayBuffer;
+        xml(): Document;
+        xhtml(): Document;
+        html(): Document;
+    }
+    class $mol_fetch extends $mol_object2 {
+        static request: (input: RequestInfo, init?: RequestInit | undefined) => Response;
+        static response(input: RequestInfo, init?: RequestInit): $mol_fetch_response;
+        static stream(input: RequestInfo, init?: RequestInit): ReadableStream<Uint8Array> | null;
+        static text(input: RequestInfo, init?: RequestInit): string;
+        static json(input: RequestInfo, init?: RequestInit): unknown;
+        static buffer(input: RequestInfo, init?: RequestInit): void;
+        static xml(input: RequestInfo, init?: RequestInit): Document;
+        static xhtml(input: RequestInfo, init?: RequestInit): Document;
+        static html(input: RequestInfo, init?: RequestInit): Document;
+    }
+}
+
+declare namespace $ {
+    class $mol_file_web extends $mol_file {
+        static absolute(path: string): $mol_file_web;
+        static relative(path: string): $mol_file_web;
+        static base: string;
+        buffer(next?: Uint8Array, force?: $mol_mem_force): Uint8Array;
+        stat(next?: $mol_file_stat, force?: $mol_mem_force): $mol_file_stat;
+        resolve(path: string): $mol_file_web;
+        ensure(next?: boolean): boolean;
+        sub(): $mol_file[];
+        relate(base?: $mol_file): string;
+        append(next: Uint8Array | string): void;
+    }
+}
+
+declare namespace $ {
+    interface $mol_locale_dict {
+        [key: string]: string;
+    }
+    class $mol_locale extends $mol_object {
+        static lang_default(): string;
+        static lang(next?: string): string;
+        static source(lang: string): any;
+        static texts(lang: string, next?: $mol_locale_dict): $mol_locale_dict;
+        static text(key: string): string;
+    }
+}
+
+declare namespace $ {
     class $hyoo_iq_neuron {
         prediction: boolean;
         right: $hyoo_iq_neuron | null;
@@ -1152,23 +1280,6 @@ declare namespace $ {
         };
         theme(): string;
     }
-}
-
-declare namespace $ {
-    class $mol_state_local<Value> extends $mol_object {
-        static 'native()': Pick<Storage, 'getItem' | 'setItem' | 'removeItem'>;
-        static native(): Storage | {
-            getItem(key: string): any;
-            setItem(key: string, value: string): void;
-            removeItem(key: string): void;
-        };
-        static value<Value>(key: string, next?: Value, force?: $mol_mem_force): Value | null;
-        prefix(): string;
-        value(key: string, next?: Value): Value | null;
-    }
-}
-
-declare namespace $ {
 }
 
 declare namespace $ {
@@ -1426,117 +1537,6 @@ declare namespace $ {
 declare namespace $ {
     class $mol_icon_brightness_6 extends $mol_icon {
         path(): string;
-    }
-}
-
-declare var $node: any;
-
-declare namespace $ {
-    type $mol_charset_encoding = 'utf8' | 'ibm866' | 'iso-8859-2' | 'iso-8859-3' | 'iso-8859-4' | 'iso-8859-5' | 'iso-8859-6' | 'iso-8859-7' | 'iso-8859-8' | 'iso-8859-8i' | 'iso-8859-10' | 'iso-8859-13' | 'iso-8859-14' | 'iso-8859-15' | 'iso-8859-16' | 'koi8-r' | 'koi8-u' | 'koi8-r' | 'macintosh' | 'windows-874' | 'windows-1250' | 'windows-1251' | 'windows-1252' | 'windows-1253' | 'windows-1254' | 'windows-1255' | 'windows-1256' | 'windows-1257' | 'windows-1258' | 'x-mac-cyrillic' | 'gbk' | 'gb18030' | 'hz-gb-2312' | 'big5' | 'euc-jp' | 'iso-2022-jp' | 'shift-jis' | 'euc-kr' | 'iso-2022-kr';
-    function $mol_charset_decode(value: Uint8Array, code?: $mol_charset_encoding): string;
-}
-
-declare namespace $ {
-    function $mol_charset_encode(value: string): Uint8Array;
-}
-
-declare namespace $ {
-    type $mol_file_type = 'file' | 'dir' | 'link';
-    interface $mol_file_stat {
-        type: $mol_file_type;
-        size: number;
-        atime: Date;
-        mtime: Date;
-        ctime: Date;
-    }
-    class $mol_file_not_found extends Error {
-    }
-    abstract class $mol_file extends $mol_object {
-        static absolute(path: string): $mol_file;
-        static relative(path: string): $mol_file;
-        path(): string;
-        parent(): $mol_file;
-        abstract stat(next?: $mol_file_stat, force?: $mol_mem_force): $mol_file_stat;
-        reset(): void;
-        version(): string;
-        abstract ensure(next?: boolean): boolean;
-        watcher(): {
-            destructor(): void;
-        };
-        exists(next?: boolean, force?: $mol_mem_force): boolean;
-        type(): $mol_file_type;
-        name(): string;
-        ext(): string;
-        abstract buffer(next?: Uint8Array, force?: $mol_mem_force): Uint8Array;
-        text(next?: string, force?: $mol_mem_force): string;
-        fail(error: Error): void;
-        buffer_cached(buffer: Uint8Array): void;
-        text_cached(content: string): void;
-        abstract sub(): $mol_file[];
-        abstract resolve(path: string): $mol_file;
-        abstract relate(base?: $mol_file): string;
-        abstract append(next: Uint8Array | string): void;
-        find(include?: RegExp, exclude?: RegExp): $mol_file[];
-        size(): number;
-    }
-}
-
-declare namespace $ {
-    function $mol_dom_parse(text: string, type?: SupportedType): Document;
-}
-
-declare namespace $ {
-    class $mol_fetch_response extends $mol_object2 {
-        readonly native: Response;
-        constructor(native: Response);
-        headers(): Headers;
-        mime(): string | null;
-        stream(): ReadableStream<Uint8Array> | null;
-        text(): string;
-        json(): unknown;
-        buffer(): ArrayBuffer;
-        xml(): Document;
-        xhtml(): Document;
-        html(): Document;
-    }
-    class $mol_fetch extends $mol_object2 {
-        static request: (input: RequestInfo, init?: RequestInit | undefined) => Response;
-        static response(input: RequestInfo, init?: RequestInit): $mol_fetch_response;
-        static stream(input: RequestInfo, init?: RequestInit): ReadableStream<Uint8Array> | null;
-        static text(input: RequestInfo, init?: RequestInit): string;
-        static json(input: RequestInfo, init?: RequestInit): unknown;
-        static buffer(input: RequestInfo, init?: RequestInit): void;
-        static xml(input: RequestInfo, init?: RequestInit): Document;
-        static xhtml(input: RequestInfo, init?: RequestInit): Document;
-        static html(input: RequestInfo, init?: RequestInit): Document;
-    }
-}
-
-declare namespace $ {
-    class $mol_file_web extends $mol_file {
-        static absolute(path: string): $mol_file_web;
-        static relative(path: string): $mol_file_web;
-        static base: string;
-        buffer(next?: Uint8Array, force?: $mol_mem_force): Uint8Array;
-        stat(next?: $mol_file_stat, force?: $mol_mem_force): $mol_file_stat;
-        resolve(path: string): $mol_file_web;
-        ensure(next?: boolean): boolean;
-        sub(): $mol_file[];
-        relate(base?: $mol_file): string;
-        append(next: Uint8Array | string): void;
-    }
-}
-
-declare namespace $ {
-    interface $mol_locale_dict {
-        [key: string]: string;
-    }
-    class $mol_locale extends $mol_object {
-        static lang_default(): string;
-        static lang(next?: string): string;
-        static source(lang: string): any;
-        static texts(lang: string, next?: $mol_locale_dict): $mol_locale_dict;
-        static text(key: string): string;
     }
 }
 
@@ -2236,460 +2236,9 @@ declare namespace $ {
 }
 
 declare namespace $ {
-    class $mol_list extends $mol_view {
-        render_visible_only(): boolean;
-        render_over(): number;
-        sub(): readonly $mol_view[];
-        rows(): readonly $mol_view[];
-        Empty(): $mol_view;
-        Gap_before(): $mol_view;
-        gap_before(): number;
-        Gap_after(): $mol_view;
-        gap_after(): number;
-        view_window(): readonly any[];
-    }
-}
-
-declare namespace $ {
-    class $mol_dom_listener extends $mol_object {
-        _node: any;
-        _event: string;
-        _handler: (event: any) => any;
-        _config: boolean | {
-            passive: boolean;
-        };
-        constructor(_node: any, _event: string, _handler: (event: any) => any, _config?: boolean | {
-            passive: boolean;
-        });
-        destructor(): void;
-    }
-}
-
-declare namespace $ {
-    class $mol_print extends $mol_object {
-        static before(): $mol_dom_listener;
-        static after(): $mol_dom_listener;
-        static active(next?: boolean): boolean;
-    }
-}
-
-declare namespace $ {
-}
-
-declare namespace $.$$ {
-    class $mol_list extends $.$mol_list {
-        sub(): readonly $mol_view[];
-        render_visible_only(): boolean;
-        view_window(): [number, number];
-        gap_before(): number;
-        gap_after(): number;
-        sub_visible(): $mol_view[];
-        minimal_height(): number;
-    }
-}
-
-declare namespace $ {
-    class $mol_float extends $mol_view {
-        style(): {
-            minHeight: string;
-        };
-    }
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
-    class $mol_icon_chevron extends $mol_icon {
-        path(): string;
-    }
-}
-
-declare namespace $ {
-    class $mol_check_expand extends $mol_check {
-        minimal_height(): number;
-        Icon(): $mol_icon_chevron;
-        level(): number;
-        style(): {
-            paddingLeft: string;
-        };
-        level_style(): string;
-        checked(val?: any, force?: $mol_mem_force): any;
-        expanded(val?: any, force?: $mol_mem_force): any;
-        enabled(): boolean;
-        expandable(): boolean;
-    }
-}
-
-declare namespace $ {
-}
-
-declare namespace $.$$ {
-    class $mol_check_expand extends $.$mol_check_expand {
-        level_style(): string;
-        expandable(): boolean;
-    }
-}
-
-declare namespace $ {
-    class $mol_paragraph extends $mol_view {
-        line_height(): number;
-        letter_width(): number;
-    }
-}
-
-declare namespace $.$$ {
-    class $mol_paragraph extends $.$mol_paragraph {
-        maximal_width(): number;
-        minimal_width(): number;
-        minimal_height(): number;
-    }
-}
-
-declare namespace $ {
-    class $mol_dimmer extends $mol_paragraph {
-        haystack(): string;
-        needle(): string;
-        sub(): readonly $mol_view_content[];
-        parts(): readonly $mol_view_content[];
-        Low(id: any): $$.$mol_paragraph;
-        string(id: any): string;
-        High(id: any): $$.$mol_paragraph;
-    }
-}
-
-declare namespace $ {
-}
-
-declare namespace $.$$ {
-    class $mol_dimmer extends $.$mol_dimmer {
-        parts(): any[];
-        strings(): string[];
-        string(index: number): string;
-    }
-}
-
-declare namespace $ {
-    class $mol_grid extends $mol_scroll {
-        row_height(): number;
-        row_ids(): readonly string[][];
-        row_id(index: any): any;
-        col_ids(): readonly any[];
-        records(): {};
-        record(id: any): any;
-        hierarchy(): any;
-        hierarchy_col(): string;
-        sub(): readonly any[];
-        Table(): $mol_grid_table;
-        rows(): readonly $mol_view[];
-        Head(): $mol_grid_row;
-        head_cells(): readonly $mol_view[];
-        Row(id: any): $mol_grid_row;
-        cells(id: any): readonly $mol_view[];
-        Cell(id: any): $mol_view;
-        cell(id: any): any;
-        Cell_text(id: any): $mol_grid_cell;
-        cell_content_text(id: any): readonly $mol_view_content[];
-        cell_content(id: any): readonly $mol_view_content[];
-        Cell_number(id: any): $mol_grid_number;
-        cell_content_number(id: any): readonly $mol_view_content[];
-        Col_head(id: any): $mol_float;
-        col_head_content(id: any): readonly $mol_view_content[];
-        Cell_branch(id: any): $$.$mol_check_expand;
-        cell_level(id: any): number;
-        cell_expanded(id: any, val?: any, force?: $mol_mem_force): any;
-        Cell_content(id: any): readonly any[];
-        Cell_dimmer(id: any): $$.$mol_dimmer;
-        needle(): string;
-        cell_value(id: any): string;
-    }
-}
-declare namespace $ {
-    class $mol_grid_table extends $mol_list {
-        dom_name(): string;
-    }
-}
-declare namespace $ {
-    class $mol_grid_row extends $mol_view {
-        dom_name(): string;
-        sub(): readonly $mol_view[];
-        cells(): readonly $mol_view[];
-    }
-}
-declare namespace $ {
-    class $mol_grid_cell extends $mol_view {
-        dom_name(): string;
-        minimal_height(): number;
-    }
-}
-declare namespace $ {
-    class $mol_grid_number extends $mol_grid_cell {
-    }
-}
-
-declare namespace $ {
-}
-
-declare namespace $.$$ {
-    interface $mol_grid_node {
-        id: string;
-        parent: $mol_grid_node;
-        sub: $mol_grid_node[];
-    }
-    class $mol_grid extends $.$mol_grid {
-        head_cells(): readonly $mol_view[];
-        col_head_content(colId: string): readonly string[];
-        rows(): readonly $mol_view[];
-        cells(row_id: string[]): readonly $mol_view[];
-        col_type(col_id: string): "text" | "number" | "branch";
-        Cell(id: {
-            row: string[];
-            col: string;
-        }): $mol_view;
-        cell_content(id: {
-            row: string[];
-            col: string;
-        }): any[];
-        records(): any;
-        record(id: string): any;
-        record_ids(): string[];
-        row_id(index: number): string;
-        col_ids(): readonly string[];
-        hierarchy(): {
-            [id: string]: $mol_grid_node;
-        };
-        row_sub_ids(row: string[]): string[][];
-        row_root_id(): string[];
-        cell_level(id: {
-            row: string[];
-        }): number;
-        row_ids(): readonly string[][];
-        row_expanded(row_id: string[], next?: boolean): boolean | null;
-        row_expanded_default(row_id: string[]): boolean;
-        cell_expanded(id: {
-            row: string[];
-        }, next?: boolean): boolean | null;
-    }
-}
-
-declare namespace $ {
-    class $mol_image extends $mol_view {
-        dom_name(): string;
-        field(): {
-            src: string;
-            alt: string;
-        };
-        uri(): string;
-    }
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
-    class $mol_link_iconed extends $mol_link {
-        sub(): readonly any[];
-        Icon(): $mol_image;
-        icon(): string;
-        content(): readonly any[];
-        title(): string;
-        host(): string;
-    }
-}
-
-declare namespace $ {
-}
-
-declare namespace $.$$ {
-    class $mol_link_iconed extends $.$mol_link_iconed {
-        icon(): string;
-        host(): string;
-        title(): string;
-        sub(): any[];
-    }
-}
-
-declare namespace $ {
-    class $mol_text extends $mol_list {
-        uri_base(): string;
-        text(): string;
-        tokens(): readonly any[];
-        Quote(id: any): $$.$mol_text;
-        quote_text(id: any): string;
-        Row(id: any): $mol_text_row;
-        block_content(id: any): readonly any[];
-        block_type(id: any): string;
-        Span(id: any): $mol_text_span;
-        Link(id: any): $mol_text_link;
-        Image(id: any): $mol_text_image;
-        Header(id: any): $mol_text_header;
-        header_level(id: any): number;
-        header_content(id: any): readonly any[];
-        Table(id: any): $$.$mol_grid;
-        table_head_cells(id: any): readonly any[];
-        table_rows(id: any): readonly any[];
-        Table_row(id: any): $mol_grid_row;
-        table_cells(id: any): readonly any[];
-        Table_cell(id: any): $mol_grid_cell;
-        table_cell_content(id: any): readonly any[];
-        Table_cell_head(id: any): $mol_float;
-    }
-}
-declare namespace $ {
-    class $mol_text_row extends $mol_paragraph {
-        attr(): {
-            mol_text_type: string;
-        };
-        type(): string;
-    }
-}
-declare namespace $ {
-    class $mol_text_header extends $mol_paragraph {
-        dom_name(): string;
-        attr(): {
-            mol_text_header_level: any;
-        };
-        level(val?: any, force?: $mol_mem_force): any;
-        sub(): readonly any[];
-        content(): readonly any[];
-    }
-}
-declare namespace $ {
-    class $mol_text_span extends $mol_paragraph {
-        dom_name(): string;
-        attr(): {
-            mol_text_type: any;
-        };
-        type(val?: any, force?: $mol_mem_force): any;
-        sub(): any;
-        content(val?: any, force?: $mol_mem_force): any;
-    }
-}
-declare namespace $ {
-    class $mol_text_link extends $mol_link_iconed {
-        attr(): {
-            mol_text_type: any;
-            href: string;
-            title: string;
-            target: string;
-            download: string;
-            mol_link_current: boolean;
-            mol_theme: any;
-        };
-        type(val?: any, force?: $mol_mem_force): any;
-        uri(): any;
-        link(val?: any, force?: $mol_mem_force): any;
-        content(val?: any, force?: $mol_mem_force): any;
-    }
-}
-declare namespace $ {
-    class $mol_text_image extends $mol_view {
-        dom_name(): string;
-        attr(): {
-            allowfullscreen: boolean;
-            mol_text_type: any;
-            data: any;
-        };
-        type(val?: any, force?: $mol_mem_force): any;
-        link(val?: any, force?: $mol_mem_force): any;
-        sub(): readonly any[];
-        title(val?: any, force?: $mol_mem_force): any;
-    }
-}
-
-declare namespace $ {
-    class $mol_syntax2<Lexems extends {
-        [name: string]: RegExp;
-    }> {
-        lexems: Lexems;
-        constructor(lexems: Lexems);
-        rules: {
-            regExp: RegExp;
-            name: string;
-            size: number;
-        }[];
-        regexp: RegExp;
-        tokenize(text: string, handle: (name: string, found: string, chunks: string[], offset: number) => void): void;
-        parse(text: string, handlers: {
-            [key in keyof Lexems | '']: (found: string, chunks: string[], offset: number) => void;
-        }): void;
-    }
-}
-
-declare namespace $ {
-    var $mol_syntax2_md_flow: $mol_syntax2<{
-        quote: RegExp;
-        header: RegExp;
-        list: RegExp;
-        code: RegExp;
-        'code-indent': RegExp;
-        table: RegExp;
-        block: RegExp;
-    }>;
-    var $mol_syntax2_md_line: $mol_syntax2<{
-        strong: RegExp;
-        emphasis: RegExp;
-        code3: RegExp;
-        code: RegExp;
-        strike: RegExp;
-        'text-link': RegExp;
-        'image-link': RegExp;
-    }>;
-    const $mol_syntax2_md_code: $mol_syntax2<{
-        'code-docs': RegExp;
-        'code-comment-block': RegExp;
-        'code-link': RegExp;
-        'code-comment-inline': RegExp;
-        'code-string': RegExp;
-        'code-number': RegExp;
-        'code-call': RegExp;
-        'code-field': RegExp;
-        'code-keyword': RegExp;
-        'code-global': RegExp;
-        'code-decorator': RegExp;
-        'code-tag': RegExp;
-        'code-punctuation': RegExp;
-    }>;
-}
-
-declare namespace $ {
-}
-
-declare namespace $.$$ {
-    class $mol_text extends $.$mol_text {
-        tokens(): readonly {
-            name: string;
-            found: string;
-            chunks: string[];
-        }[];
-        rows(): ($mol_grid | $mol_text | $mol_text_row | $mol_text_header)[];
-        header_level(index: number): number;
-        header_content(index: number): $mol_view[];
-        quote_text(index: number): string;
-        block_type(index: number): string;
-        cell_contents(indexBlock: number): string[][];
-        table_rows(blockId: number): $mol_grid_row[];
-        table_head_cells(blockId: number): $mol_float[];
-        table_cells(id: {
-            block: number;
-            row: number;
-        }): $mol_grid_cell[];
-        table_cell_content(id: {
-            block: number;
-            row: number;
-            cell: number;
-        }): $mol_view[];
-        uri_base(): string;
-        uri_resolve(uri: string): string;
-        text2spans(prefix: string, text: string): $mol_view[];
-        code2spans(prefix: string, text: string): $mol_view[];
-        block_content(indexBlock: number): ($mol_view | string)[];
-    }
-}
-
-declare namespace $ {
     class $hyoo_iq extends $mol_page {
-        title(): string;
+        title_result(): string;
+        title_wait(): string;
         Brain(): $hyoo_iq_neuron;
         history(val?: any, force?: $mol_mem_force): any;
         plugins(): readonly any[];
@@ -2706,10 +2255,13 @@ declare namespace $ {
         Ruler_hor(): $$.$mol_plot_ruler_hor;
         Choices(): $mol_view;
         Left(): $mol_button_major;
+        left_title(): string;
         left(event?: any, force?: $mol_mem_force): any;
         Right(): $mol_button_major;
+        right_title(): string;
         right(event?: any, force?: $mol_mem_force): any;
-        Description(): $$.$mol_text;
+        Description(): $mol_view;
+        description(): string;
     }
 }
 
