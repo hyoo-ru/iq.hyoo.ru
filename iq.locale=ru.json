@@ -1,6 +1,6 @@
 {
 	"$hyoo_iq_title_result": "IQ: {score}",
-	"$hyoo_iq_title_wait": "IQ: нужно 200 нажатий",
+	"$hyoo_iq_title_wait": "IQ: нужно {required} нажатий",
 	"$hyoo_iq_left_title": "Лево",
 	"$hyoo_iq_right_title": "Право",
 	"$hyoo_iq_description": "Жми кнопки, чтобы увеличить счёт!"

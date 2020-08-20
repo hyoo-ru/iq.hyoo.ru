@@ -1,6 +1,7 @@
 $hyoo_iq $mol_page
 	title_result @ \IQ: {score}
-	title_wait @ \IQ: need 200 clicks
+	title_wait @ \IQ: need {required} clicks
+	required 200
 	Brain $hyoo_iq_neuron
 	history?val /boolean
 	plugins /

@@ -4,10 +4,10 @@ namespace $.$$ {
 
 		title() {
 			
-			if( this.history().length > 200 ) {
+			if( this.history().length > this.required() ) {
 				return super.title_result().replace( '{score}' , this.score().toFixed(0) )
 			} else {
-				return super.title_wait()
+				return super.title_wait().replace( '{required}' , this.required().toString() )
 			}
 
 		}
