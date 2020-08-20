@@ -3,10 +3,15 @@ $hyoo_iq $mol_page
 	Brain $hyoo_iq_neuron
 	history?val /boolean
 	plugins /
-		<= Left_key $mol_hotkey
-			key * left?event <=> left?event
-		<= Right_key $mol_hotkey
-			key * right?event <=> right?event
+		<= Theme $mol_theme_auto
+		<= Hotkey $mol_hotkey
+			key *
+				left?event <=> left?event
+				right?event <=> right?event
+	tools /
+		<= Lights $mol_lights_toggle
+		<= Sources $mol_link_source
+			uri \https://github.com/hyoo-ru/iq.hyoo.ru/
 	body /
 		<= History $mol_chart
 			Legend null
