@@ -1,5 +1,6 @@
 $hyoo_iq $mol_page
-	title \IQ: {score}
+	title_result @ \IQ: {score}
+	title_wait @ \IQ: need 200 clicks
 	Brain $hyoo_iq_neuron
 	history?val /boolean
 	plugins /
@@ -25,11 +26,11 @@ $hyoo_iq $mol_page
 		<= Choices $mol_view
 			sub /
 				<= Left $mol_button_major
-					title \Left
+					title <= left_title @ \Left
 					click?event <=> left?event null
 				<= Right $mol_button_major
-					title \Right
+					title <= right_title @ \Right
 					click?event <=> right?event null
-		<= Description $mol_text
-			text \
-				\Click buttons to maximize your score!
+		<= Description $mol_view
+			sub /
+				<= description @ \Click buttons to maximize your score!

@@ -3,8 +3,13 @@ namespace $.$$ {
 	export class $hyoo_iq extends $.$hyoo_iq {
 
 		title() {
-			const score = this.history().length > 200 ? this.score().toFixed(0) : 'need 200 clicks'
-			return super.title().replace( '{score}' , score )
+			
+			if( this.history().length > 200 ) {
+				return super.title_result().replace( '{score}' , this.score().toFixed(0) )
+			} else {
+				return super.title_wait()
+			}
+
 		}
 
 		right() {

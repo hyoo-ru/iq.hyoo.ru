@@ -6,6 +6,7 @@ namespace $ {
 
 		Description: {
 			margin: 'auto',
+			padding: rem(.75),
 		},
 
 		Choices: {
