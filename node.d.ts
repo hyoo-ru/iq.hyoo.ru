@@ -2695,8 +2695,8 @@ declare namespace $ {
         History(): $mol_chart;
         Score(): $$.$mol_plot_line;
         score_series(val?: any, force?: $mol_mem_force): any;
-        Mark_vert(): $$.$mol_plot_ruler_vert;
-        Mark_hor(): $$.$mol_plot_ruler_hor;
+        Ruler_vert(): $$.$mol_plot_ruler_vert;
+        Ruler_hor(): $$.$mol_plot_ruler_hor;
         Choices(): $mol_view;
         Left(): $mol_button_major;
         left(event?: any, force?: $mol_mem_force): any;

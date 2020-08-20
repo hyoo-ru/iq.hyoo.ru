@@ -8506,7 +8506,7 @@ var $;
         History() {
             return ((obj) => {
                 obj.Legend = () => null;
-                obj.graphs = () => [this.Score(), this.Mark_vert(), this.Mark_hor()];
+                obj.graphs = () => [this.Score(), this.Ruler_vert(), this.Ruler_hor()];
                 return obj;
             })(new this.$.$mol_chart());
         }
@@ -8519,13 +8519,13 @@ var $;
         score_series(val, force) {
             return (val !== void 0) ? val : [];
         }
-        Mark_vert() {
+        Ruler_vert() {
             return ((obj) => {
                 obj.title = () => "";
                 return obj;
             })(new this.$.$mol_plot_ruler_vert());
         }
-        Mark_hor() {
+        Ruler_hor() {
             return ((obj) => {
                 obj.title = () => "";
                 return obj;
@@ -8593,10 +8593,10 @@ var $;
     ], $hyoo_iq.prototype, "score_series", null);
     __decorate([
         $.$mol_mem
-    ], $hyoo_iq.prototype, "Mark_vert", null);
+    ], $hyoo_iq.prototype, "Ruler_vert", null);
     __decorate([
         $.$mol_mem
-    ], $hyoo_iq.prototype, "Mark_hor", null);
+    ], $hyoo_iq.prototype, "Ruler_hor", null);
     __decorate([
         $.$mol_mem
     ], $hyoo_iq.prototype, "Choices", null);
