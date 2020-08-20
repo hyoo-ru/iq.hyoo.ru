@@ -17,9 +17,6 @@ $hyoo_iq $mol_page
 					title \
 				<= Mark_hor $mol_plot_ruler_hor
 					title \
-		<= Description $mol_text
-			text \
-				\Click buttons to maximize your score!
 		<= Choices $mol_view
 			sub /
 				<= Left $mol_button_minor
@@ -28,3 +25,6 @@ $hyoo_iq $mol_page
 				<= Right $mol_button_minor
 					title \Right
 					click?event <=> right?event null
+		<= Description $mol_text
+			text \
+				\Click buttons to maximize your score!
