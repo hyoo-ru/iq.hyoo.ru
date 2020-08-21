@@ -398,7 +398,7 @@ $mol_chart $mol_view
 			hue_shift?val <= hue_shift 111
 
 $mol_plot_line $mol_plot_graph
-	threshold 4
+	threshold 1
 	spacing 2
 	color_fill \none
 	sub /
