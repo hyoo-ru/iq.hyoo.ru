@@ -936,14 +936,14 @@ declare namespace $ {
     class $mol_button extends $mol_view {
         enabled(): boolean;
         minimal_height(): number;
-        click(event?: any, force?: $mol_mem_force): any;
-        event_click(event?: any, force?: $mol_mem_force): any;
+        click(event?: any): any;
+        event_click(event?: any): any;
         event(): {
             click: (event?: any) => any;
             keypress: (event?: any) => any;
         };
-        event_activate(event?: any, force?: $mol_mem_force): any;
-        event_key_press(event?: any, force?: $mol_mem_force): any;
+        event_activate(event?: any): any;
+        event_key_press(event?: any): any;
         attr(): {
             disabled: boolean;
             role: string;
@@ -1083,19 +1083,19 @@ declare namespace $.$$ {
 declare namespace $ {
     class $mol_scroll extends $mol_view {
         minimal_height(): number;
-        _event_scroll_timer(val?: any, force?: $mol_mem_force): any;
+        _event_scroll_timer(val?: any): any;
         field(): {
             scrollTop: any;
             scrollLeft: any;
             tabIndex: number;
         };
-        scroll_top(val?: any, force?: $mol_mem_force): any;
-        scroll_left(val?: any, force?: $mol_mem_force): any;
+        scroll_top(val?: any): any;
+        scroll_left(val?: any): any;
         tabindex(): number;
         event(): {
             scroll: (event?: any) => any;
         };
-        event_scroll(event?: any, force?: $mol_mem_force): any;
+        event_scroll(event?: any): any;
     }
 }
 
@@ -1131,11 +1131,11 @@ declare namespace $ {
         Head(): $mol_view;
         head(): readonly any[];
         Title(): $$.$mol_button;
-        event_top(val?: any, force?: $mol_mem_force): any;
+        event_top(val?: any): any;
         Tools(): $mol_view;
         tools(): readonly $mol_view_content[];
         Body(): $$.$mol_scroll;
-        body_scroll_top(val?: any, force?: $mol_mem_force): any;
+        body_scroll_top(val?: any): any;
         body(): readonly $mol_view_content[];
         Foot(): $mol_view;
         foot(): readonly $mol_view[];
@@ -1298,7 +1298,7 @@ declare namespace $ {
         event(): {
             keydown: (event?: any) => any;
         };
-        keydown(event?: any, force?: $mol_mem_force): any;
+        keydown(event?: any): any;
         key(): {};
         mod_ctrl(): boolean;
         mod_alt(): boolean;
@@ -1441,7 +1441,7 @@ declare namespace $ {
             tabindex: number;
             title: string;
         };
-        checked(val?: any, force?: $mol_mem_force): any;
+        checked(val?: any): any;
         sub(): readonly any[];
         Icon(): any;
         label(): readonly any[];
@@ -1546,8 +1546,8 @@ declare namespace $ {
         Icon(): $mol_icon_brightness_6;
         Lights_icon(): $mol_icon_brightness_6;
         hint(): string;
-        checked(val?: any, force?: $mol_mem_force): any;
-        lights(val?: any, force?: $mol_mem_force): any;
+        checked(val?: any): any;
+        lights(val?: any): any;
     }
 }
 
@@ -1582,8 +1582,8 @@ declare namespace $ {
         event(): {
             click: (event?: any) => any;
         };
-        click(event?: any, force?: $mol_mem_force): any;
-        event_click(event?: any, force?: $mol_mem_force): any;
+        click(event?: any): any;
+        event_click(event?: any): any;
     }
 }
 
@@ -1750,8 +1750,6 @@ declare namespace $ {
         hue(): number;
         Sample(): any;
     }
-}
-declare namespace $ {
     class $mol_plot_graph_sample extends $mol_view {
         attr(): {
             mol_plot_graph_type: string;
@@ -1806,12 +1804,12 @@ declare namespace $.$$ {
 declare namespace $ {
     class $mol_meter extends $mol_plugin {
         zoom(): number;
-        width(val?: any, force?: $mol_mem_force): any;
-        height(val?: any, force?: $mol_mem_force): any;
-        left(val?: any, force?: $mol_mem_force): any;
-        right(val?: any, force?: $mol_mem_force): any;
-        bottom(val?: any, force?: $mol_mem_force): any;
-        top(val?: any, force?: $mol_mem_force): any;
+        width(val?: any): any;
+        height(val?: any): any;
+        left(val?: any): any;
+        right(val?: any): any;
+        bottom(val?: any): any;
+        top(val?: any): any;
     }
 }
 
@@ -1838,26 +1836,26 @@ declare namespace $.$$ {
 
 declare namespace $ {
     class $mol_touch extends $mol_plugin {
-        start_zoom(val?: any, force?: $mol_mem_force): any;
-        start_distance(val?: any, force?: $mol_mem_force): any;
-        zoom(val?: any, force?: $mol_mem_force): any;
-        start_pan(val?: any, force?: $mol_mem_force): any;
-        pan(val?: any, force?: $mol_mem_force): any;
-        pos(val?: any, force?: $mol_mem_force): any;
-        start_pos(val?: any, force?: $mol_mem_force): any;
+        start_zoom(val?: any): any;
+        start_distance(val?: any): any;
+        zoom(val?: any): any;
+        start_pan(val?: any): any;
+        pan(val?: any): any;
+        pos(val?: any): any;
+        start_pos(val?: any): any;
         swipe_precision(): number;
-        swipe_right(val?: any, force?: $mol_mem_force): any;
-        swipe_bottom(val?: any, force?: $mol_mem_force): any;
-        swipe_left(val?: any, force?: $mol_mem_force): any;
-        swipe_top(val?: any, force?: $mol_mem_force): any;
-        swipe_from_right(val?: any, force?: $mol_mem_force): any;
-        swipe_from_bottom(val?: any, force?: $mol_mem_force): any;
-        swipe_from_left(val?: any, force?: $mol_mem_force): any;
-        swipe_from_top(val?: any, force?: $mol_mem_force): any;
-        swipe_to_right(val?: any, force?: $mol_mem_force): any;
-        swipe_to_bottom(val?: any, force?: $mol_mem_force): any;
-        swipe_to_left(val?: any, force?: $mol_mem_force): any;
-        swipe_to_top(val?: any, force?: $mol_mem_force): any;
+        swipe_right(val?: any): any;
+        swipe_bottom(val?: any): any;
+        swipe_left(val?: any): any;
+        swipe_top(val?: any): any;
+        swipe_from_right(val?: any): any;
+        swipe_from_bottom(val?: any): any;
+        swipe_from_left(val?: any): any;
+        swipe_from_top(val?: any): any;
+        swipe_to_right(val?: any): any;
+        swipe_to_bottom(val?: any): any;
+        swipe_to_left(val?: any): any;
+        swipe_to_top(val?: any): any;
         style(): {
             "touch-action": string;
             "overscroll-behavior": string;
@@ -1872,11 +1870,11 @@ declare namespace $ {
             mouseleave: (event?: any) => any;
             wheel: (event?: any) => any;
         };
-        event_start(event?: any, force?: $mol_mem_force): any;
-        event_move(event?: any, force?: $mol_mem_force): any;
-        event_end(event?: any, force?: $mol_mem_force): any;
-        event_leave(event?: any, force?: $mol_mem_force): any;
-        event_wheel(event?: any, force?: $mol_mem_force): any;
+        event_start(event?: any): any;
+        event_move(event?: any): any;
+        event_end(event?: any): any;
+        event_leave(event?: any): any;
+        event_wheel(event?: any): any;
     }
 }
 
@@ -1898,8 +1896,8 @@ declare namespace $.$$ {
 declare namespace $ {
     class $mol_plot_pane extends $mol_svg_root {
         aspect(): string;
-        hue_base(val?: any, force?: $mol_mem_force): any;
-        hue_shift(val?: any, force?: $mol_mem_force): any;
+        hue_base(val?: any): any;
+        hue_shift(val?: any): any;
         gap_hor(): number;
         gap_vert(): number;
         gap_left(): number;
@@ -1913,14 +1911,14 @@ declare namespace $ {
         shift_limit_x(): $mol_vector_range<number>;
         shift_limit_y(): $mol_vector_range<number>;
         shift_default(): readonly number[];
-        shift(val?: any, force?: $mol_mem_force): any;
+        shift(val?: any): any;
         scale_limit(): $mol_vector_2d<$mol_vector_range<number>>;
         scale_limit_x(): $mol_vector_range<number>;
         scale_limit_y(): $mol_vector_range<number>;
         scale_default(): readonly number[];
-        scale(val?: any, force?: $mol_mem_force): any;
-        scale_x(val?: any, force?: $mol_mem_force): any;
-        scale_y(val?: any, force?: $mol_mem_force): any;
+        scale(val?: any): any;
+        scale_x(val?: any): any;
+        scale_y(val?: any): any;
         size(): $mol_vector_2d<number>;
         size_real(): $mol_vector_2d<number>;
         dimensions_viewport(): $mol_vector_2d<$mol_vector_range<number>>;
@@ -1934,16 +1932,16 @@ declare namespace $ {
         graphs_colored(): readonly $mol_plot_graph[];
         graphs_positioned(): readonly $mol_plot_graph[];
         graphs(): readonly $mol_plot_graph[];
-        cursor_position(val?: any, force?: $mol_mem_force): any;
+        cursor_position(val?: any): any;
         plugins(): readonly any[];
+        Meter(): $$.$mol_meter;
         width(): number;
         height(): number;
-        Meter(): $$.$mol_meter;
         Touch(): $$.$mol_touch;
         event(): {
             dblclick: (event?: any) => any;
         };
-        reset(event?: any, force?: $mol_mem_force): any;
+        reset(event?: any): any;
     }
 }
 
@@ -1985,8 +1983,8 @@ declare namespace $ {
         graphs(): readonly $mol_plot_graph[];
         sub(): readonly any[];
         Legend(): $$.$mol_chart_legend;
-        graphs_colored(): readonly $mol_plot_graph[];
         Plot(): $$.$mol_plot_pane;
+        graphs_colored(): readonly $mol_plot_graph[];
         hue_base(): number;
         hue_shift(): number;
     }
@@ -2115,7 +2113,7 @@ declare namespace $ {
         dimensions_axis(): $mol_vector_range<number>;
         viewport_axis(): $mol_vector_range<number>;
         axis_points(): readonly number[];
-        normalize(val?: any, force?: $mol_mem_force): any;
+        normalize(val?: any): any;
         precision(): number;
         sub(): readonly any[];
         Background(): $$.$mol_svg_rect;
@@ -2236,7 +2234,7 @@ declare namespace $ {
         title_wait(): string;
         required(): number;
         Brain(): $hyoo_iq_neuron;
-        history(val?: any, force?: $mol_mem_force): any;
+        history(val?: any): any;
         plugins(): readonly any[];
         Theme(): $$.$mol_theme_auto;
         Hotkey(): $$.$mol_hotkey;
@@ -2246,16 +2244,16 @@ declare namespace $ {
         body(): readonly any[];
         History(): $mol_chart;
         Score(): $$.$mol_plot_line;
-        score_series(val?: any, force?: $mol_mem_force): any;
+        score_series(val?: any): any;
         Ruler_vert(): $$.$mol_plot_ruler_vert;
         Ruler_hor(): $$.$mol_plot_ruler_hor;
         Choices(): $mol_view;
         Left(): $mol_button_major;
         left_title(): string;
-        left(event?: any, force?: $mol_mem_force): any;
+        left(event?: any): any;
         Right(): $mol_button_major;
         right_title(): string;
-        right(event?: any, force?: $mol_mem_force): any;
+        right(event?: any): any;
         Description(): $mol_view;
         description(): string;
     }
@@ -2272,6 +2270,79 @@ declare namespace $.$$ {
         choice(next: boolean): void;
         score(): number;
     }
+}
+
+declare namespace $ {
+    class $mol_view_tree_test_attributes_super extends $mol_view {
+        some(): {
+            a: number;
+            b: number;
+        };
+    }
+    class $mol_view_tree_test_attributes extends $mol_view_tree_test_attributes_super {
+        some(): {
+            a: number;
+            b: number;
+        };
+    }
+}
+
+declare namespace $ {
+    class $mol_view_tree_test_binding extends $mol_view {
+        value(val?: any): any;
+        task_title_new(val?: any): any;
+        enabled(): boolean;
+        head_complete_enabled(): boolean;
+    }
+}
+
+declare namespace $ {
+    class $mol_view_tree_test_binding_right extends $mol_view {
+        Test(): $mol_view_tree_test_binding_right_test;
+        outer_width(v?: any): any;
+    }
+    class $mol_view_tree_test_binding_right_test extends $mol_view {
+        width(val?: any): any;
+    }
+}
+
+declare namespace $ {
+    class $mol_view_tree_test_simple extends $mol_view {
+        some(): number;
+        bool(): boolean;
+        str(): string;
+        arr(): readonly any[];
+        arr_string(): readonly string[];
+    }
+}
+
+declare namespace $ {
+    class $mol_view_tree_test_attributes_subcomponent extends $mol_view {
+        Page(index: any): $mol_view_tree_test_attributes_subcomponent_page;
+        page(index: any): any;
+    }
+    class $mol_view_tree_test_attributes_subcomponent_page extends $mol_view {
+        Sub(): any;
+    }
+}
+
+declare namespace $ {
+    function $mol_view_tree_trim_remarks(def: $mol_tree): $mol_tree;
+    function $mol_view_tree_classes(defs: $mol_tree): $mol_tree;
+    function $mol_view_tree_class_name(val: $mol_tree): string;
+    function $mol_view_tree_super_name(val: $mol_tree): string;
+    function $mol_view_tree_class_props(def: $mol_tree): $mol_tree;
+    function $mol_view_tree_prop_name(prop: $mol_tree): string;
+    function $mol_view_tree_prop_key(prop: $mol_tree): string;
+    function $mol_view_tree_prop_next(prop: $mol_tree): string;
+    function $mol_view_tree_prop_value(prop: $mol_tree): $mol_tree;
+    function $mol_view_tree_value_type(val: $mol_tree): "locale" | "string" | "object" | "number" | "null" | "bool" | "dict" | "get" | "bind" | "put" | "list";
+    function $mol_view_tree_compile(tree: $mol_tree): {
+        script: string;
+        locales: {
+            [key: string]: string;
+        };
+    };
 }
 
 declare namespace $ {
