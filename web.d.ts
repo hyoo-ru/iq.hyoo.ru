@@ -1,5 +1,17 @@
-declare namespace $ { }
-export = $;
+declare let _$_: {
+    new (): {};
+} & typeof globalThis;
+declare class $ extends _$_ {
+}
+declare namespace $ {
+    export type $ = typeof $$;
+    export class $$ extends $ {
+    }
+    namespace $$ {
+        type $$ = $;
+    }
+    export {};
+}
 
 declare namespace $ {
     function $mol_fail(error: any): never;
@@ -68,12 +80,9 @@ declare namespace $ {
 }
 
 declare namespace $ {
-    namespace $$ {
-        let $$: typeof $;
-    }
     const $mol_ambient_ref: unique symbol;
-    type $mol_ambient_context = (typeof globalThis) & (typeof $.$$) & (typeof $);
-    function $mol_ambient(this: $mol_ambient_context | void, overrides: Partial<$mol_ambient_context>): $mol_ambient_context;
+    type $mol_ambient_context = $;
+    function $mol_ambient(this: $ | void, overrides: Partial<$>): $;
 }
 
 declare namespace $ {
@@ -102,10 +111,10 @@ declare namespace $ {
 
 declare namespace $ {
     class $mol_object2 {
-        static $: $mol_ambient_context;
-        [$mol_ambient_ref]: $mol_ambient_context;
-        get $(): $mol_ambient_context;
-        set $(next: $mol_ambient_context);
+        static $: typeof $$;
+        [$mol_ambient_ref]: typeof $$;
+        get $(): $;
+        set $(next: $);
         constructor(init?: (obj: any) => void);
         static create<Instance>(this: new (init?: (instance: any) => void) => Instance, init?: (instance: $mol_type_writable<Instance>) => void): Instance;
         static toString(): any;
@@ -190,7 +199,7 @@ declare namespace $ {
         place: unknown;
         message: string;
     } & Fields;
-    type $mol_log3_logger<Fields, Res = void> = (this: $mol_ambient_context, event: $mol_log3_event<Fields>) => Res;
+    type $mol_log3_logger<Fields, Res = void> = (this: $, event: $mol_log3_event<Fields>) => Res;
     let $mol_log3_come: $mol_log3_logger<{}>;
     let $mol_log3_done: $mol_log3_logger<{}>;
     let $mol_log3_fail: $mol_log3_logger<{}>;
@@ -199,12 +208,12 @@ declare namespace $ {
     }>;
     let $mol_log3_rise: $mol_log3_logger<{}>;
     let $mol_log3_area: $mol_log3_logger<{}, () => void>;
-    function $mol_log3_area_lazy(this: $mol_ambient_context, event: $mol_log3_event<{}>): () => void;
+    function $mol_log3_area_lazy(this: $, event: $mol_log3_event<{}>): () => void;
     let $mol_log3_stack: (() => void)[];
 }
 
 declare namespace $ {
-    function $mol_log3_web_make<Close>(level: keyof Console, color: string): (this: $mol_ambient_context, event: $mol_log3_event<{}>) => () => void;
+    function $mol_log3_web_make<Close>(level: keyof Console, color: string): (this: $, event: $mol_log3_event<{}>) => () => void;
 }
 
 declare namespace $ {
@@ -345,11 +354,12 @@ declare namespace $ {
 }
 
 declare namespace $ {
-    function $mol_atom2_value<Value>(task: () => Value): Value | undefined;
+    function $mol_atom2_value<Value>(task: () => Value, next?: Value): Value | undefined;
     class $mol_atom2<Value = any> extends $mol_fiber<Value> {
         static logs: boolean;
         static get current(): $mol_atom2<any> | null;
         static cached: boolean;
+        static cached_next: any;
         static reap_task: $mol_fiber<any> | null;
         static reap_queue: $mol_atom2<any>[];
         static reap(atom: $mol_atom2): void;
@@ -406,7 +416,7 @@ declare namespace $ {
     function $mol_mem_persist(): void;
     function $mol_mem<Host extends object, Field extends keyof Host, Prop extends Extract<Host[Field], (next?: any) => any>>(proto: Host, name: Field, descr?: TypedPropertyDescriptor<Prop>): {
         value: ((this: Host, next?: $mol_type_param<Prop, 0> | undefined, force?: $mol_mem_force | undefined) => any) & {
-            orig: NonNullable<Prop>;
+            orig: Function;
         };
         enumerable?: boolean | undefined;
         configurable?: boolean | undefined;
@@ -493,6 +503,10 @@ declare namespace $ {
 }
 
 declare namespace $ {
+    function $mol_fail_catch(error: object): boolean;
+}
+
+declare namespace $ {
     function $mol_const<Value>(value: Value): {
         (): Value;
         '()': Value;
@@ -503,10 +517,6 @@ declare namespace $ {
     function $mol_dom_render_attributes(el: Element, attrs: {
         [key: string]: string | number | boolean | null;
     }): void;
-}
-
-declare namespace $ {
-    function $mol_fail_catch(error: object): boolean;
 }
 
 declare namespace $ {
@@ -532,13 +542,13 @@ declare namespace $ {
 }
 
 declare namespace $ {
-    function $mol_func_name(this: $mol_ambient_context, func: Function): string;
+    function $mol_func_name(this: $, func: Function): string;
     function $mol_func_name_from<Target extends Function>(target: Target, source: Function): Target;
 }
 
 declare namespace $ {
     function $mol_deprecated(message: string): <Method extends (this: Host, ...args: readonly any[]) => any, Host extends { [key in Field]: Method; } & {
-        $: $mol_ambient_context;
+        $: $;
     }, Field extends keyof Host>(host: Host, field: Field, descr: TypedPropertyDescriptor<Method>) => void;
 }
 
@@ -602,8 +612,11 @@ declare namespace $ {
             [key: string]: (event: Event) => void;
         };
         plugins(): readonly $mol_view[];
+        view_find(check: (path: $mol_view, text?: string) => boolean, path?: $mol_view[]): Generator<$mol_view[]>;
+        force_render(path: Set<$mol_view>): void;
+        ensure_visible(view: $mol_view): Promise<void>;
     }
-    type $mol_view_all = $mol_type_pick<$mol_ambient_context, typeof $mol_view>;
+    type $mol_view_all = $mol_type_pick<$, typeof $mol_view>;
 }
 
 declare namespace $ {
@@ -781,9 +794,9 @@ declare namespace $ {
     export type $mol_style_properties = Partial<$mol_type_override<CSSStyleDeclaration, Overrides>>;
     type Common = 'inherit' | 'initial' | 'unset';
     type Color = keyof typeof $mol_colors | 'transparent' | 'currentcolor' | $mol_style_func<'hsla' | 'rgba' | 'var'>;
-    type Length = 0 | $mol_style_unit<$mol_style_unit_length> | $mol_style_func<'calc'>;
+    type Length = 0 | $mol_style_unit<$mol_style_unit_length> | $mol_style_func<'calc' | 'var'>;
     type Size = 'auto' | 'max-content' | 'min-content' | 'fit-content' | Length | Common;
-    type Directions<Value> = Value | [Value, Value] | {
+    type Directions<Value> = Value | readonly [Value, Value] | {
         top?: Value;
         right?: Value;
         bottom?: Value;
@@ -794,10 +807,10 @@ declare namespace $ {
     type Overflow = 'visible' | 'hidden' | 'clip' | 'scroll' | 'auto' | 'overlay' | Common;
     type ContainRule = 'size' | 'layout' | 'style' | 'paint';
     interface Overrides {
-        alignContent?: 'baseline' | 'start' | 'end' | 'flex-start' | 'flex-end' | 'center' | 'normal' | 'space-between' | 'space-around' | 'space-evenly' | 'stretch' | ['first' | 'last', 'baseline'] | ['safe' | 'unsafe', 'start' | 'end' | 'flex-start' | 'flex-end'] | Common;
+        alignContent?: 'baseline' | 'start' | 'end' | 'flex-start' | 'flex-end' | 'center' | 'normal' | 'space-between' | 'space-around' | 'space-evenly' | 'stretch' | readonly ['first' | 'last', 'baseline'] | readonly ['safe' | 'unsafe', 'start' | 'end' | 'flex-start' | 'flex-end'] | Common;
         background?: 'none' | {
             color?: Color | Common;
-            image?: [$mol_style_func<'url'>][];
+            image?: readonly (readonly [$mol_style_func<'url'>])[];
         };
         box?: {
             shadow?: readonly {
@@ -822,17 +835,17 @@ declare namespace $ {
             y?: Overflow | Common;
             anchor?: 'auto' | 'none' | Common;
         };
-        contain?: 'none' | 'strict' | 'content' | ContainRule | ContainRule[] | Common;
+        contain?: 'none' | 'strict' | 'content' | ContainRule | readonly ContainRule[] | Common;
         whiteSpace?: 'normal' | 'nowrap' | 'break-spaces' | 'pre' | 'pre-wrap' | 'pre-line' | Common;
         webkitOverflowScrolling?: 'auto' | 'touch';
         scrollbar?: {
-            color?: [Color, Color] | 'dark' | 'light' | 'auto' | Common;
+            color?: readonly [Color, Color] | 'dark' | 'light' | 'auto' | Common;
         };
         scroll?: {
             snap?: {
-                type: 'none' | Snap_axis | [Snap_axis, 'mandatory' | 'proximity'] | Common;
+                type: 'none' | Snap_axis | readonly [Snap_axis, 'mandatory' | 'proximity'] | Common;
                 stop: 'normal' | 'always' | Common;
-                align: Span_align | [Span_align, Span_align] | Common;
+                align: Span_align | readonly [Span_align, Span_align] | Common;
             };
         };
         width?: Size;
@@ -843,6 +856,15 @@ declare namespace $ {
         maxHeight?: Size;
         margin?: Directions<Length | 'auto'>;
         padding?: Directions<Length | 'auto'>;
+        position?: 'static' | 'relative' | 'absolute' | 'sticky' | 'fixed';
+        top?: Length | 'auto' | Common;
+        right?: Length | 'auto' | Common;
+        bottom?: Length | 'auto' | Common;
+        left?: Length | 'auto' | Common;
+        border?: {
+            radius?: Length | [Length, Length];
+            style?: 'none' | 'hidden' | 'dotted' | 'dashed' | 'solid' | 'double' | 'groove' | 'ridge' | 'inset' | 'outset' | Common;
+        };
         flex?: 'none' | 'auto' | {
             grow?: number | Common;
             shrink?: number | Common;
@@ -851,6 +873,7 @@ declare namespace $ {
             wrap?: 'wrap' | 'nowrap' | 'wrap-reverse' | Common;
         };
         zIndex: number;
+        opacity: number;
     }
     export {};
 }
@@ -916,7 +939,7 @@ declare namespace $ {
         event_click(event?: any): any;
         event(): {
             click: (event?: any) => any;
-            keypress: (event?: any) => any;
+            keydown: (event?: any) => any;
         };
         attr(): {
             disabled: boolean;
@@ -1052,8 +1075,18 @@ declare namespace $.$$ {
         tab_index(): number;
         error(): string;
         hint_or_error(): string;
-        sub_visible(): (string | number | boolean | Node | $mol_view | $mol_speck)[];
+        sub_visible(): (string | number | boolean | $mol_view | Node | $mol_speck)[];
     }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+    let $mol_gap: {
+        readonly block: $mol_style_func<"var", "--mol_gap_block">;
+        readonly text: $mol_style_func<"var", "--mol_gap_text">;
+    };
 }
 
 declare namespace $ {
@@ -1089,6 +1122,29 @@ declare namespace $ {
     }
 }
 
+declare namespace $ {
+    class $mol_dom_listener extends $mol_object {
+        _node: any;
+        _event: string;
+        _handler: (event: any) => any;
+        _config: boolean | {
+            passive: boolean;
+        };
+        constructor(_node: any, _event: string, _handler: (event: any) => any, _config?: boolean | {
+            passive: boolean;
+        });
+        destructor(): void;
+    }
+}
+
+declare namespace $ {
+    class $mol_print extends $mol_object {
+        static before(): $mol_dom_listener;
+        static after(): $mol_dom_listener;
+        static active(next?: boolean): boolean;
+    }
+}
+
 declare namespace $.$$ {
 }
 
@@ -1098,14 +1154,14 @@ declare namespace $.$$ {
         scroll_left(next?: number): number;
         _event_scroll_timer(next?: $mol_after_timeout | null): $mol_after_timeout | null | undefined;
         event_scroll(next?: Event): void;
+        minimal_height(): number;
     }
 }
 
 declare namespace $ {
     class $mol_page extends $mol_view {
         sub(): readonly any[];
-        event_top(val?: any): any;
-        Title(): $$.$mol_button;
+        Title(): $mol_view;
         tools(): readonly $mol_view_content[];
         Tools(): $mol_view;
         head(): readonly any[];
@@ -1252,6 +1308,7 @@ declare namespace $ {
         static source(lang: string): any;
         static texts(lang: string, next?: $mol_locale_dict): $mol_locale_dict;
         static text(key: string): string;
+        static warn(key: string): null;
     }
 }
 
@@ -1290,7 +1347,7 @@ declare namespace $ {
 }
 
 declare namespace $ {
-    function $mol_lights(this: $mol_ambient_context, next?: boolean): boolean;
+    function $mol_lights(this: $, next?: boolean): boolean;
 }
 
 declare namespace $.$$ {
@@ -1585,7 +1642,6 @@ declare namespace $ {
             target: string;
             download: string;
             mol_link_current: boolean;
-            mol_theme: any;
         };
         sub(): readonly $mol_view_content[];
         arg(): {};
@@ -1597,7 +1653,6 @@ declare namespace $ {
         target(): string;
         file_name(): string;
         current(): boolean;
-        theme(): any;
         event_click(event?: any): any;
         click(event?: any): any;
     }
@@ -1642,7 +1697,6 @@ declare namespace $.$$ {
         event_click(event?: Event): void;
         file_name(): string;
         minimal_height(): number;
-        theme(): "$mol_theme_base" | null;
     }
 }
 
@@ -2394,7 +2448,7 @@ declare namespace $ {
     function $mol_view_tree_prop_key(prop: $mol_tree): string;
     function $mol_view_tree_prop_next(prop: $mol_tree): string;
     function $mol_view_tree_prop_value(prop: $mol_tree): $mol_tree;
-    function $mol_view_tree_value_type(val: $mol_tree): "locale" | "string" | "object" | "number" | "null" | "bool" | "dict" | "get" | "bind" | "put" | "list";
+    function $mol_view_tree_value_type(val: $mol_tree): "locale" | "string" | "object" | "bool" | "null" | "dict" | "get" | "bind" | "put" | "list" | "number";
     function $mol_view_tree_compile(tree: $mol_tree): {
         script: string;
         locales: {
