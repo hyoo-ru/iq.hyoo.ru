@@ -25,16 +25,27 @@ namespace $.$$ {
 			const brain = this.Brain()
 			const history = this.history()
 			
-			brain.learn( next , history )
-			this.history([ ... history , next ])
+			let prediction = brain.predict( history )
+			let teach = next
+			
+			if( Math.random() < .1 ) teach = !teach
+			brain.learn( teach , history )
+			
+			this.history([ ... history , teach ])
+			if( next !== prediction ) this.wins( this.wins() + 1 )
 
 			this.score_series([ ... this.score_series() , this.score() ])
 
 		}
 
 		@ $mol_mem
+		wins( next = 0 ) {
+			return next
+		}
+		
+		@ $mol_mem
 		score() {
-			return this.Brain().size() / ( this.history().length + 1 ) * 100
+			return this.wins() / ( this.history().length + 1 ) * 100
 		}
 
 	}
