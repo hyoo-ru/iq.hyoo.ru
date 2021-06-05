@@ -162,7 +162,7 @@ var $;
                 return false;
             return true;
         }
-        catch (_a) {
+        catch {
             return false;
         }
     }
@@ -239,7 +239,7 @@ var $;
             if (this[$.$mol_ambient_ref])
                 return this[$.$mol_ambient_ref];
             const owner = $.$mol_owning_get(this);
-            return this[$.$mol_ambient_ref] = (owner === null || owner === void 0 ? void 0 : owner.$) || $mol_object2.$;
+            return this[$.$mol_ambient_ref] = owner?.$ || $mol_object2.$;
         }
         set $(next) {
             if (this[$.$mol_ambient_ref])
@@ -321,7 +321,7 @@ var $node = new Proxy({ require }, {
                 try {
                     $$.$mol_exec('.', 'npm', 'install', '@types/' + name);
                 }
-                catch (_a) { }
+                catch { }
                 break;
             }
             else {
@@ -1660,7 +1660,7 @@ var $;
                 try {
                     next[Symbol.toStringTag] = this[Symbol.toStringTag];
                 }
-                catch (_a) { }
+                catch { }
                 next[$.$mol_object_field] = this[$.$mol_object_field];
             }
             this._value = next;
@@ -2303,10 +2303,9 @@ var $;
         static wrap(task) {
             const store = new WeakMap();
             return function (next) {
-                var _a;
                 if (next === undefined && store.has(this))
                     return store.get(this);
-                const val = (_a = task.call(this, next)) !== null && _a !== void 0 ? _a : next;
+                const val = task.call(this, next) ?? next;
                 store.set(this, val);
                 return val;
             };
@@ -2321,7 +2320,7 @@ var $;
 (function ($) {
     function $mol_func_name(func) {
         let name = func.name;
-        if ((name === null || name === void 0 ? void 0 : name.length) > 1)
+        if (name?.length > 1)
             return name;
         for (let key in this) {
             try {
@@ -2331,7 +2330,7 @@ var $;
                 Object.defineProperty(func, 'name', { value: name });
                 break;
             }
-            catch (_a) { }
+            catch { }
         }
         return name;
     }
@@ -2434,10 +2433,9 @@ var $;
             return this.minimal_width();
         }
         minimal_height() {
-            var _a;
             let min = 0;
             try {
-                for (const view of (_a = this.sub()) !== null && _a !== void 0 ? _a : []) {
+                for (const view of this.sub() ?? []) {
                     if (view instanceof $mol_view) {
                         min = Math.max(min, view.minimal_height());
                     }
@@ -3232,16 +3230,15 @@ var $;
                 return this.enabled() ? super.tab_index() : -1;
             }
             error() {
-                var _a, _b;
                 try {
-                    (_a = this.fiber()) === null || _a === void 0 ? void 0 : _a.get();
+                    this.fiber()?.get();
                     return '';
                 }
                 catch (error) {
                     if (error instanceof Promise) {
                         return $.$mol_fail_hidden(error);
                     }
-                    return String((_b = error.message) !== null && _b !== void 0 ? _b : error);
+                    return String(error.message ?? error);
                 }
             }
             hint_or_error() {
@@ -3524,8 +3521,7 @@ var $;
                 return next;
             }
             event_scroll(next) {
-                var _a;
-                (_a = this._event_scroll_timer()) === null || _a === void 0 ? void 0 : _a.destructor();
+                this._event_scroll_timer()?.destructor();
                 const el = this.dom_node();
                 this._event_scroll_timer(new $.$mol_after_timeout(200, $.$mol_fiber_solid.func(() => {
                     this.scroll_top(Math.max(0, el.scrollTop));
@@ -3795,8 +3791,7 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    var _a;
-    const TextDecoder = (_a = globalThis.TextDecoder) !== null && _a !== void 0 ? _a : $node.util.TextDecoder;
+    const TextDecoder = globalThis.TextDecoder ?? $node.util.TextDecoder;
     function $mol_charset_decode(value, code = 'utf8') {
         return new TextDecoder(code).decode(value);
     }
@@ -3807,8 +3802,7 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    var _a;
-    const TextEncoder = (_a = globalThis.TextEncoder) !== null && _a !== void 0 ? _a : $node.util.TextEncoder;
+    const TextEncoder = globalThis.TextEncoder ?? $node.util.TextEncoder;
     const encoder = new TextEncoder();
     function $mol_charset_encode(value) {
         return encoder.encode(value);
@@ -4038,7 +4032,7 @@ var $;
             const path = this.path();
             this.parent().watcher();
             try {
-                stat = next !== null && next !== void 0 ? next : stat_convert($node.fs.statSync(path));
+                stat = next ?? stat_convert($node.fs.statSync(path));
             }
             catch (error) {
                 if (error.code === 'ENOENT')
@@ -4258,8 +4252,7 @@ var $;
             }
         }
         size() {
-            var _a, _b, _c, _d;
-            return 1 + ((_b = (_a = this.right) === null || _a === void 0 ? void 0 : _a.size()) !== null && _b !== void 0 ? _b : 0) + ((_d = (_c = this.left) === null || _c === void 0 ? void 0 : _c.size()) !== null && _d !== void 0 ? _d : 0);
+            return 1 + (this.right?.size() ?? 0) + (this.left?.size() ?? 0);
         }
     }
     $.$hyoo_iq_neuron = $hyoo_iq_neuron;
@@ -4316,9 +4309,96 @@ var $;
 "use strict";
 var $;
 (function ($) {
+    class $mol_state_arg extends $.$mol_object {
+        constructor(prefix = '') {
+            super();
+            this.prefix = prefix;
+        }
+        static href(next) {
+            return next || process.argv.slice(2).join(' ');
+        }
+        static dict(next) {
+            if (next !== void 0)
+                this.href(this.make_link(next));
+            var href = this.href();
+            var chunks = href.split(' ');
+            var params = {};
+            chunks.forEach(chunk => {
+                if (!chunk)
+                    return;
+                var vals = chunk.split('=').map(decodeURIComponent);
+                params[vals.shift()] = vals.join('=');
+            });
+            return params;
+        }
+        static value(key, next) {
+            if (next === void 0)
+                return this.dict()[key] || null;
+            this.href(this.link({ [key]: next }));
+            return next;
+        }
+        static link(next) {
+            var params = {};
+            var prev = this.dict();
+            for (var key in prev) {
+                params[key] = prev[key];
+            }
+            for (var key in next) {
+                params[key] = next[key];
+            }
+            return this.make_link(params);
+        }
+        static make_link(next) {
+            var chunks = [];
+            for (var key in next) {
+                if (null == next[key])
+                    continue;
+                chunks.push([key].concat(next[key]).map(encodeURIComponent).join('='));
+            }
+            return chunks.join(' ');
+        }
+        value(key, next) {
+            return this.constructor.value(this.prefix + key, next);
+        }
+        sub(postfix) {
+            return new this.constructor(this.prefix + postfix + '.');
+        }
+        link(next) {
+            var prefix = this.prefix;
+            var dict = {};
+            for (var key in next) {
+                dict[prefix + key] = next[key];
+            }
+            return this.constructor.link(dict);
+        }
+    }
+    __decorate([
+        $.$mol_mem
+    ], $mol_state_arg, "href", null);
+    __decorate([
+        $.$mol_mem
+    ], $mol_state_arg, "dict", null);
+    __decorate([
+        $.$mol_mem_key
+    ], $mol_state_arg, "value", null);
+    $.$mol_state_arg = $mol_state_arg;
+})($ || ($ = {}));
+//arg.node.js.map
+;
+"use strict";
+var $;
+(function ($) {
+    function parse(theme) {
+        if (theme === 'on')
+            return true;
+        if (theme === 'off')
+            return false;
+        return null;
+    }
     function $mol_lights(next) {
-        var _a;
-        return (_a = this.$mol_state_local.value('$mol_lights', next)) !== null && _a !== void 0 ? _a : $.$mol_dom_context.matchMedia('(prefers-color-scheme: light)').matches;
+        return this.$mol_state_local.value('$mol_lights', next)
+            ?? parse(this.$mol_state_arg.value('mol_lights'))
+            ?? $.$mol_dom_context.matchMedia('(prefers-color-scheme: light)').matches;
     }
     $.$mol_lights = $mol_lights;
 })($ || ($ = {}));
@@ -4513,7 +4593,7 @@ var $;
     (function ($$) {
         class $mol_check extends $.$mol_check {
             click(next) {
-                if (next === null || next === void 0 ? void 0 : next.defaultPrevented)
+                if (next?.defaultPrevented)
                     return;
                 this.checked(!this.checked());
                 if (next)
@@ -4857,85 +4937,6 @@ var $;
     $.$mol_link = $mol_link;
 })($ || ($ = {}));
 //link.view.tree.js.map
-;
-"use strict";
-var $;
-(function ($) {
-    class $mol_state_arg extends $.$mol_object {
-        constructor(prefix = '') {
-            super();
-            this.prefix = prefix;
-        }
-        static href(next) {
-            return next || process.argv.slice(2).join(' ');
-        }
-        static dict(next) {
-            if (next !== void 0)
-                this.href(this.make_link(next));
-            var href = this.href();
-            var chunks = href.split(' ');
-            var params = {};
-            chunks.forEach(chunk => {
-                if (!chunk)
-                    return;
-                var vals = chunk.split('=').map(decodeURIComponent);
-                params[vals.shift()] = vals.join('=');
-            });
-            return params;
-        }
-        static value(key, next) {
-            if (next === void 0)
-                return this.dict()[key] || null;
-            this.href(this.link({ [key]: next }));
-            return next;
-        }
-        static link(next) {
-            var params = {};
-            var prev = this.dict();
-            for (var key in prev) {
-                params[key] = prev[key];
-            }
-            for (var key in next) {
-                params[key] = next[key];
-            }
-            return this.make_link(params);
-        }
-        static make_link(next) {
-            var chunks = [];
-            for (var key in next) {
-                if (null == next[key])
-                    continue;
-                chunks.push([key].concat(next[key]).map(encodeURIComponent).join('='));
-            }
-            return chunks.join(' ');
-        }
-        value(key, next) {
-            return this.constructor.value(this.prefix + key, next);
-        }
-        sub(postfix) {
-            return new this.constructor(this.prefix + postfix + '.');
-        }
-        link(next) {
-            var prefix = this.prefix;
-            var dict = {};
-            for (var key in next) {
-                dict[prefix + key] = next[key];
-            }
-            return this.constructor.link(dict);
-        }
-    }
-    __decorate([
-        $.$mol_mem
-    ], $mol_state_arg, "href", null);
-    __decorate([
-        $.$mol_mem
-    ], $mol_state_arg, "dict", null);
-    __decorate([
-        $.$mol_mem_key
-    ], $mol_state_arg, "value", null);
-    $.$mol_state_arg = $mol_state_arg;
-})($ || ($ = {}));
-//arg.node.js.map
 ;
 "use strict";
 var $;
