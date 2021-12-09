@@ -11,6 +11,7 @@ $mol_speck $mol_view
 $mol_button $mol_view
 	enabled true
 	minimal_height 40
+	minimal_width 40
 	click?event null
 	event_click?event null
 	event *
@@ -148,6 +149,11 @@ $mol_link_source $mol_link
 $mol_svg_group $mol_svg
 	dom_name \g
 
+$mol_svg_title $mol_svg
+	dom_name \title
+	sub /
+		<= title
+
 $mol_plot_graph $mol_svg_group
 	series_x /number
 	series_y /number
@@ -200,10 +206,14 @@ $mol_plot_graph $mol_svg_group
 		<= gap_y $mol_vector_range /
 			0
 			0
+	repos_x!val 0
+	repos_y!val 0
 	indexes /number
 	points /readonly(number)[]
 	front /$mol_svg
 	back /$mol_svg
+	Hint $mol_svg_title
+		title <= hint <= title \
 	hue NaN
 	Sample null
 
@@ -219,9 +229,12 @@ $mol_plot_line $mol_plot_graph
 	threshold 1
 	spacing 2
 	color_fill \none
+	dom_name \path
+	attr *
+		^
+		d <= curve \
 	sub /
-		<= Curve $mol_svg_path
-			geometry <= curve \
+		<= Hint
 	-
 	Sample $mol_plot_graph_sample
 		color <= color
@@ -319,6 +332,7 @@ $mol_plot_ruler_hor $mol_plot_ruler
 
 $mol_chart_legend $mol_scroll
 	graphs /$mol_plot_graph
+	graphs_front /$mol_plot_graph
 	sub <= graph_legends /$mol_view
 	-
 	Graph_legend!id $mol_view
@@ -330,29 +344,25 @@ $mol_chart_legend $mol_scroll
 				sub /
 					<= graph_title!id \
 
-$mol_meter $mol_plugin
-	zoom 1
-	-
-	width?val 0
-	height?val 0
-	-
-	left?val 0
-	right?val 0
-	bottom?val 0
-	top?val 0
-
 $mol_touch $mol_plugin
 	start_zoom?val 0
 	start_distance?val 0
 	zoom?val 1
+	allow_draw true
+	allow_pan true
+	allow_zoom true
+	action_type?val \
+	action_point?val $mol_vector_2d /
+		NaN
+		NaN
 	-
 	start_pan?val /
 		0
 		0
-	pan?val /
+	pan?val $mol_vector_2d /
 		0
 		0
-	pos?val /
+	pointer_center $mol_vector_2d /
 		NaN
 		NaN
 	-
@@ -374,6 +384,10 @@ $mol_touch $mol_plugin
 	swipe_to_left?val null
 	swipe_to_top?val null
 	-
+	draw_start?event null
+	draw?event null
+	draw_end?event null
+	-
 	style *
 		^
 		touch-action \none
@@ -381,13 +395,10 @@ $mol_touch $mol_plugin
 	-
 	event *
 		^
-		touchstart?event <=> event_start?event null
-		touchmove?event <=> event_move?event null
-		touchend?event <=> event_end?event null
-		mousedown?event <=> event_start?event null
-		mousemove?event <=> event_move?event null
-		mouseup?event <=> event_end?event null
-		mouseleave?event <=> event_leave?event null
+		pointerdown?event <=> event_start?event null
+		pointermove?event <=> event_move?event null
+		pointerup?event <=> event_end?event null
+		pointerleave?event <=> event_leave?event null
 		wheel?event <=> event_wheel?event null
 
 $mol_plot_pane $mol_svg_root
@@ -417,10 +428,10 @@ $mol_plot_pane $mol_svg_root
 		<= shift_limit_y $mol_vector_range /
 			0
 			0
-	shift_default /number
+	shift_default $mol_vector_2d /
 		0
 		0
-	shift?val /number
+	shift?val $mol_vector_2d /
 		0
 		0
 	scale_limit $mol_vector_2d /
@@ -429,28 +440,21 @@ $mol_plot_pane $mol_svg_root
 			Infinity
 		<= scale_limit_y $mol_vector_range /
 			0
-			Infinity
-	scale_default /number
+			-Infinity
+	scale_default $mol_vector_2d /
 		0
 		0
-	scale?val /number
+	scale?val $mol_vector_2d /
 		1
-		1
-	scale_x?val 0
-	scale_y?val 0
+		-1
+	scale_x?val 1
+	scale_y?val -1
 	size $mol_vector_2d /
 		0
 		0
 	size_real $mol_vector_2d /
 		1
 		1
-	dimensions_viewport $mol_vector_2d /
-		<= dimensions_viewport_x $mol_vector_range /
-			Infinity
-			-Infinity
-		<= dimensions_viewport_y $mol_vector_range /
-			Infinity
-			-Infinity
 	dimensions $mol_vector_2d /
 		<= dimensions_x $mol_vector_range /
 			Infinity
@@ -458,23 +462,32 @@ $mol_plot_pane $mol_svg_root
 		<= dimensions_y $mol_vector_range /
 			Infinity
 			-Infinity
+	dimensions_viewport $mol_vector_2d /
+		<= dimensions_viewport_x $mol_vector_range /
+			Infinity
+			-Infinity
+		<= dimensions_viewport_y $mol_vector_range /
+			Infinity
+			-Infinity
 	-
 	sub <= graphs_sorted /$mol_svg
-	graphs_colored <= graphs_positioned <= graphs /$mol_plot_graph
-	cursor_position?val $mol_vector_2d /
-		NaN
-		NaN
+	graphs_colored <= graphs_positioned <= graphs_visible <= graphs /$mol_plot_graph
 	-
 	plugins /
 		^
-		<= Meter $mol_meter
-			width => width
-			height => height
 		<= Touch $mol_touch
-			zoom?val <=> scale_x?val
+			zoom?val <=> zoom?val 1
 			pan?val <=> shift?val
-			pos?val <=> cursor_position?val
-	event *
+			pointer_center => cursor_position
+			allow_draw <= allow_draw true
+			allow_pan <= allow_pan true
+			allow_zoom <= allow_zoom true
+			action_type => action_type
+			action_point => action_point
+			draw_start?event <=> draw_start?event null
+			draw?event <=> draw?event null
+			draw_end?event <=> draw_end?event null
+	- event *
 		^
 		dblclick?event <=> reset?event null
 
@@ -490,6 +503,8 @@ $mol_chart $mol_view
 		<= Legend $mol_chart_legend
 			graphs <= graphs_colored
 		<= Plot $mol_plot_pane
+			scale_x?val => zoom?val
+			zoom?val <=> zoom?val
 			gap_left <= gap_left
 			gap_right <= gap_right
 			gap_bottom <= gap_bottom
