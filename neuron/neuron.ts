@@ -8,7 +8,7 @@ namespace $ {
 			public left: $hyoo_iq_neuron | null = null,
 		) {}
 
-		predict( history : boolean[] ) : boolean {
+		predict( history : readonly boolean[] ) : boolean {
 			
 			if( history.length === 0 ) return this.prediction
 			
@@ -23,7 +23,7 @@ namespace $ {
 
 		}
 
-		learn( next : boolean , history : boolean[] ) : void {
+		learn( next : boolean , history : readonly boolean[] ) : void {
 			
 			if( history.length === 0 ) {
 				this.prediction = next
