@@ -7076,14 +7076,16 @@ var $;
         required() {
             return 200;
         }
-        Brain() {
-            const obj = new this.$.$hyoo_iq_neuron();
-            return obj;
-        }
         history(val) {
             if (val !== undefined)
                 return val;
             return [];
+        }
+        auto() {
+            return [
+                this.Brain(),
+                this.score()
+            ];
         }
         plugins() {
             return [
@@ -7103,6 +7105,13 @@ var $;
                 this.Choices(),
                 this.Description()
             ];
+        }
+        Brain() {
+            const obj = new this.$.$hyoo_iq_neuron();
+            return obj;
+        }
+        score() {
+            return 0;
         }
         Theme() {
             const obj = new this.$.$mol_theme_auto();
@@ -7204,10 +7213,10 @@ var $;
     }
     __decorate([
         $mol_mem
-    ], $hyoo_iq.prototype, "Brain", null);
+    ], $hyoo_iq.prototype, "history", null);
     __decorate([
         $mol_mem
-    ], $hyoo_iq.prototype, "history", null);
+    ], $hyoo_iq.prototype, "Brain", null);
     __decorate([
         $mol_mem
     ], $hyoo_iq.prototype, "Theme", null);
