@@ -221,8 +221,8 @@
     "$hyoo_iq_iq.view.tree"
   ],
   "dependencies": {
-    "jsdom": "*",
     "colorette": "*",
+    "jsdom": "*",
     "chokidar": "*"
   }
 }
