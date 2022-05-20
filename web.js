@@ -7234,6 +7234,7 @@ var $;
                         basis: per(50),
                         shrink: 1,
                     },
+                    justifyContent: 'center',
                     margin: [0, rem(.75)],
                 },
             },
