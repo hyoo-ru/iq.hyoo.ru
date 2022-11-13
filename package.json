@@ -96,6 +96,7 @@
     "$mol_style_sheet",
     "$mol_button",
     "$mol_speck",
+    "$mol_layer",
     "$mol_keyboard",
     "$mol_page",
     "$mol_scroll",
