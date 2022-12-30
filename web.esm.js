@@ -3128,7 +3128,6 @@ var $;
         const { calc } = $mol_style_func;
         $mol_style_define($mol_page, {
             display: 'flex',
-            margin: 0,
             flex: {
                 basis: 'auto',
                 direction: 'column',
