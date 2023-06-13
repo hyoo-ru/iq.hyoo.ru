@@ -8150,4 +8150,5 @@ var $;
 })($ || ($ = {}));
 //hyoo/iq/iq.view.css.ts
 
+export default $
 //# sourceMappingURL=node.js.map

@@ -7574,4 +7574,5 @@ var $;
 })($ || ($ = {}));
 //hyoo/iq/iq.view.css.ts
 
+export default $
 //# sourceMappingURL=web.js.map
