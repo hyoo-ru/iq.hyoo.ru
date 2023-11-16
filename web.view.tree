@@ -1,3 +1,14 @@
+$mol_list $mol_view
+	render_visible_only true
+	render_over 0
+	sub <= rows /$mol_view
+	Empty $mol_view
+	Gap_before $mol_view style * paddingTop <= gap_before 0
+	Gap_after $mol_view style * paddingTop <= gap_after 0
+	view_window /
+		0
+		0
+
 $mol_scroll $mol_view
 	scroll_top? 0
 	scroll_left? 0
@@ -27,7 +38,9 @@ $mol_page $mol_view
 					sub <= tools /$mol_view_content
 		<= Body $mol_scroll
 			scroll_top? => body_scroll_top?
-			sub <= body /$mol_view_content
+			sub <= body_content /
+				<= Body_content $mol_list
+					rows <= body /$mol_view
 		<= Foot $mol_view
 			dom_name \footer
 			sub <= foot /$mol_view
@@ -325,10 +338,18 @@ $mol_plot_ruler_hor $mol_plot_ruler
 	label_pos_y* <= title_pos_y
 	background_width \100%
 
+$mol_gallery $mol_view
+	sub <= items /$mol_view
+	Side* $mol_gallery
+		style *
+			flexGrow <= side_size* \1
+		items <= side_items* /$mol_view
+
 $mol_chart_legend $mol_scroll
 	graphs /$mol_plot_graph
 	graphs_front /$mol_plot_graph
-	sub <= graph_legends /$mol_view
+	sub /
+		<= Gallery $mol_gallery items <= graph_legends /$mol_view
 	-
 	Graph_legend* $mol_view
 		sub /
@@ -506,8 +527,8 @@ $mol_chart $mol_view
 			gap_top <= gap_top
 			graphs <= graphs
 			graphs_colored => graphs_colored
-			hue_base <= hue_base 140
-			hue_shift <= hue_shift 111
+			hue_base <= hue_base 210
+			hue_shift <= hue_shift 163
 
 $mol_button_major $mol_button_typed
 	attr *
