@@ -522,10 +522,7 @@ $mol_chart $mol_view
 			hue_base <= hue_base 210
 			hue_shift <= hue_shift 163
 
-$mol_button_major $mol_button_typed
-	attr *
-		^
-		mol_theme \$mol_theme_accent
+$mol_button_major $mol_button_minor
 
 $hyoo_iq $mol_page
 	title_result @ \IQ: {score}
