@@ -3,6 +3,12 @@ namespace $ {
 	const { per , rem } = $mol_style_unit
 
 	$mol_style_define( $hyoo_iq , {
+		
+		Body_content: {
+			align: {
+				self: 'stretch',
+			},
+		},
 
 		Description: {
 			margin: 'auto',
