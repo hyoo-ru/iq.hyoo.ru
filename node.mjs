@@ -3103,10 +3103,10 @@ var $;
 			return 0;
 		}
 		field(){
-			return {...(super.field()), "tabIndex": (this.tabindex())};
+			return {...(super.field()), "tabIndex": (this?.tabindex())};
 		}
 		event(){
-			return {...(super.event()), "scroll": (next) => (this.event_scroll(next))};
+			return {...(super.event()), "scroll": (next) => (this?.event_scroll(next))};
 		}
 	};
 	($mol_mem(($.$mol_scroll.prototype), "event_scroll"));
@@ -3404,12 +3404,12 @@ var $;
 			return null;
 		}
 		title_content(){
-			return [(this.Logo()), (this.title())];
+			return [(this?.Logo()), (this?.title())];
 		}
 		Title(){
 			const obj = new this.$.$mol_view();
 			(obj.dom_name) = () => ("h1");
-			(obj.sub) = () => ((this.title_content()));
+			(obj.sub) = () => ((this?.title_content()));
 			return obj;
 		}
 		tools(){
@@ -3417,36 +3417,36 @@ var $;
 		}
 		Tools(){
 			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ((this.tools()));
+			(obj.sub) = () => ((this?.tools()));
 			return obj;
 		}
 		head(){
-			return [(this.Title()), (this.Tools())];
+			return [(this?.Title()), (this?.Tools())];
 		}
 		Head(){
 			const obj = new this.$.$mol_view();
 			(obj.minimal_height) = () => (64);
 			(obj.dom_name) = () => ("header");
-			(obj.sub) = () => ((this.head()));
+			(obj.sub) = () => ((this?.head()));
 			return obj;
 		}
 		body_scroll_top(next){
-			return (this.Body().scroll_top(next));
+			return (this?.Body()?.scroll_top(next));
 		}
 		body(){
 			return [];
 		}
 		Body_content(){
 			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ((this.body()));
+			(obj.sub) = () => ((this?.body()));
 			return obj;
 		}
 		body_content(){
-			return [(this.Body_content())];
+			return [(this?.Body_content())];
 		}
 		Body(){
 			const obj = new this.$.$mol_scroll();
-			(obj.sub) = () => ((this.body_content()));
+			(obj.sub) = () => ((this?.body_content()));
 			return obj;
 		}
 		foot(){
@@ -3455,20 +3455,20 @@ var $;
 		Foot(){
 			const obj = new this.$.$mol_view();
 			(obj.dom_name) = () => ("footer");
-			(obj.sub) = () => ((this.foot()));
+			(obj.sub) = () => ((this?.foot()));
 			return obj;
 		}
 		dom_name(){
 			return "article";
 		}
 		field(){
-			return {...(super.field()), "tabIndex": (this.tabindex())};
+			return {...(super.field()), "tabIndex": (this?.tabindex())};
 		}
 		sub(){
 			return [
-				(this.Head()), 
-				(this.Body()), 
-				(this.Foot())
+				(this?.Head()), 
+				(this?.Body()), 
+				(this?.Foot())
 			];
 		}
 	};
@@ -3675,7 +3675,7 @@ var $;
 			return "";
 		}
 		attr(){
-			return {"mol_theme": (this.theme())};
+			return {"mol_theme": (this?.theme())};
 		}
 	};
 
@@ -4396,7 +4396,7 @@ var $;
 			return null;
 		}
 		event(){
-			return {...(super.event()), "keydown": (next) => (this.keydown(next))};
+			return {...(super.event()), "keydown": (next) => (this?.keydown(next))};
 		}
 		key(){
 			return {};
@@ -4566,13 +4566,13 @@ var $;
 			return null;
 		}
 		attr(){
-			return {...(super.attr()), "mol_theme": (this.theme())};
+			return {...(super.attr()), "mol_theme": (this?.theme())};
 		}
 		style(){
 			return {...(super.style()), "minHeight": "1em"};
 		}
 		sub(){
-			return [(this.value())];
+			return [(this?.value())];
 		}
 	};
 
@@ -4631,7 +4631,7 @@ var $;
 			return "";
 		}
 		hint_safe(){
-			return (this.hint());
+			return (this?.hint());
 		}
 		error(){
 			return "";
@@ -4650,26 +4650,26 @@ var $;
 		event(){
 			return {
 				...(super.event()), 
-				"click": (next) => (this.event_activate(next)), 
-				"dblclick": (next) => (this.clicks(next)), 
-				"keydown": (next) => (this.event_key_press(next))
+				"click": (next) => (this?.event_activate(next)), 
+				"dblclick": (next) => (this?.clicks(next)), 
+				"keydown": (next) => (this?.event_key_press(next))
 			};
 		}
 		attr(){
 			return {
 				...(super.attr()), 
-				"disabled": (this.disabled()), 
+				"disabled": (this?.disabled()), 
 				"role": "button", 
-				"tabindex": (this.tab_index()), 
-				"title": (this.hint_safe())
+				"tabindex": (this?.tab_index()), 
+				"title": (this?.hint_safe())
 			};
 		}
 		sub(){
-			return [(this.title())];
+			return [(this?.title())];
 		}
 		Speck(){
 			const obj = new this.$.$mol_speck();
-			(obj.value) = () => ((this.error()));
+			(obj.value) = () => ((this?.error()));
 			return obj;
 		}
 	};
@@ -4812,22 +4812,22 @@ var $;
 		}
 		Title(){
 			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([(this.title())]);
+			(obj.sub) = () => ([(this?.title())]);
 			return obj;
 		}
 		label(){
-			return [(this.Title())];
+			return [(this?.Title())];
 		}
 		attr(){
 			return {
 				...(super.attr()), 
-				"mol_check_checked": (this.checked()), 
-				"aria-checked": (this.aria_checked()), 
-				"role": (this.aria_role())
+				"mol_check_checked": (this?.checked()), 
+				"aria-checked": (this?.aria_checked()), 
+				"role": (this?.aria_role())
 			};
 		}
 		sub(){
-			return [(this.Icon()), (this.label())];
+			return [(this?.Icon()), (this?.label())];
 		}
 	};
 	($mol_mem(($.$mol_check.prototype), "checked"));
@@ -4997,8 +4997,8 @@ var $;
 		attr(){
 			return {
 				...(super.attr()), 
-				"viewBox": (this.view_box()), 
-				"preserveAspectRatio": (this.aspect())
+				"viewBox": (this?.view_box()), 
+				"preserveAspectRatio": (this?.aspect())
 			};
 		}
 	};
@@ -5023,7 +5023,7 @@ var $;
 			return "path";
 		}
 		attr(){
-			return {...(super.attr()), "d": (this.geometry())};
+			return {...(super.attr()), "d": (this?.geometry())};
 		}
 	};
 
@@ -5038,7 +5038,7 @@ var $;
 		}
 		Path(){
 			const obj = new this.$.$mol_svg_path();
-			(obj.geometry) = () => ((this.path()));
+			(obj.geometry) = () => ((this?.path()));
 			return obj;
 		}
 		view_box(){
@@ -5051,7 +5051,7 @@ var $;
 			return 16;
 		}
 		sub(){
-			return [(this.Path())];
+			return [(this?.Path())];
 		}
 	};
 	($mol_mem(($.$mol_icon.prototype), "Path"));
@@ -5155,13 +5155,13 @@ var $;
 			return false;
 		}
 		Icon(){
-			return (this.Lights_icon());
+			return (this?.Lights_icon());
 		}
 		hint(){
 			return (this.$.$mol_locale.text("$mol_lights_toggle_hint"));
 		}
 		checked(next){
-			return (this.lights(next));
+			return (this?.lights(next));
 		}
 	};
 	($mol_mem(($.$mol_lights_toggle.prototype), "Lights_icon"));
@@ -5195,7 +5195,7 @@ var $;
 			return "";
 		}
 		hint_safe(){
-			return (this.hint());
+			return (this?.hint());
 		}
 		target(){
 			return "_self";
@@ -5214,7 +5214,7 @@ var $;
 			return null;
 		}
 		click(next){
-			return (this.event_click(next));
+			return (this?.event_click(next));
 		}
 		uri(){
 			return "";
@@ -5234,22 +5234,22 @@ var $;
 		attr(){
 			return {
 				...(super.attr()), 
-				"href": (this.uri_toggle()), 
-				"title": (this.hint_safe()), 
-				"target": (this.target()), 
-				"download": (this.file_name()), 
-				"mol_link_current": (this.current()), 
-				"rel": (this.relation())
+				"href": (this?.uri_toggle()), 
+				"title": (this?.hint_safe()), 
+				"target": (this?.target()), 
+				"download": (this?.file_name()), 
+				"mol_link_current": (this?.current()), 
+				"rel": (this?.relation())
 			};
 		}
 		sub(){
-			return [(this.title())];
+			return [(this?.title())];
 		}
 		arg(){
 			return {};
 		}
 		event(){
-			return {...(super.event()), "click": (next) => (this.click(next))};
+			return {...(super.event()), "click": (next) => (this?.click(next))};
 		}
 	};
 	($mol_mem(($.$mol_link.prototype), "event_click"));
@@ -5412,7 +5412,7 @@ var $;
 			return (this.$.$mol_locale.text("$mol_link_source_hint"));
 		}
 		sub(){
-			return [(this.Icon())];
+			return [(this?.Icon())];
 		}
 	};
 	($mol_mem(($.$mol_link_source.prototype), "Icon"));
@@ -5554,7 +5554,7 @@ var $;
 			return "title";
 		}
 		sub(){
-			return [(this.title())];
+			return [(this?.title())];
 		}
 	};
 
@@ -5606,7 +5606,7 @@ var $;
 			return "";
 		}
 		hint(){
-			return (this.title());
+			return (this?.title());
 		}
 		series_x(){
 			return [];
@@ -5615,13 +5615,13 @@ var $;
 			return [];
 		}
 		attr(){
-			return {...(super.attr()), "mol_plot_graph_type": (this.type())};
+			return {...(super.attr()), "mol_plot_graph_type": (this?.type())};
 		}
 		style(){
-			return {...(super.style()), "color": (this.color())};
+			return {...(super.style()), "color": (this?.color())};
 		}
 		viewport(){
-			const obj = new this.$.$mol_vector_2d((this.viewport_x()), (this.viewport_y()));
+			const obj = new this.$.$mol_vector_2d((this?.viewport_x()), (this?.viewport_y()));
 			return obj;
 		}
 		shift(){
@@ -5635,11 +5635,11 @@ var $;
 			return obj;
 		}
 		dimensions_pane(){
-			const obj = new this.$.$mol_vector_2d((this.dimensions_pane_x()), (this.dimensions_pane_y()));
+			const obj = new this.$.$mol_vector_2d((this?.dimensions_pane_x()), (this?.dimensions_pane_y()));
 			return obj;
 		}
 		dimensions(){
-			const obj = new this.$.$mol_vector_2d((this.dimensions_x()), (this.dimensions_y()));
+			const obj = new this.$.$mol_vector_2d((this?.dimensions_x()), (this?.dimensions_y()));
 			return obj;
 		}
 		size_real(){
@@ -5647,7 +5647,7 @@ var $;
 			return obj;
 		}
 		gap(){
-			const obj = new this.$.$mol_vector_2d((this.gap_x()), (this.gap_y()));
+			const obj = new this.$.$mol_vector_2d((this?.gap_x()), (this?.gap_y()));
 			return obj;
 		}
 		repos_x(id){
@@ -5670,7 +5670,7 @@ var $;
 		}
 		Hint(){
 			const obj = new this.$.$mol_svg_title();
-			(obj.title) = () => ((this.hint()));
+			(obj.title) = () => ((this?.hint()));
 			return obj;
 		}
 		hue(){
@@ -5703,10 +5703,10 @@ var $;
 			return "black";
 		}
 		attr(){
-			return {...(super.attr()), "mol_plot_graph_type": (this.type())};
+			return {...(super.attr()), "mol_plot_graph_type": (this?.type())};
 		}
 		style(){
-			return {...(super.style()), "color": (this.color())};
+			return {...(super.style()), "color": (this?.color())};
 		}
 	};
 
@@ -5816,15 +5816,15 @@ var $;
 			return "path";
 		}
 		attr(){
-			return {...(super.attr()), "d": (this.curve())};
+			return {...(super.attr()), "d": (this?.curve())};
 		}
 		sub(){
-			return [(this.Hint())];
+			return [(this?.Hint())];
 		}
 		Sample(){
 			const obj = new this.$.$mol_plot_graph_sample();
-			(obj.color) = () => ((this.color()));
-			(obj.type) = () => ((this.type()));
+			(obj.color) = () => ((this?.color()));
+			(obj.type) = () => ((this?.type()));
 			return obj;
 		}
 	};
@@ -5923,10 +5923,10 @@ var $;
 		attr(){
 			return {
 				...(super.attr()), 
-				"width": (this.width()), 
-				"height": (this.height()), 
-				"x": (this.pos_x()), 
-				"y": (this.pos_y())
+				"width": (this?.width()), 
+				"height": (this?.height()), 
+				"x": (this?.pos_x()), 
+				"y": (this?.pos_y())
 			};
 		}
 	};
@@ -5965,7 +5965,7 @@ var $;
 			return "middle";
 		}
 		align_hor(){
-			return (this.align());
+			return (this?.align());
 		}
 		align_vert(){
 			return "baseline";
@@ -5982,14 +5982,14 @@ var $;
 		attr(){
 			return {
 				...(super.attr()), 
-				"x": (this.pos_x()), 
-				"y": (this.pos_y()), 
-				"text-anchor": (this.align_hor()), 
-				"alignment-baseline": (this.align_vert())
+				"x": (this?.pos_x()), 
+				"y": (this?.pos_y()), 
+				"text-anchor": (this?.align_hor()), 
+				"alignment-baseline": (this?.align_vert())
 			};
 		}
 		sub(){
-			return [(this.text())];
+			return [(this?.text())];
 		}
 	};
 
@@ -6038,10 +6038,10 @@ var $;
 		}
 		Background(){
 			const obj = new this.$.$mol_svg_rect();
-			(obj.pos_x) = () => ((this.background_x()));
-			(obj.pos_y) = () => ((this.background_y()));
-			(obj.width) = () => ((this.background_width()));
-			(obj.height) = () => ((this.background_height()));
+			(obj.pos_x) = () => ((this?.background_x()));
+			(obj.pos_y) = () => ((this?.background_y()));
+			(obj.width) = () => ((this?.background_width()));
+			(obj.height) = () => ((this?.background_height()));
 			return obj;
 		}
 		curve(){
@@ -6049,7 +6049,7 @@ var $;
 		}
 		Curve(){
 			const obj = new this.$.$mol_svg_path();
-			(obj.geometry) = () => ((this.curve()));
+			(obj.geometry) = () => ((this?.curve()));
 			return obj;
 		}
 		labels_formatted(){
@@ -6066,10 +6066,10 @@ var $;
 		}
 		Title(){
 			const obj = new this.$.$mol_svg_text();
-			(obj.pos_x) = () => ((this.title_pos_x()));
-			(obj.pos_y) = () => ((this.title_pos_y()));
-			(obj.align) = () => ((this.title_align()));
-			(obj.text) = () => ((this.title()));
+			(obj.pos_x) = () => ((this?.title_pos_x()));
+			(obj.pos_y) = () => ((this?.title_pos_y()));
+			(obj.align) = () => ((this?.title_align()));
+			(obj.text) = () => ((this?.title()));
 			return obj;
 		}
 		label_pos_x(id){
@@ -6079,7 +6079,7 @@ var $;
 			return "";
 		}
 		label_pos(id){
-			return [(this.label_pos_x(id)), (this.label_pos_y(id))];
+			return [(this?.label_pos_x(id)), (this?.label_pos_y(id))];
 		}
 		label_text(id){
 			return "";
@@ -6119,17 +6119,17 @@ var $;
 		}
 		sub(){
 			return [
-				(this.Background()), 
-				(this.Curve()), 
-				(this.labels_formatted()), 
-				(this.Title())
+				(this?.Background()), 
+				(this?.Curve()), 
+				(this?.labels_formatted()), 
+				(this?.Title())
 			];
 		}
 		Label(id){
 			const obj = new this.$.$mol_svg_text();
-			(obj.pos) = () => ((this.label_pos(id)));
-			(obj.text) = () => ((this.label_text(id)));
-			(obj.align) = () => ((this.label_align()));
+			(obj.pos) = () => ((this?.label_pos(id)));
+			(obj.text) = () => ((this?.label_text(id)));
+			(obj.align) = () => ((this?.label_align()));
 			return obj;
 		}
 	};
@@ -6268,13 +6268,13 @@ var $;
 			return "14";
 		}
 		label_pos_x(id){
-			return (this.title_pos_x());
+			return (this?.title_pos_x());
 		}
 		background_height(){
 			return "100%";
 		}
 		background_width(){
-			return (this.title_pos_x());
+			return (this?.title_pos_x());
 		}
 	};
 
@@ -6346,7 +6346,7 @@ var $;
 			return "100%";
 		}
 		label_pos_y(id){
-			return (this.title_pos_y());
+			return (this?.title_pos_y());
 		}
 		background_width(){
 			return "100%";
@@ -6424,12 +6424,12 @@ var $;
 			return [];
 		}
 		sub(){
-			return (this.items());
+			return (this?.items());
 		}
 		Side(id){
 			const obj = new this.$.$mol_gallery();
-			(obj.style) = () => ({"flexGrow": (this.side_size(id))});
-			(obj.items) = () => ((this.side_items(id)));
+			(obj.style) = () => ({"flexGrow": (this?.side_size(id))});
+			(obj.items) = () => ((this?.side_items(id)));
 			return obj;
 		}
 	};
@@ -6492,7 +6492,7 @@ var $;
 		}
 		Gallery(){
 			const obj = new this.$.$mol_gallery();
-			(obj.items) = () => ((this.graph_legends()));
+			(obj.items) = () => ((this?.graph_legends()));
 			return obj;
 		}
 		Graph_sample(id){
@@ -6500,7 +6500,7 @@ var $;
 		}
 		Graph_sample_box(id){
 			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([(this.Graph_sample(id))]);
+			(obj.sub) = () => ([(this?.Graph_sample(id))]);
 			return obj;
 		}
 		graph_title(id){
@@ -6508,7 +6508,7 @@ var $;
 		}
 		Graph_title(id){
 			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([(this.graph_title(id))]);
+			(obj.sub) = () => ([(this?.graph_title(id))]);
 			return obj;
 		}
 		graphs(){
@@ -6518,11 +6518,11 @@ var $;
 			return [];
 		}
 		sub(){
-			return [(this.Gallery())];
+			return [(this?.Gallery())];
 		}
 		Graph_legend(id){
 			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([(this.Graph_sample_box(id)), (this.Graph_title(id))]);
+			(obj.sub) = () => ([(this?.Graph_sample_box(id)), (this?.Graph_title(id))]);
 			return obj;
 		}
 	};
@@ -6711,11 +6711,11 @@ var $;
 		event(){
 			return {
 				...(super.event()), 
-				"pointerdown": (next) => (this.event_start(next)), 
-				"pointermove": (next) => (this.event_move(next)), 
-				"pointerup": (next) => (this.event_end(next)), 
-				"pointerleave": (next) => (this.event_leave(next)), 
-				"wheel": (next) => (this.event_wheel(next))
+				"pointerdown": (next) => (this?.event_start(next)), 
+				"pointermove": (next) => (this?.event_move(next)), 
+				"pointerup": (next) => (this?.event_end(next)), 
+				"pointerleave": (next) => (this?.event_leave(next)), 
+				"wheel": (next) => (this?.event_wheel(next))
 			};
 		}
 	};
@@ -7002,11 +7002,11 @@ var $;
 ;
 	($.$mol_plot_pane) = class $mol_plot_pane extends ($.$mol_svg_root) {
 		gap_x(){
-			const obj = new this.$.$mol_vector_range((this.gap_left()), (this.gap_right()));
+			const obj = new this.$.$mol_vector_range((this?.gap_left()), (this?.gap_right()));
 			return obj;
 		}
 		gap_y(){
-			const obj = new this.$.$mol_vector_range((this.gap_bottom()), (this.gap_top()));
+			const obj = new this.$.$mol_vector_range((this?.gap_bottom()), (this?.gap_top()));
 			return obj;
 		}
 		shift_limit_x(){
@@ -7048,17 +7048,17 @@ var $;
 			return [];
 		}
 		graphs_positioned(){
-			return (this.graphs());
+			return (this?.graphs());
 		}
 		graphs_visible(){
-			return (this.graphs_positioned());
+			return (this?.graphs_positioned());
 		}
 		zoom(next){
 			if(next !== undefined) return next;
 			return 1;
 		}
 		cursor_position(){
-			return (this.Touch().pointer_center());
+			return (this?.Touch()?.pointer_center());
 		}
 		allow_draw(){
 			return true;
@@ -7070,10 +7070,10 @@ var $;
 			return true;
 		}
 		action_type(){
-			return (this.Touch().action_type());
+			return (this?.Touch()?.action_type());
 		}
 		action_point(){
-			return (this.Touch().action_point());
+			return (this?.Touch()?.action_point());
 		}
 		draw_start(next){
 			if(next !== undefined) return next;
@@ -7089,14 +7089,14 @@ var $;
 		}
 		Touch(){
 			const obj = new this.$.$mol_touch();
-			(obj.zoom) = (next) => ((this.zoom(next)));
-			(obj.pan) = (next) => ((this.shift(next)));
-			(obj.allow_draw) = () => ((this.allow_draw()));
-			(obj.allow_pan) = () => ((this.allow_pan()));
-			(obj.allow_zoom) = () => ((this.allow_zoom()));
-			(obj.draw_start) = (next) => ((this.draw_start(next)));
-			(obj.draw) = (next) => ((this.draw(next)));
-			(obj.draw_end) = (next) => ((this.draw_end(next)));
+			(obj.zoom) = (next) => ((this?.zoom(next)));
+			(obj.pan) = (next) => ((this?.shift(next)));
+			(obj.allow_draw) = () => ((this?.allow_draw()));
+			(obj.allow_pan) = () => ((this?.allow_pan()));
+			(obj.allow_zoom) = () => ((this?.allow_zoom()));
+			(obj.draw_start) = (next) => ((this?.draw_start(next)));
+			(obj.draw) = (next) => ((this?.draw(next)));
+			(obj.draw_end) = (next) => ((this?.draw_end(next)));
 			return obj;
 		}
 		aspect(){
@@ -7117,23 +7117,23 @@ var $;
 			return 24;
 		}
 		gap_left(){
-			return (this.gap_hor());
+			return (this?.gap_hor());
 		}
 		gap_right(){
-			return (this.gap_hor());
+			return (this?.gap_hor());
 		}
 		gap_top(){
-			return (this.gap_vert());
+			return (this?.gap_vert());
 		}
 		gap_bottom(){
-			return (this.gap_vert());
+			return (this?.gap_vert());
 		}
 		gap(){
-			const obj = new this.$.$mol_vector_2d((this.gap_x()), (this.gap_y()));
+			const obj = new this.$.$mol_vector_2d((this?.gap_x()), (this?.gap_y()));
 			return obj;
 		}
 		shift_limit(){
-			const obj = new this.$.$mol_vector_2d((this.shift_limit_x()), (this.shift_limit_y()));
+			const obj = new this.$.$mol_vector_2d((this?.shift_limit_x()), (this?.shift_limit_y()));
 			return obj;
 		}
 		shift_default(){
@@ -7146,7 +7146,7 @@ var $;
 			return obj;
 		}
 		scale_limit(){
-			const obj = new this.$.$mol_vector_2d((this.scale_limit_x()), (this.scale_limit_y()));
+			const obj = new this.$.$mol_vector_2d((this?.scale_limit_x()), (this?.scale_limit_y()));
 			return obj;
 		}
 		scale_default(){
@@ -7175,21 +7175,21 @@ var $;
 			return obj;
 		}
 		dimensions(){
-			const obj = new this.$.$mol_vector_2d((this.dimensions_x()), (this.dimensions_y()));
+			const obj = new this.$.$mol_vector_2d((this?.dimensions_x()), (this?.dimensions_y()));
 			return obj;
 		}
 		dimensions_viewport(){
-			const obj = new this.$.$mol_vector_2d((this.dimensions_viewport_x()), (this.dimensions_viewport_y()));
+			const obj = new this.$.$mol_vector_2d((this?.dimensions_viewport_x()), (this?.dimensions_viewport_y()));
 			return obj;
 		}
 		sub(){
-			return (this.graphs_sorted());
+			return (this?.graphs_sorted());
 		}
 		graphs_colored(){
-			return (this.graphs_visible());
+			return (this?.graphs_visible());
 		}
 		plugins(){
-			return [...(super.plugins()), (this.Touch())];
+			return [...(super.plugins()), (this?.Touch())];
 		}
 	};
 	($mol_mem(($.$mol_plot_pane.prototype), "gap_x"));
@@ -7440,14 +7440,14 @@ var $;
 	($.$mol_chart) = class $mol_chart extends ($.$mol_view) {
 		Legend(){
 			const obj = new this.$.$mol_chart_legend();
-			(obj.graphs) = () => ((this.graphs_colored()));
+			(obj.graphs) = () => ((this?.graphs_colored()));
 			return obj;
 		}
 		zoom(next){
-			return (this.Plot().scale_x(next));
+			return (this?.Plot()?.scale_x(next));
 		}
 		graphs_colored(){
-			return (this.Plot().graphs_colored());
+			return (this?.Plot()?.graphs_colored());
 		}
 		hue_base(){
 			return 210;
@@ -7457,14 +7457,14 @@ var $;
 		}
 		Plot(){
 			const obj = new this.$.$mol_plot_pane();
-			(obj.zoom) = (next) => ((this.zoom(next)));
-			(obj.gap_left) = () => ((this.gap_left()));
-			(obj.gap_right) = () => ((this.gap_right()));
-			(obj.gap_bottom) = () => ((this.gap_bottom()));
-			(obj.gap_top) = () => ((this.gap_top()));
-			(obj.graphs) = () => ((this.graphs()));
-			(obj.hue_base) = () => ((this.hue_base()));
-			(obj.hue_shift) = () => ((this.hue_shift()));
+			(obj.zoom) = (next) => ((this?.zoom(next)));
+			(obj.gap_left) = () => ((this?.gap_left()));
+			(obj.gap_right) = () => ((this?.gap_right()));
+			(obj.gap_bottom) = () => ((this?.gap_bottom()));
+			(obj.gap_top) = () => ((this?.gap_top()));
+			(obj.graphs) = () => ((this?.graphs()));
+			(obj.hue_base) = () => ((this?.hue_base()));
+			(obj.hue_shift) = () => ((this?.hue_shift()));
 			return obj;
 		}
 		gap_hor(){
@@ -7474,22 +7474,22 @@ var $;
 			return 24;
 		}
 		gap_left(){
-			return (this.gap_hor());
+			return (this?.gap_hor());
 		}
 		gap_right(){
-			return (this.gap_hor());
+			return (this?.gap_hor());
 		}
 		gap_bottom(){
-			return (this.gap_vert());
+			return (this?.gap_vert());
 		}
 		gap_top(){
-			return (this.gap_vert());
+			return (this?.gap_vert());
 		}
 		graphs(){
 			return [];
 		}
 		sub(){
-			return [(this.Legend()), (this.Plot())];
+			return [(this?.Legend()), (this?.Plot())];
 		}
 	};
 	($mol_mem(($.$mol_chart.prototype), "Legend"));
@@ -7539,7 +7539,7 @@ var $;
 		}
 		Hotkey(){
 			const obj = new this.$.$mol_hotkey();
-			(obj.key) = () => ({"left": (next) => (this.left(next)), "right": (next) => (this.right(next))});
+			(obj.key) = () => ({"left": (next) => (this?.left(next)), "right": (next) => (this?.right(next))});
 			return obj;
 		}
 		Lights(){
@@ -7557,7 +7557,7 @@ var $;
 		}
 		Score(){
 			const obj = new this.$.$mol_plot_line();
-			(obj.series_y) = () => ((this.score_series()));
+			(obj.series_y) = () => ((this?.score_series()));
 			return obj;
 		}
 		Ruler_vert(){
@@ -7574,9 +7574,9 @@ var $;
 			const obj = new this.$.$mol_chart();
 			(obj.Legend) = () => (null);
 			(obj.graphs) = () => ([
-				(this.Score()), 
-				(this.Ruler_vert()), 
-				(this.Ruler_hor())
+				(this?.Score()), 
+				(this?.Ruler_vert()), 
+				(this?.Ruler_hor())
 			]);
 			return obj;
 		}
@@ -7589,8 +7589,8 @@ var $;
 		}
 		Left(){
 			const obj = new this.$.$mol_button_major();
-			(obj.title) = () => ((this.left_title()));
-			(obj.click) = (next) => ((this.left(next)));
+			(obj.title) = () => ((this?.left_title()));
+			(obj.click) = (next) => ((this?.left(next)));
 			return obj;
 		}
 		right_title(){
@@ -7602,13 +7602,13 @@ var $;
 		}
 		Right(){
 			const obj = new this.$.$mol_button_major();
-			(obj.title) = () => ((this.right_title()));
-			(obj.click) = (next) => ((this.right(next)));
+			(obj.title) = () => ((this?.right_title()));
+			(obj.click) = (next) => ((this?.right(next)));
 			return obj;
 		}
 		Choices(){
 			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([(this.Left()), (this.Right())]);
+			(obj.sub) = () => ([(this?.Left()), (this?.Right())]);
 			return obj;
 		}
 		description(){
@@ -7616,7 +7616,7 @@ var $;
 		}
 		Description(){
 			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([(this.description())]);
+			(obj.sub) = () => ([(this?.description())]);
 			return obj;
 		}
 		title_result(){
@@ -7633,19 +7633,19 @@ var $;
 			return [];
 		}
 		auto(){
-			return [(this.Brain()), (this.score())];
+			return [(this?.Brain()), (this?.score())];
 		}
 		plugins(){
-			return [(this.Theme()), (this.Hotkey())];
+			return [(this?.Theme()), (this?.Hotkey())];
 		}
 		tools(){
-			return [(this.Lights()), (this.Sources())];
+			return [(this?.Lights()), (this?.Sources())];
 		}
 		body(){
 			return [
-				(this.History()), 
-				(this.Choices()), 
-				(this.Description())
+				(this?.History()), 
+				(this?.Choices()), 
+				(this?.Description())
 			];
 		}
 	};
