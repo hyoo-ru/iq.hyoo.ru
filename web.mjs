@@ -5207,7 +5207,8 @@ var $;
 			(obj.title) = () => ((this?.hint()));
 			return obj;
 		}
-		hue(){
+		hue(next){
+			if(next !== undefined) return next;
 			return +NaN;
 		}
 		Sample(){
@@ -5229,6 +5230,7 @@ var $;
 	($mol_mem(($.$mol_plot_graph.prototype), "size_real"));
 	($mol_mem(($.$mol_plot_graph.prototype), "gap"));
 	($mol_mem(($.$mol_plot_graph.prototype), "Hint"));
+	($mol_mem(($.$mol_plot_graph.prototype), "hue"));
 	($.$mol_plot_graph_sample) = class $mol_plot_graph_sample extends ($.$mol_view) {
 		type(){
 			return "solid";
@@ -6782,7 +6784,7 @@ var $;
             graphs_colored() {
                 const graphs = this.graphs_visible();
                 for (let index = 0; index < graphs.length; index++) {
-                    graphs[index].hue = () => this.graph_hue(index);
+                    graphs[index].hue(this.graph_hue(index));
                 }
                 return graphs;
             }
