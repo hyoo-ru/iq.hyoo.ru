@@ -1,6 +1,5 @@
 $hyoo_iq $mol_page
-	title_result @ \IQ: {score}
-	title_wait @ \IQ: need {required} clicks
+	title @ \Hyper IQ
 	required 200
 	history?val /boolean
 	auto /
@@ -13,6 +12,7 @@ $hyoo_iq $mol_page
 				left?event <=> left?event
 				right?event <=> right?event
 	tools /
+		<= Score $mol_chip sub / <= score
 		<= Lights $mol_lights_toggle
 		<= Sources $mol_link_source
 			uri \https://github.com/hyoo-ru/iq.hyoo.ru/
@@ -20,7 +20,7 @@ $hyoo_iq $mol_page
 		<= Stats $mol_chart
 			Legend null
 			graphs /
-				<= Score $mol_plot_group
+				<= Score_log $mol_plot_group
 					graphs /
 						<= Score_line $mol_plot_line
 						<= Score_fill $mol_plot_fill

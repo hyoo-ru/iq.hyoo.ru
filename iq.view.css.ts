@@ -4,6 +4,13 @@ namespace $ {
 
 	$mol_style_define( $hyoo_iq , {
 		
+		Score: {
+			color: $mol_theme.special,
+			text: {
+				shadow: '0 0',
+			},
+		},
+		
 		Body_content: {
 			padding: 0,
 			align: {
