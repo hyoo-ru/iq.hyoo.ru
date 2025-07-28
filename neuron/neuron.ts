@@ -7,7 +7,7 @@ namespace $ {
 			public value = 0,
 			public depth = 0,
 		) {
-			super()
+			super( length )
 		}
 
 		predict( history: readonly number[], pos = history.length - 1 ): number {
