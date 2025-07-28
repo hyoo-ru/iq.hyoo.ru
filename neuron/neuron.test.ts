@@ -82,10 +82,10 @@ namespace $ {
 		
 		},
 
-		'Warp history'() {
+		'Study history'() {
 			
 			const brain = new $hyoo_iq_neuron(2)
-			brain.warp( [ 1, 0, 1, 1 ] )
+			brain.study( [ 1, 0, 1, 1 ] )
 			
 			$mol_assert_equal( brain.predict( [] ) , 1 )
 			$mol_assert_equal( brain.predict( [ 1 ] ) , 0 )
@@ -98,13 +98,31 @@ namespace $ {
 		'Non boolean'() {
 			
 			const brain = new $hyoo_iq_neuron(8)
-			brain.warp( [ 1, 2, 3, 1 ] )
+			brain.study( [ 1, 2, 3, 1 ] )
 			
 			$mol_assert_equal( brain.predict( [] ) , 1 )
 			$mol_assert_equal( brain.predict( [ 1 ] ) , 2 )
 			$mol_assert_equal( brain.predict( [ 1, 2 ] ) , 3 )
 			$mol_assert_equal( brain.predict( [ 1, 2, 3 ] ) , 1 )
 			$mol_assert_equal( brain.predict( [ 1, 2, 3, 1 ] ) , 2 )
+			
+		},
+
+		'Finite sequence generation'() {
+			
+			const brain = new $hyoo_iq_neuron(8)
+			brain.study( [ 1, 2, 3, 4 ] )
+			
+			$mol_assert_equal( brain.generate( 5, [ 2 ] ) , [ 3, 4 ] )
+			
+		},
+
+		'Limited infinite sequence generation'() {
+			
+			const brain = new $hyoo_iq_neuron(8)
+			brain.study( [ 1, 2, 3, 1 ] )
+			
+			$mol_assert_equal( brain.generate( 5, [ 1 ] ) , [ 2, 3, 1, 2, 3 ] )
 			
 		},
 
