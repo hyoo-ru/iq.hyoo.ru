@@ -1,24 +1,23 @@
 namespace $ {
 
-	export class $hyoo_iq_neuron extends Array< $hyoo_iq_neuron | null > {
+	export class $hyoo_iq_neuron< Value > extends Map< Value, $hyoo_iq_neuron< Value > > {
 		
 		constructor(
-			length: number,
-			public value = 0,
+			public value: Value,
 			public depth = 0,
 		) {
-			super( length )
+			super()
 		}
 		
 		/** Generate story which continuous history. */
-		generate( limit: number, history: readonly number[] = [] ): readonly number[] {
+		generate( limit: number, history: ArrayLike<Value> = [] ): readonly Value[] {
 			
-			const story = [ ... history ]
+			const story = Array.from( history )
 			
 			for( let i = 0; i < limit; ++i ) {
 				
 				const tail = this.locate( story )
-				if( tail.depth < story.length && tail.some( Boolean ) ) break
+				if( tail.depth < story.length && tail.size ) break
 			
 				story.push( tail.value )
 			}
@@ -27,19 +26,19 @@ namespace $ {
 		}
 
 		/** Predict next step for history. */
-		predict( history: readonly number[], pos = history.length - 1 ): number {
+		predict( history: ArrayLike<Value>, pos = history.length - 1 ): Value {
 			return this.locate( history, pos ).value
 		}
 		
 		/** Study history untill remember. */
-		remember( history: readonly number[] ): boolean {
+		remember( history: ArrayLike<Value> ): boolean {
 			let studied = false
 			while( this.study( history ) ) studied = true
 			return studied
 		}
 		
 		/** Learn history step by step. */
-		study( history: readonly number[] ): boolean {
+		study( history: ArrayLike<Value> ): boolean {
 			
 			let learned = false
 			
@@ -51,7 +50,7 @@ namespace $ {
 		}
 		
 		/** Learn next step for history */
-		learn( next: number , history: readonly number[], pos = history.length - 1 ): boolean {
+		learn( next: Value , history: ArrayLike<Value>, pos = history.length - 1 ): boolean {
 			
 			if( pos < 0 ) {
 			
@@ -63,22 +62,22 @@ namespace $ {
 			}
 			
 			const tail = this.locate( history, pos )
-			if( tail.value === next && !tail.some( Boolean ) ) return false
+			if( tail.value === next && !tail.size ) return false
 			
 			const x =  pos - tail.depth
 			if( x < 0 ) return false
 			
-			tail[ history[ x ] ] = new $hyoo_iq_neuron( this.length, next, tail.depth + 1 )
+			tail.set( history[ x ], new $hyoo_iq_neuron( next, tail.depth + 1 ) )
 			
 			return true
 		}
 
 		/** Locate meaningful neuron for history. */
-		locate( history : readonly number[], pos = history.length - 1 ): $hyoo_iq_neuron {
+		locate( history : ArrayLike<Value>, pos = history.length - 1 ): $hyoo_iq_neuron< Value > {
 			
 			if( pos < 0 ) return this
 			
-			const kid = this[ history[ pos ] ]
+			const kid = this.get( history[ pos ] )
 			if( !kid ) return this
 			
 			return kid.locate( history, pos - 1 )
@@ -86,8 +85,8 @@ namespace $ {
 		}
 
 		/** Count of neurons in subtree. */
-		size(): number {
-			return 1 + this.reduce( ( sum, kid )=> kid ? sum + kid.size() : sum, 0 )
+		population(): number {
+			return 1 + this.values().reduce( ( sum, kid )=> kid ? sum + kid.population() : sum, 0 )
 		}
 
 	}
