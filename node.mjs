@@ -8344,19 +8344,36 @@ var $;
 			const obj = new this.$.$mol_plot_fill();
 			return obj;
 		}
-		score_series_y(next){
+		score_series(next){
 			if(next !== undefined) return next;
-			return [200, 0];
-		}
-		score_series_x(next){
-			if(next !== undefined) return next;
-			return [-1, 0];
+			return [];
 		}
 		Score(){
 			const obj = new this.$.$mol_plot_group();
 			(obj.graphs) = () => ([(this.Score_line()), (this.Score_fill())]);
-			(obj.series_y) = () => ((this.score_series_y()));
-			(obj.series_x) = () => ((this.score_series_x()));
+			(obj.series_y) = () => ((this.score_series()));
+			return obj;
+		}
+		Frame(){
+			const obj = new this.$.$mol_plot_line();
+			(obj.series_x) = () => ([
+				0, 
+				0, 
+				100, 
+				100, 
+				0, 
+				0, 
+				100
+			]);
+			(obj.series_y) = () => ([
+				-100, 
+				+100, 
+				+100, 
+				-100, 
+				-100, 
+				+0, 
+				+0
+			]);
 			return obj;
 		}
 		Ruler_vert(){
@@ -8374,6 +8391,7 @@ var $;
 			(obj.Legend) = () => (null);
 			(obj.graphs) = () => ([
 				(this.Score()), 
+				(this.Frame()), 
 				(this.Ruler_vert()), 
 				(this.Ruler_hor())
 			]);
@@ -8464,9 +8482,9 @@ var $;
 	($mol_mem(($.$hyoo_iq.prototype), "Sources"));
 	($mol_mem(($.$hyoo_iq.prototype), "Score_line"));
 	($mol_mem(($.$hyoo_iq.prototype), "Score_fill"));
-	($mol_mem(($.$hyoo_iq.prototype), "score_series_y"));
-	($mol_mem(($.$hyoo_iq.prototype), "score_series_x"));
+	($mol_mem(($.$hyoo_iq.prototype), "score_series"));
 	($mol_mem(($.$hyoo_iq.prototype), "Score"));
+	($mol_mem(($.$hyoo_iq.prototype), "Frame"));
 	($mol_mem(($.$hyoo_iq.prototype), "Ruler_vert"));
 	($mol_mem(($.$hyoo_iq.prototype), "Ruler_hor"));
 	($mol_mem(($.$hyoo_iq.prototype), "Stats"));
@@ -8528,8 +8546,7 @@ var $;
                 this.history([...history, teach]);
                 if (next !== prediction)
                     this.wins(this.wins() + 1);
-                this.score_series_y([...this.score_series_y(), this.score()]);
-                this.score_series_x([...this.score_series_x(), this.score_series_x().length - 1]);
+                this.score_series([...this.score_series(), this.score()]);
             }
             history_log() {
                 return this.history().map(val => val ? '▶' : '◀').join('');
@@ -8538,7 +8555,7 @@ var $;
                 return next;
             }
             score() {
-                return this.wins() / (this.history().length + 1) * 200;
+                return this.wins() / (this.history().length + 1) * 200 - 100;
             }
         }
         __decorate([

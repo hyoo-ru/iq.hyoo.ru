@@ -561,12 +561,24 @@ $hyoo_iq $mol_page
 					graphs /
 						<= Score_line $mol_plot_line
 						<= Score_fill $mol_plot_fill
-					series_y <= score_series_y?val /number
-						200
+					series_y <= score_series?val /number
+				<= Frame $mol_plot_line
+					series_x /number
 						0
-					series_x <= score_series_x?val /number
-						-1
 						0
+						100
+						100
+						0
+						0
+						100
+					series_y /number
+						-100
+						+100
+						+100
+						-100
+						-100
+						+0
+						+0
 				<= Ruler_vert $mol_plot_ruler_vert
 					title \
 				<= Ruler_hor $mol_plot_ruler_hor
