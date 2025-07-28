@@ -5,6 +5,7 @@ namespace $ {
 	$mol_style_define( $hyoo_iq , {
 		
 		Body_content: {
+			padding: 0,
 			align: {
 				self: 'stretch',
 			},
@@ -13,6 +14,15 @@ namespace $ {
 		Description: {
 			margin: 'auto',
 			padding: rem(.75),
+		},
+		
+		History_log: {
+			display: 'flex',
+			margin: $mol_gap.block,
+			padding: $mol_gap.block,
+			flex: {
+				direction: 'row-reverse',
+			},
 		},
 
 		Choices: {

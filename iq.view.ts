@@ -4,11 +4,11 @@ namespace $.$$ {
 
 		title() {
 			
-			if( this.history().length > this.required() ) {
+			// if( this.history().length > this.required() ) {
 				return super.title_result().replace( '{score}' , this.score().toFixed(0) )
-			} else {
-				return super.title_wait().replace( '{required}' , this.required().toString() )
-			}
+			// } else {
+			// 	return super.title_wait().replace( '{required}' , this.required().toString() )
+			// }
 
 		}
 
@@ -28,14 +28,20 @@ namespace $.$$ {
 			let prediction = brain.predict( history )
 			let teach = next
 			
-			if( Math.random() < .1 ) teach = !teach
+			// if( Math.random() < .1 ) teach = !teach
 			brain.learn( teach , history )
 			
 			this.history([ ... history , teach ])
 			if( next !== prediction ) this.wins( this.wins() + 1 )
 
-			this.score_series([ ... this.score_series() , this.score() ])
+			this.score_series_y([ ... this.score_series_y() , this.score() ])
+			this.score_series_x([ ... this.score_series_x() , this.score_series_x().length - 1 ])
 
+		}
+		
+		@ $mol_mem
+		history_log() {
+			return this.history().map( val => val ? '▶' : '◀' ).join( '' )
 		}
 
 		@ $mol_mem
@@ -45,7 +51,7 @@ namespace $.$$ {
 		
 		@ $mol_mem
 		score() {
-			return this.wins() / ( this.history().length + 1 ) * 100
+			return this.wins() / ( this.history().length + 1 ) * 200
 		}
 
 	}
