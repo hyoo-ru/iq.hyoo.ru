@@ -34,8 +34,7 @@ namespace $.$$ {
 			this.history([ ... history , teach ])
 			if( next !== prediction ) this.wins( this.wins() + 1 )
 
-			this.score_series_y([ ... this.score_series_y() , this.score() ])
-			this.score_series_x([ ... this.score_series_x() , this.score_series_x().length - 1 ])
+			this.score_series([ ... this.score_series() , this.score() ])
 
 		}
 		
@@ -51,7 +50,7 @@ namespace $.$$ {
 		
 		@ $mol_mem
 		score() {
-			return this.wins() / ( this.history().length + 1 ) * 200
+			return this.wins() / ( this.history().length + 1 ) * 200 - 100
 		}
 
 	}
