@@ -3,65 +3,65 @@ namespace $ {
 
 		'Empty brain'() {
 		
-			const brain = new $hyoo_iq_neuron
+			const brain = new $hyoo_iq_neuron(2)
 		
 			$mol_assert_equal( brain.size() , 1 )
-			$mol_assert_equal( brain.predict( [] ) , false )
+			$mol_assert_equal( brain.predict( [] ) , 0 )
 		
 		},
 
 		'Root switch'() {
 		
-			const brain = new $hyoo_iq_neuron
-			brain.learn( true , [] )
+			const brain = new $hyoo_iq_neuron(2)
+			brain.learn( 1 , [] )
 		
 			$mol_assert_equal( brain.size() , 1 )
-			$mol_assert_equal( brain.predict( [] ) , true )
-			$mol_assert_equal( brain.predict( [ true ] ) , true )
-			$mol_assert_equal( brain.predict( [ false ] ) , true )
+			$mol_assert_equal( brain.predict( [] ) , 1 )
+			$mol_assert_equal( brain.predict( [ 1 ] ) , 1 )
+			$mol_assert_equal( brain.predict( [ 0 ] ) , 1 )
 		
 		},
 
 		'Right way'() {
 			
-			const brain = new $hyoo_iq_neuron
-			brain.learn( true , [ true ] )
+			const brain = new $hyoo_iq_neuron(2)
+			brain.learn( 1 , [ 1 ] )
 			
 			$mol_assert_equal( brain.size() , 2 )
-			$mol_assert_equal( brain.predict( [ true ] ) , true )
-			$mol_assert_equal( brain.predict( [ false ] ) , false )
+			$mol_assert_equal( brain.predict( [ 1 ] ) , 1 )
+			$mol_assert_equal( brain.predict( [ 0 ] ) , 0 )
 		
 		},
 
 		'Left way'() {
 			
-			const brain = new $hyoo_iq_neuron
-			brain.learn( true , [ false ] )
+			const brain = new $hyoo_iq_neuron(2)
+			brain.learn( 1 , [ 0 ] )
 
 			$mol_assert_equal( brain.size() , 2 )
-			$mol_assert_equal( brain.predict( [ true ] ) , false )
-			$mol_assert_equal( brain.predict( [ false ] ) , true )
+			$mol_assert_equal( brain.predict( [ 1 ] ) , 0 )
+			$mol_assert_equal( brain.predict( [ 0 ] ) , 1 )
 
 		},
 
 		'Both way'() {
 		
-			const brain = new $hyoo_iq_neuron
-			brain.learn( true , [ true ] )
-			brain.learn( true , [ false ] )
+			const brain = new $hyoo_iq_neuron(2)
+			brain.learn( 1 , [ 1 ] )
+			brain.learn( 1 , [ 0 ] )
 		
 			$mol_assert_equal( brain.size() , 3 )
-			$mol_assert_equal( brain.predict( [] ) , false )
-			$mol_assert_equal( brain.predict( [ true ] ) , true )
-			$mol_assert_equal( brain.predict( [ false ] ) , true )
+			$mol_assert_equal( brain.predict( [] ) , 0 )
+			$mol_assert_equal( brain.predict( [ 1 ] ) , 1 )
+			$mol_assert_equal( brain.predict( [ 0 ] ) , 1 )
 		
 		},
 
 		'Deep no switch'() {
 		
-			const brain = new $hyoo_iq_neuron
-			brain.learn( true , [ true ] )
-			brain.learn( true , [ true , true ] )
+			const brain = new $hyoo_iq_neuron(2)
+			brain.learn( 1 , [ 1 ] )
+			brain.learn( 1 , [ 1 , 1 ] )
 		
 			$mol_assert_equal( brain.size() , 2 )
 			
@@ -69,29 +69,42 @@ namespace $ {
 		
 		'Deep switch'() {
 			
-			const brain = new $hyoo_iq_neuron
-			brain.learn( true , [ true ] )
-			brain.learn( false , [ false , true ] )
+			const brain = new $hyoo_iq_neuron(2)
+			brain.learn( 1 , [ 1 ] )
+			brain.learn( 0 , [ 0 , 1 ] )
 			
 			$mol_assert_equal( brain.size() , 3 )
-			$mol_assert_equal( brain.predict( [] ) , false )
-			$mol_assert_equal( brain.predict( [ true ] ) , true )
-			$mol_assert_equal( brain.predict( [ true , true ] ) , true )
-			$mol_assert_equal( brain.predict( [ false , true ] ) , false )
-			$mol_assert_equal( brain.predict( [ false , false ] ) , false )
+			$mol_assert_equal( brain.predict( [] ) , 0 )
+			$mol_assert_equal( brain.predict( [ 1 ] ) , 1 )
+			$mol_assert_equal( brain.predict( [ 1 , 1 ] ) , 1 )
+			$mol_assert_equal( brain.predict( [ 0 , 1 ] ) , 0 )
+			$mol_assert_equal( brain.predict( [ 0 , 0 ] ) , 0 )
 		
 		},
 
 		'Warp history'() {
 			
-			const brain = new $hyoo_iq_neuron
-			brain.warp( [ true, false, true, true ] )
+			const brain = new $hyoo_iq_neuron(2)
+			brain.warp( [ 1, 0, 1, 1 ] )
 			
-			$mol_assert_equal( brain.predict( [] ) , true )
-			$mol_assert_equal( brain.predict( [ true ] ) , false )
-			$mol_assert_equal( brain.predict( [ true, false ] ) , true )
-			$mol_assert_equal( brain.predict( [ true, false, true ] ) , true )
-			$mol_assert_equal( brain.predict( [ true, false, true, true ] ) , false )
+			$mol_assert_equal( brain.predict( [] ) , 1 )
+			$mol_assert_equal( brain.predict( [ 1 ] ) , 0 )
+			$mol_assert_equal( brain.predict( [ 1, 0 ] ) , 1 )
+			$mol_assert_equal( brain.predict( [ 1, 0, 1 ] ) , 1 )
+			$mol_assert_equal( brain.predict( [ 1, 0, 1, 1 ] ) , 0 )
+			
+		},
+
+		'Non boolean'() {
+			
+			const brain = new $hyoo_iq_neuron(8)
+			brain.warp( [ 1, 2, 3, 1 ] )
+			
+			$mol_assert_equal( brain.predict( [] ) , 1 )
+			$mol_assert_equal( brain.predict( [ 1 ] ) , 2 )
+			$mol_assert_equal( brain.predict( [ 1, 2 ] ) , 3 )
+			$mol_assert_equal( brain.predict( [ 1, 2, 3 ] ) , 1 )
+			$mol_assert_equal( brain.predict( [ 1, 2, 3, 1 ] ) , 2 )
 			
 		},
 

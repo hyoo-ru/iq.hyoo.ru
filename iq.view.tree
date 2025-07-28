@@ -1,9 +1,9 @@
 $hyoo_iq $mol_page
 	title @ \Hyper IQ
 	required 200
-	history?val /boolean
+	history?val /number
 	auto /
-		<= Brain $hyoo_iq_neuron
+		<= Brain $hyoo_iq_neuron / 2
 		<= score 0
 	plugins /
 		<= Theme $mol_theme_auto

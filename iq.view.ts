@@ -3,14 +3,14 @@ namespace $.$$ {
 	export class $hyoo_iq extends $.$hyoo_iq {
 
 		right() {
-			this.choice( true )
+			this.choice( 1 )
 		}
 		
 		left() {
-			this.choice( false )
+			this.choice( 0 )
 		}
 
-		choice( next : boolean ) {
+		choice( next: number ) {
 
 			const brain = this.Brain()
 			const history = this.history()
