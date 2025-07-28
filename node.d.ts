@@ -1221,12 +1221,15 @@ declare namespace $.$$ {
 
 declare namespace $ {
     class $hyoo_iq_neuron {
-        prediction: boolean;
+        value: boolean;
+        depth: number;
         right: $hyoo_iq_neuron | null;
         left: $hyoo_iq_neuron | null;
-        constructor(prediction?: boolean, right?: $hyoo_iq_neuron | null, left?: $hyoo_iq_neuron | null);
-        predict(history: readonly boolean[]): boolean;
-        learn(next: boolean, history: readonly boolean[]): void;
+        constructor(value?: boolean, depth?: number, right?: $hyoo_iq_neuron | null, left?: $hyoo_iq_neuron | null);
+        predict(history: readonly boolean[], pos?: number): boolean;
+        locate(history: readonly boolean[], pos?: number): $hyoo_iq_neuron;
+        learn(next: boolean, history: readonly boolean[], pos?: number): void;
+        warp(history: readonly boolean[]): void;
         size(): number;
     }
 }
@@ -2264,6 +2267,54 @@ declare namespace $ {
 
 declare namespace $ {
 
+	export class $mol_plot_fill extends $mol_plot_line {
+		threshold( ): number
+	}
+	
+}
+
+//# sourceMappingURL=fill.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $mol_plot_fill extends $.$mol_plot_fill {
+        curve(): string;
+        front(): never[];
+        back(): this[];
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	type $mol_plot_graph_sample__sub_mol_plot_group_1 = $mol_type_enforce<
+		ReturnType< $mol_plot_group['graph_samples'] >
+		,
+		ReturnType< $mol_plot_graph_sample['sub'] >
+	>
+	export class $mol_plot_group extends $mol_plot_graph {
+		graphs( ): readonly($mol_plot_graph)[]
+		graphs_enriched( ): ReturnType< $mol_plot_group['graphs'] >
+		graph_samples( ): readonly($mol_view)[]
+		sub( ): ReturnType< $mol_plot_group['graphs_enriched'] >
+		Sample( ): $mol_plot_graph_sample
+	}
+	
+}
+
+//# sourceMappingURL=group.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $mol_plot_group extends $.$mol_plot_group {
+        graphs_enriched(): readonly $.$mol_plot_graph[];
+        dimensions(): $mol_vector_2d<$mol_vector_range<number>>;
+        graph_samples(): any[];
+        back(): $mol_plot_graph[];
+        front(): $mol_plot_graph[];
+    }
+}
+
+declare namespace $ {
+
 	export class $mol_svg_rect extends $mol_svg {
 		width( ): string
 		height( ): string
@@ -3026,57 +3077,72 @@ declare namespace $ {
 		,
 		ReturnType< $mol_link_source['uri'] >
 	>
-	type $mol_plot_line__series_y_hyoo_iq_3 = $mol_type_enforce<
-		ReturnType< $hyoo_iq['score_series'] >
+	type $mol_plot_group__graphs_hyoo_iq_3 = $mol_type_enforce<
+		readonly(any)[]
 		,
-		ReturnType< $mol_plot_line['series_y'] >
+		ReturnType< $mol_plot_group['graphs'] >
 	>
-	type $mol_plot_ruler_vert__title_hyoo_iq_4 = $mol_type_enforce<
+	type $mol_plot_group__series_y_hyoo_iq_4 = $mol_type_enforce<
+		ReturnType< $hyoo_iq['score_series_y'] >
+		,
+		ReturnType< $mol_plot_group['series_y'] >
+	>
+	type $mol_plot_group__series_x_hyoo_iq_5 = $mol_type_enforce<
+		ReturnType< $hyoo_iq['score_series_x'] >
+		,
+		ReturnType< $mol_plot_group['series_x'] >
+	>
+	type $mol_plot_ruler_vert__title_hyoo_iq_6 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_plot_ruler_vert['title'] >
 	>
-	type $mol_plot_ruler_hor__title_hyoo_iq_5 = $mol_type_enforce<
+	type $mol_plot_ruler_hor__title_hyoo_iq_7 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_plot_ruler_hor['title'] >
 	>
-	type $mol_chart__Legend_hyoo_iq_6 = $mol_type_enforce<
+	type $mol_chart__Legend_hyoo_iq_8 = $mol_type_enforce<
 		any
 		,
 		ReturnType< $mol_chart['Legend'] >
 	>
-	type $mol_chart__graphs_hyoo_iq_7 = $mol_type_enforce<
+	type $mol_chart__graphs_hyoo_iq_9 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_chart['graphs'] >
 	>
-	type $mol_button_major__title_hyoo_iq_8 = $mol_type_enforce<
+	type $mol_scroll__sub_hyoo_iq_10 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_scroll['sub'] >
+	>
+	type $mol_button_major__title_hyoo_iq_11 = $mol_type_enforce<
 		ReturnType< $hyoo_iq['left_title'] >
 		,
 		ReturnType< $mol_button_major['title'] >
 	>
-	type $mol_button_major__click_hyoo_iq_9 = $mol_type_enforce<
+	type $mol_button_major__click_hyoo_iq_12 = $mol_type_enforce<
 		ReturnType< $hyoo_iq['left'] >
 		,
 		ReturnType< $mol_button_major['click'] >
 	>
-	type $mol_button_major__title_hyoo_iq_10 = $mol_type_enforce<
+	type $mol_button_major__title_hyoo_iq_13 = $mol_type_enforce<
 		ReturnType< $hyoo_iq['right_title'] >
 		,
 		ReturnType< $mol_button_major['title'] >
 	>
-	type $mol_button_major__click_hyoo_iq_11 = $mol_type_enforce<
+	type $mol_button_major__click_hyoo_iq_14 = $mol_type_enforce<
 		ReturnType< $hyoo_iq['right'] >
 		,
 		ReturnType< $mol_button_major['click'] >
 	>
-	type $mol_view__sub_hyoo_iq_12 = $mol_type_enforce<
+	type $mol_view__sub_hyoo_iq_15 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $mol_view__sub_hyoo_iq_13 = $mol_type_enforce<
+	type $mol_view__sub_hyoo_iq_16 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_view['sub'] >
@@ -3088,11 +3154,16 @@ declare namespace $ {
 		Hotkey( ): $mol_hotkey
 		Lights( ): $mol_lights_toggle
 		Sources( ): $mol_link_source
-		score_series( next?: readonly(number)[] ): readonly(number)[]
-		Score( ): $mol_plot_line
+		Score_line( ): $mol_plot_line
+		Score_fill( ): $mol_plot_fill
+		score_series_y( next?: readonly(number)[] ): readonly(number)[]
+		score_series_x( next?: readonly(number)[] ): readonly(number)[]
+		Score( ): $mol_plot_group
 		Ruler_vert( ): $mol_plot_ruler_vert
 		Ruler_hor( ): $mol_plot_ruler_hor
-		History( ): $mol_chart
+		Stats( ): $mol_chart
+		history_log( ): string
+		History_log( ): $mol_scroll
 		left_title( ): string
 		left( next?: any ): any
 		Left( ): $mol_button_major
@@ -3121,6 +3192,7 @@ declare namespace $.$$ {
         right(): void;
         left(): void;
         choice(next: boolean): void;
+        history_log(): string;
         wins(next?: number): number;
         score(): number;
     }

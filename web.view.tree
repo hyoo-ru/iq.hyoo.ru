@@ -259,6 +259,14 @@ $mol_plot_line $mol_plot_graph
 		color <= color
 		type <= type
 
+$mol_plot_fill $mol_plot_line
+	threshold 4
+
+$mol_plot_group $mol_plot_graph
+	sub <= graphs_enriched <= graphs /$mol_plot_graph
+	Sample $mol_plot_graph_sample
+		sub <= graph_samples /$mol_view
+
 $mol_svg_rect $mol_svg
 	dom_name \rect
 	pos /
@@ -546,15 +554,24 @@ $hyoo_iq $mol_page
 		<= Sources $mol_link_source
 			uri \https://github.com/hyoo-ru/iq.hyoo.ru/
 	body /
-		<= History $mol_chart
+		<= Stats $mol_chart
 			Legend null
 			graphs /
-				<= Score $mol_plot_line
-					series_y <= score_series?val /number
+				<= Score $mol_plot_group
+					graphs /
+						<= Score_line $mol_plot_line
+						<= Score_fill $mol_plot_fill
+					series_y <= score_series_y?val /number
+						200
+						0
+					series_x <= score_series_x?val /number
+						-1
+						0
 				<= Ruler_vert $mol_plot_ruler_vert
 					title \
 				<= Ruler_hor $mol_plot_ruler_hor
 					title \
+		<= History_log $mol_scroll sub / <= history_log \
 		<= Choices $mol_view
 			sub /
 				<= Left $mol_button_major

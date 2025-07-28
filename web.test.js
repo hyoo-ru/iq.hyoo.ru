@@ -2739,6 +2739,8 @@ var $;
             brain.learn(true, []);
             $mol_assert_equal(brain.size(), 1);
             $mol_assert_equal(brain.predict([]), true);
+            $mol_assert_equal(brain.predict([true]), true);
+            $mol_assert_equal(brain.predict([false]), true);
         },
         'Right way'() {
             const brain = new $hyoo_iq_neuron;
@@ -2779,6 +2781,15 @@ var $;
             $mol_assert_equal(brain.predict([true, true]), true);
             $mol_assert_equal(brain.predict([false, true]), false);
             $mol_assert_equal(brain.predict([false, false]), false);
+        },
+        'Warp history'() {
+            const brain = new $hyoo_iq_neuron;
+            brain.warp([true, false, true, true]);
+            $mol_assert_equal(brain.predict([]), true);
+            $mol_assert_equal(brain.predict([true]), false);
+            $mol_assert_equal(brain.predict([true, false]), true);
+            $mol_assert_equal(brain.predict([true, false, true]), true);
+            $mol_assert_equal(brain.predict([true, false, true, true]), false);
         },
     });
 })($ || ($ = {}));

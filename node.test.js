@@ -3949,50 +3949,51 @@ var $;
 var $;
 (function ($) {
     class $hyoo_iq_neuron {
-        prediction;
+        value;
+        depth;
         right;
         left;
-        constructor(prediction = false, right = null, left = null) {
-            this.prediction = prediction;
+        constructor(value = false, depth = 0, right = null, left = null) {
+            this.value = value;
+            this.depth = depth;
             this.right = right;
             this.left = left;
         }
-        predict(history) {
-            if (history.length === 0)
-                return this.prediction;
-            const last = history[history.length - 1];
+        predict(history, pos = history.length - 1) {
+            return this.locate(history, pos).value;
+        }
+        locate(history, pos = history.length - 1) {
+            if (pos < 0)
+                return this;
+            const last = history[pos];
             if (last) {
                 if (!this.right)
-                    return this.prediction;
-                return this.right.predict(history.slice(0, -1));
+                    return this;
+                return this.right.locate(history, pos - 1);
             }
             else {
                 if (!this.left)
-                    return this.prediction;
-                return this.left.predict(history.slice(0, -1));
+                    return this;
+                return this.left.locate(history, pos - 1);
             }
         }
-        learn(next, history) {
-            if (history.length === 0) {
-                this.prediction = next;
+        learn(next, history, pos = history.length - 1) {
+            if (pos < 0) {
+                this.value = next;
                 return;
             }
-            const last = history[history.length - 1];
-            if (last) {
-                if (this.right) {
-                    return this.right.learn(next, history.slice(0, -1));
-                }
-                else if (this.prediction !== next) {
-                    this.right = new $hyoo_iq_neuron(next);
-                }
-            }
-            else {
-                if (this.left) {
-                    return this.left.learn(next, history.slice(0, -1));
-                }
-                else if (this.prediction !== next) {
-                    this.left = new $hyoo_iq_neuron(next);
-                }
+            const tail = this.locate(history, pos);
+            if (tail.value === next)
+                return;
+            const axon = new $hyoo_iq_neuron(next, tail.depth + 1);
+            if (history[pos - tail.depth])
+                tail.right = axon;
+            else
+                tail.left = axon;
+        }
+        warp(history) {
+            for (let pos = 0; pos < history.length; ++pos) {
+                this.learn(history[pos], history, pos - 1);
             }
         }
         size() {
@@ -6541,6 +6542,141 @@ var $;
 })($ || ($ = {}));
 
 ;
+	($.$mol_plot_fill) = class $mol_plot_fill extends ($.$mol_plot_line) {
+		threshold(){
+			return 4;
+		}
+	};
+
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $mol_plot_fill extends $.$mol_plot_fill {
+            curve() {
+                const points = this.points();
+                if (points.length === 0)
+                    return '';
+                const [, shift_y] = this.shift();
+                const main = points.map(point => point.join(',')).join(' ');
+                return `M ${points[0].join(' ')} L ${main} V ${shift_y} H ${points[0][0]}`;
+            }
+            front() {
+                return [];
+            }
+            back() {
+                return [this];
+            }
+        }
+        $$.$mol_plot_fill = $mol_plot_fill;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/plot/fill/fill.view.css", "[mol_plot_fill] {\n\tstroke: none;\n\tstroke-width: 0;\n\topacity: .1;\n\tfill: currentColor;\n\tpointer-events: none;\n}\n\n[mol_plot_fill_sample] {\n\topacity: .1;\n\tbackground: currentColor;\n\tposition: absolute;\n\tbottom: 0;\n\ttop: .75em;\n\tleft: 0;\n\tright: 0;\n}\n");
+})($ || ($ = {}));
+
+;
+	($.$mol_plot_group) = class $mol_plot_group extends ($.$mol_plot_graph) {
+		graphs(){
+			return [];
+		}
+		graphs_enriched(){
+			return (this.graphs());
+		}
+		graph_samples(){
+			return [];
+		}
+		sub(){
+			return (this.graphs_enriched());
+		}
+		Sample(){
+			const obj = new this.$.$mol_plot_graph_sample();
+			(obj.sub) = () => ((this.graph_samples()));
+			return obj;
+		}
+	};
+	($mol_mem(($.$mol_plot_group.prototype), "Sample"));
+
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $mol_plot_group extends $.$mol_plot_group {
+            graphs_enriched() {
+                const graphs = this.graphs();
+                for (let graph of graphs) {
+                    graph.shift = () => this.shift();
+                    graph.scale = () => this.scale();
+                    graph.size_real = () => this.size_real();
+                    graph.hue = () => this.hue();
+                    graph.series_x = () => this.series_x();
+                    graph.series_y = () => this.series_y();
+                    graph.dimensions_pane = () => this.dimensions_pane();
+                    graph.viewport = () => this.viewport();
+                    graph.cursor_position = () => this.cursor_position();
+                    graph.gap = () => this.gap();
+                    graph.title = () => this.title();
+                    graph.repos_x = val => this.repos_x(val);
+                    graph.repos_y = val => this.repos_y(val);
+                }
+                return graphs;
+            }
+            dimensions() {
+                const graphs = this.graphs_enriched();
+                let next = new this.$.$mol_vector_2d($mol_vector_range_full.inversed, $mol_vector_range_full.inversed);
+                for (let graph of graphs) {
+                    next = next.expanded2(graph.dimensions());
+                }
+                return next;
+            }
+            graph_samples() {
+                return this.graphs_enriched().map(graph => graph.Sample());
+            }
+            back() {
+                const graphs = this.graphs_enriched();
+                const next = [];
+                for (let graph of graphs)
+                    next.push(...graph.back());
+                return next;
+            }
+            front() {
+                const graphs = this.graphs_enriched();
+                const next = [];
+                for (let graph of graphs)
+                    next.push(...graph.front());
+                return next;
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $mol_plot_group.prototype, "graphs_enriched", null);
+        __decorate([
+            $mol_mem
+        ], $mol_plot_group.prototype, "dimensions", null);
+        __decorate([
+            $mol_mem
+        ], $mol_plot_group.prototype, "graph_samples", null);
+        $$.$mol_plot_group = $mol_plot_group;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
 	($.$mol_svg_rect) = class $mol_svg_rect extends ($.$mol_svg) {
 		width(){
 			return "0";
@@ -8191,13 +8327,27 @@ var $;
 			(obj.uri) = () => ("https://github.com/hyoo-ru/iq.hyoo.ru/");
 			return obj;
 		}
-		score_series(next){
+		Score_line(){
+			const obj = new this.$.$mol_plot_line();
+			return obj;
+		}
+		Score_fill(){
+			const obj = new this.$.$mol_plot_fill();
+			return obj;
+		}
+		score_series_y(next){
 			if(next !== undefined) return next;
-			return [];
+			return [200, 0];
+		}
+		score_series_x(next){
+			if(next !== undefined) return next;
+			return [-1, 0];
 		}
 		Score(){
-			const obj = new this.$.$mol_plot_line();
-			(obj.series_y) = () => ((this.score_series()));
+			const obj = new this.$.$mol_plot_group();
+			(obj.graphs) = () => ([(this.Score_line()), (this.Score_fill())]);
+			(obj.series_y) = () => ((this.score_series_y()));
+			(obj.series_x) = () => ((this.score_series_x()));
 			return obj;
 		}
 		Ruler_vert(){
@@ -8210,7 +8360,7 @@ var $;
 			(obj.title) = () => ("");
 			return obj;
 		}
-		History(){
+		Stats(){
 			const obj = new this.$.$mol_chart();
 			(obj.Legend) = () => (null);
 			(obj.graphs) = () => ([
@@ -8218,6 +8368,14 @@ var $;
 				(this.Ruler_vert()), 
 				(this.Ruler_hor())
 			]);
+			return obj;
+		}
+		history_log(){
+			return "";
+		}
+		History_log(){
+			const obj = new this.$.$mol_scroll();
+			(obj.sub) = () => ([(this.history_log())]);
 			return obj;
 		}
 		left_title(){
@@ -8283,7 +8441,8 @@ var $;
 		}
 		body(){
 			return [
-				(this.History()), 
+				(this.Stats()), 
+				(this.History_log()), 
 				(this.Choices()), 
 				(this.Description())
 			];
@@ -8294,11 +8453,15 @@ var $;
 	($mol_mem(($.$hyoo_iq.prototype), "Hotkey"));
 	($mol_mem(($.$hyoo_iq.prototype), "Lights"));
 	($mol_mem(($.$hyoo_iq.prototype), "Sources"));
-	($mol_mem(($.$hyoo_iq.prototype), "score_series"));
+	($mol_mem(($.$hyoo_iq.prototype), "Score_line"));
+	($mol_mem(($.$hyoo_iq.prototype), "Score_fill"));
+	($mol_mem(($.$hyoo_iq.prototype), "score_series_y"));
+	($mol_mem(($.$hyoo_iq.prototype), "score_series_x"));
 	($mol_mem(($.$hyoo_iq.prototype), "Score"));
 	($mol_mem(($.$hyoo_iq.prototype), "Ruler_vert"));
 	($mol_mem(($.$hyoo_iq.prototype), "Ruler_hor"));
-	($mol_mem(($.$hyoo_iq.prototype), "History"));
+	($mol_mem(($.$hyoo_iq.prototype), "Stats"));
+	($mol_mem(($.$hyoo_iq.prototype), "History_log"));
 	($mol_mem(($.$hyoo_iq.prototype), "left"));
 	($mol_mem(($.$hyoo_iq.prototype), "Left"));
 	($mol_mem(($.$hyoo_iq.prototype), "right"));
@@ -8339,12 +8502,7 @@ var $;
     (function ($$) {
         class $hyoo_iq extends $.$hyoo_iq {
             title() {
-                if (this.history().length > this.required()) {
-                    return super.title_result().replace('{score}', this.score().toFixed(0));
-                }
-                else {
-                    return super.title_wait().replace('{required}', this.required().toString());
-                }
+                return super.title_result().replace('{score}', this.score().toFixed(0));
             }
             right() {
                 this.choice(true);
@@ -8357,21 +8515,26 @@ var $;
                 const history = this.history();
                 let prediction = brain.predict(history);
                 let teach = next;
-                if (Math.random() < .1)
-                    teach = !teach;
                 brain.learn(teach, history);
                 this.history([...history, teach]);
                 if (next !== prediction)
                     this.wins(this.wins() + 1);
-                this.score_series([...this.score_series(), this.score()]);
+                this.score_series_y([...this.score_series_y(), this.score()]);
+                this.score_series_x([...this.score_series_x(), this.score_series_x().length - 1]);
+            }
+            history_log() {
+                return this.history().map(val => val ? '▶' : '◀').join('');
             }
             wins(next = 0) {
                 return next;
             }
             score() {
-                return this.wins() / (this.history().length + 1) * 100;
+                return this.wins() / (this.history().length + 1) * 200;
             }
         }
+        __decorate([
+            $mol_mem
+        ], $hyoo_iq.prototype, "history_log", null);
         __decorate([
             $mol_mem
         ], $hyoo_iq.prototype, "wins", null);
@@ -8389,6 +8552,7 @@ var $;
     const { per, rem } = $mol_style_unit;
     $mol_style_define($hyoo_iq, {
         Body_content: {
+            padding: 0,
             align: {
                 self: 'stretch',
             },
@@ -8396,6 +8560,14 @@ var $;
         Description: {
             margin: 'auto',
             padding: rem(.75),
+        },
+        History_log: {
+            display: 'flex',
+            margin: $mol_gap.block,
+            padding: $mol_gap.block,
+            flex: {
+                direction: 'row-reverse',
+            },
         },
         Choices: {
             margin: [0, rem(.75)],
@@ -11470,6 +11642,8 @@ var $;
             brain.learn(true, []);
             $mol_assert_equal(brain.size(), 1);
             $mol_assert_equal(brain.predict([]), true);
+            $mol_assert_equal(brain.predict([true]), true);
+            $mol_assert_equal(brain.predict([false]), true);
         },
         'Right way'() {
             const brain = new $hyoo_iq_neuron;
@@ -11510,6 +11684,15 @@ var $;
             $mol_assert_equal(brain.predict([true, true]), true);
             $mol_assert_equal(brain.predict([false, true]), false);
             $mol_assert_equal(brain.predict([false, false]), false);
+        },
+        'Warp history'() {
+            const brain = new $hyoo_iq_neuron;
+            brain.warp([true, false, true, true]);
+            $mol_assert_equal(brain.predict([]), true);
+            $mol_assert_equal(brain.predict([true]), false);
+            $mol_assert_equal(brain.predict([true, false]), true);
+            $mol_assert_equal(brain.predict([true, false, true]), true);
+            $mol_assert_equal(brain.predict([true, false, true, true]), false);
         },
     });
 })($ || ($ = {}));
