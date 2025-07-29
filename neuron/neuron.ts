@@ -86,7 +86,7 @@ namespace $ {
 
 		/** Count of neurons in subtree. */
 		population(): number {
-			return 1 + this.values().reduce( ( sum, kid )=> kid ? sum + kid.population() : sum, 0 )
+			return 1 + [ ... this.values() ].reduce( ( sum, kid )=> kid ? sum + kid.population() : sum, 0 )
 		}
 
 	}
