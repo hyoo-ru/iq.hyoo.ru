@@ -146,6 +146,7 @@
     "$mol_hotkey",
     "$mol_keyboard_code",
     "$mol_keyboard",
+    "$mol_chip",
     "$mol_lights_toggle",
     "$mol_check_icon",
     "$mol_check",

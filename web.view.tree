@@ -47,6 +47,14 @@ $mol_hotkey $mol_plugin
 	mod_alt false
 	mod_shift false
 
+$mol_chip $mol_view
+	minimal_height 40
+	attr *
+		^
+		title <= hint \
+	sub /
+		<= title
+
 $mol_speck $mol_view
 	minimal_width 12
 	attr *
@@ -536,12 +544,11 @@ $mol_button_major $mol_button_minor
 	theme \$mol_theme_base
 
 $hyoo_iq $mol_page
-	title_result @ \IQ: {score}
-	title_wait @ \IQ: need {required} clicks
+	title @ \Hyper IQ
 	required 200
-	history?val /boolean
+	history?val /number
 	auto /
-		<= Brain $hyoo_iq_neuron
+		<= Brain $hyoo_iq_neuron<number> / 0
 		<= score 0
 	plugins /
 		<= Theme $mol_theme_auto
@@ -550,6 +557,7 @@ $hyoo_iq $mol_page
 				left?event <=> left?event
 				right?event <=> right?event
 	tools /
+		<= Score $mol_chip sub / <= score
 		<= Lights $mol_lights_toggle
 		<= Sources $mol_link_source
 			uri \https://github.com/hyoo-ru/iq.hyoo.ru/
@@ -557,7 +565,7 @@ $hyoo_iq $mol_page
 		<= Stats $mol_chart
 			Legend null
 			graphs /
-				<= Score $mol_plot_group
+				<= Score_log $mol_plot_group
 					graphs /
 						<= Score_line $mol_plot_line
 						<= Score_fill $mol_plot_fill

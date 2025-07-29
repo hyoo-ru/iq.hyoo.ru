@@ -2,8 +2,7 @@
 	"$hyoo_iq_description": "Жми кнопки, чтобы увеличить счёт!",
 	"$hyoo_iq_left_title": "Лево",
 	"$hyoo_iq_right_title": "Право",
-	"$hyoo_iq_title_result": "IQ: {score}",
-	"$hyoo_iq_title_wait": "IQ: нужно {required} нажатий",
+	"$hyoo_iq_title": "Гипер IQ",
 	"$mol_lights_toggle_hint": "Переключить освещение",
 	"$mol_link_source_hint": "Исходные коды"
 }

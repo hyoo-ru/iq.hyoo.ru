@@ -3957,56 +3957,67 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    class $hyoo_iq_neuron {
+    class $hyoo_iq_neuron extends Map {
         value;
         depth;
-        right;
-        left;
-        constructor(value = false, depth = 0, right = null, left = null) {
+        constructor(value, depth = 0) {
+            super();
             this.value = value;
             this.depth = depth;
-            this.right = right;
-            this.left = left;
+        }
+        generate(limit, history = []) {
+            const story = Array.from(history);
+            for (let i = 0; i < limit; ++i) {
+                const tail = this.locate(story);
+                if (tail.depth < story.length && tail.size)
+                    break;
+                story.push(tail.value);
+            }
+            return story.slice(history.length);
         }
         predict(history, pos = history.length - 1) {
             return this.locate(history, pos).value;
         }
-        locate(history, pos = history.length - 1) {
-            if (pos < 0)
-                return this;
-            const last = history[pos];
-            if (last) {
-                if (!this.right)
-                    return this;
-                return this.right.locate(history, pos - 1);
+        remember(history) {
+            let studied = false;
+            while (this.study(history))
+                studied = true;
+            return studied;
+        }
+        study(history) {
+            let learned = false;
+            for (let pos = 0; pos < history.length; ++pos) {
+                if (this.learn(history[pos], history, pos - 1))
+                    learned = true;
             }
-            else {
-                if (!this.left)
-                    return this;
-                return this.left.locate(history, pos - 1);
-            }
+            return learned;
         }
         learn(next, history, pos = history.length - 1) {
             if (pos < 0) {
+                if (this.value === next)
+                    return false;
                 this.value = next;
-                return;
+                return true;
             }
             const tail = this.locate(history, pos);
-            if (tail.value === next)
-                return;
-            const axon = new $hyoo_iq_neuron(next, tail.depth + 1);
-            if (history[pos - tail.depth])
-                tail.right = axon;
-            else
-                tail.left = axon;
+            if (tail.value === next && !tail.size)
+                return false;
+            const x = pos - tail.depth;
+            if (x < 0)
+                return false;
+            tail.set(history[x], new $hyoo_iq_neuron(next, tail.depth + 1));
+            return true;
         }
-        warp(history) {
-            for (let pos = 0; pos < history.length; ++pos) {
-                this.learn(history[pos], history, pos - 1);
-            }
+        locate(history, pos = history.length - 1) {
+            if (pos < 0)
+                return this;
+            const kid = this.get(history[pos]);
+            if (!kid)
+                return this;
+            return kid.locate(history, pos - 1);
         }
-        size() {
-            return 1 + (this.right?.size() ?? 0) + (this.left?.size() ?? 0);
+        population() {
+            return 1 + [...this.values()].reduce((sum, kid) => kid ? sum + kid.population() : sum, 0);
         }
     }
     $.$hyoo_iq_neuron = $hyoo_iq_neuron;
@@ -5207,6 +5218,45 @@ var $;
             }
         }
         $$.$mol_hotkey = $mol_hotkey;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+	($.$mol_chip) = class $mol_chip extends ($.$mol_view) {
+		hint(){
+			return "";
+		}
+		minimal_height(){
+			return 40;
+		}
+		attr(){
+			return {...(super.attr()), "title": (this.hint())};
+		}
+		sub(){
+			return [(this.title())];
+		}
+	};
+
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        $mol_style_define($mol_chip, {
+            padding: $mol_gap.text,
+            border: {
+                radius: $mol_gap.round,
+            },
+            background: {
+                color: $mol_theme.card,
+            },
+            gap: $mol_gap.block,
+        });
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
 
@@ -8312,7 +8362,7 @@ var $;
 ;
 	($.$hyoo_iq) = class $hyoo_iq extends ($.$mol_page) {
 		Brain(){
-			const obj = new this.$.$hyoo_iq_neuron();
+			const obj = new this.$.$hyoo_iq_neuron(0);
 			return obj;
 		}
 		score(){
@@ -8325,6 +8375,11 @@ var $;
 		Hotkey(){
 			const obj = new this.$.$mol_hotkey();
 			(obj.key) = () => ({"left": (next) => (this.left(next)), "right": (next) => (this.right(next))});
+			return obj;
+		}
+		Score(){
+			const obj = new this.$.$mol_chip();
+			(obj.sub) = () => ([(this.score())]);
 			return obj;
 		}
 		Lights(){
@@ -8348,7 +8403,7 @@ var $;
 			if(next !== undefined) return next;
 			return [];
 		}
-		Score(){
+		Score_log(){
 			const obj = new this.$.$mol_plot_group();
 			(obj.graphs) = () => ([(this.Score_line()), (this.Score_fill())]);
 			(obj.series_y) = () => ((this.score_series()));
@@ -8390,7 +8445,7 @@ var $;
 			const obj = new this.$.$mol_chart();
 			(obj.Legend) = () => (null);
 			(obj.graphs) = () => ([
-				(this.Score()), 
+				(this.Score_log()), 
 				(this.Frame()), 
 				(this.Ruler_vert()), 
 				(this.Ruler_hor())
@@ -8444,11 +8499,8 @@ var $;
 			(obj.sub) = () => ([(this.description())]);
 			return obj;
 		}
-		title_result(){
-			return (this.$.$mol_locale.text("$hyoo_iq_title_result"));
-		}
-		title_wait(){
-			return (this.$.$mol_locale.text("$hyoo_iq_title_wait"));
+		title(){
+			return (this.$.$mol_locale.text("$hyoo_iq_title"));
 		}
 		required(){
 			return 200;
@@ -8464,7 +8516,11 @@ var $;
 			return [(this.Theme()), (this.Hotkey())];
 		}
 		tools(){
-			return [(this.Lights()), (this.Sources())];
+			return [
+				(this.Score()), 
+				(this.Lights()), 
+				(this.Sources())
+			];
 		}
 		body(){
 			return [
@@ -8478,12 +8534,13 @@ var $;
 	($mol_mem(($.$hyoo_iq.prototype), "Brain"));
 	($mol_mem(($.$hyoo_iq.prototype), "Theme"));
 	($mol_mem(($.$hyoo_iq.prototype), "Hotkey"));
+	($mol_mem(($.$hyoo_iq.prototype), "Score"));
 	($mol_mem(($.$hyoo_iq.prototype), "Lights"));
 	($mol_mem(($.$hyoo_iq.prototype), "Sources"));
 	($mol_mem(($.$hyoo_iq.prototype), "Score_line"));
 	($mol_mem(($.$hyoo_iq.prototype), "Score_fill"));
 	($mol_mem(($.$hyoo_iq.prototype), "score_series"));
-	($mol_mem(($.$hyoo_iq.prototype), "Score"));
+	($mol_mem(($.$hyoo_iq.prototype), "Score_log"));
 	($mol_mem(($.$hyoo_iq.prototype), "Frame"));
 	($mol_mem(($.$hyoo_iq.prototype), "Ruler_vert"));
 	($mol_mem(($.$hyoo_iq.prototype), "Ruler_hor"));
@@ -8528,14 +8585,11 @@ var $;
     var $$;
     (function ($$) {
         class $hyoo_iq extends $.$hyoo_iq {
-            title() {
-                return super.title_result().replace('{score}', this.score().toFixed(0));
-            }
             right() {
-                this.choice(true);
+                this.choice(1);
             }
             left() {
-                this.choice(false);
+                this.choice(0);
             }
             choice(next) {
                 const brain = this.Brain();
@@ -8555,7 +8609,7 @@ var $;
                 return next;
             }
             score() {
-                return this.wins() / (this.history().length + 1) * 200 - 100;
+                return Math.round(this.wins() / (this.history().length + 1) * 200 - 100);
             }
         }
         __decorate([
@@ -8577,6 +8631,10 @@ var $;
 (function ($) {
     const { per, rem } = $mol_style_unit;
     $mol_style_define($hyoo_iq, {
+        Score: {
+            color: $mol_theme.special,
+            textShadow: '0 0',
+        },
         Body_content: {
             padding: 0,
             align: {

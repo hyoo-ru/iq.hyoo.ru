@@ -1153,17 +1153,17 @@ declare namespace $.$$ {
 }
 
 declare namespace $ {
-    class $hyoo_iq_neuron {
-        value: boolean;
+    class $hyoo_iq_neuron<Value> extends Map<Value, $hyoo_iq_neuron<Value>> {
+        value: Value;
         depth: number;
-        right: $hyoo_iq_neuron | null;
-        left: $hyoo_iq_neuron | null;
-        constructor(value?: boolean, depth?: number, right?: $hyoo_iq_neuron | null, left?: $hyoo_iq_neuron | null);
-        predict(history: readonly boolean[], pos?: number): boolean;
-        locate(history: readonly boolean[], pos?: number): $hyoo_iq_neuron;
-        learn(next: boolean, history: readonly boolean[], pos?: number): void;
-        warp(history: readonly boolean[]): void;
-        size(): number;
+        constructor(value: Value, depth?: number);
+        generate(limit: number, history?: ArrayLike<Value>): readonly Value[];
+        predict(history: ArrayLike<Value>, pos?: number): Value;
+        remember(history: ArrayLike<Value>): boolean;
+        study(history: ArrayLike<Value>): boolean;
+        learn(next: Value, history: ArrayLike<Value>, pos?: number): boolean;
+        locate(history: ArrayLike<Value>, pos?: number): $hyoo_iq_neuron<Value>;
+        population(): number;
     }
 }
 
@@ -1301,6 +1301,23 @@ declare namespace $.$$ {
         key(): { [key in keyof typeof $mol_keyboard_code]?: (event: KeyboardEvent) => void; };
         keydown(event?: KeyboardEvent): void;
     }
+}
+
+declare namespace $ {
+
+	export class $mol_chip extends $mol_view {
+		hint( ): string
+		minimal_height( ): number
+		attr( ): ({ 
+			'title': ReturnType< $mol_chip['hint'] >,
+		})  & ReturnType< $mol_view['attr'] >
+		sub( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=chip.view.tree.d.ts.map
+declare namespace $.$$ {
 }
 
 declare namespace $ {
@@ -2953,7 +2970,12 @@ declare namespace $ {
 
 declare namespace $ {
 
-	type $mol_hotkey__key_hyoo_iq_1 = $mol_type_enforce<
+	type $hyoo_iq_neuron__hyoo_iq_1 = $mol_type_enforce<
+		[ number ]
+		,
+		ConstructorParameters< typeof $hyoo_iq_neuron<number> >
+	>
+	type $mol_hotkey__key_hyoo_iq_2 = $mol_type_enforce<
 		({ 
 			left( next?: ReturnType< $hyoo_iq['left'] > ): ReturnType< $hyoo_iq['left'] >,
 			right( next?: ReturnType< $hyoo_iq['right'] > ): ReturnType< $hyoo_iq['right'] >,
@@ -2961,97 +2983,103 @@ declare namespace $ {
 		,
 		ReturnType< $mol_hotkey['key'] >
 	>
-	type $mol_link_source__uri_hyoo_iq_2 = $mol_type_enforce<
+	type $mol_chip__sub_hyoo_iq_3 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_chip['sub'] >
+	>
+	type $mol_link_source__uri_hyoo_iq_4 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_link_source['uri'] >
 	>
-	type $mol_plot_group__graphs_hyoo_iq_3 = $mol_type_enforce<
+	type $mol_plot_group__graphs_hyoo_iq_5 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_plot_group['graphs'] >
 	>
-	type $mol_plot_group__series_y_hyoo_iq_4 = $mol_type_enforce<
+	type $mol_plot_group__series_y_hyoo_iq_6 = $mol_type_enforce<
 		ReturnType< $hyoo_iq['score_series'] >
 		,
 		ReturnType< $mol_plot_group['series_y'] >
 	>
-	type $mol_plot_line__series_x_hyoo_iq_5 = $mol_type_enforce<
+	type $mol_plot_line__series_x_hyoo_iq_7 = $mol_type_enforce<
 		readonly(number)[]
 		,
 		ReturnType< $mol_plot_line['series_x'] >
 	>
-	type $mol_plot_line__series_y_hyoo_iq_6 = $mol_type_enforce<
+	type $mol_plot_line__series_y_hyoo_iq_8 = $mol_type_enforce<
 		readonly(number)[]
 		,
 		ReturnType< $mol_plot_line['series_y'] >
 	>
-	type $mol_plot_ruler_vert__title_hyoo_iq_7 = $mol_type_enforce<
+	type $mol_plot_ruler_vert__title_hyoo_iq_9 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_plot_ruler_vert['title'] >
 	>
-	type $mol_plot_ruler_hor__title_hyoo_iq_8 = $mol_type_enforce<
+	type $mol_plot_ruler_hor__title_hyoo_iq_10 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_plot_ruler_hor['title'] >
 	>
-	type $mol_chart__Legend_hyoo_iq_9 = $mol_type_enforce<
+	type $mol_chart__Legend_hyoo_iq_11 = $mol_type_enforce<
 		any
 		,
 		ReturnType< $mol_chart['Legend'] >
 	>
-	type $mol_chart__graphs_hyoo_iq_10 = $mol_type_enforce<
+	type $mol_chart__graphs_hyoo_iq_12 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_chart['graphs'] >
 	>
-	type $mol_scroll__sub_hyoo_iq_11 = $mol_type_enforce<
+	type $mol_scroll__sub_hyoo_iq_13 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_scroll['sub'] >
 	>
-	type $mol_button_major__title_hyoo_iq_12 = $mol_type_enforce<
+	type $mol_button_major__title_hyoo_iq_14 = $mol_type_enforce<
 		ReturnType< $hyoo_iq['left_title'] >
 		,
 		ReturnType< $mol_button_major['title'] >
 	>
-	type $mol_button_major__click_hyoo_iq_13 = $mol_type_enforce<
+	type $mol_button_major__click_hyoo_iq_15 = $mol_type_enforce<
 		ReturnType< $hyoo_iq['left'] >
 		,
 		ReturnType< $mol_button_major['click'] >
 	>
-	type $mol_button_major__title_hyoo_iq_14 = $mol_type_enforce<
+	type $mol_button_major__title_hyoo_iq_16 = $mol_type_enforce<
 		ReturnType< $hyoo_iq['right_title'] >
 		,
 		ReturnType< $mol_button_major['title'] >
 	>
-	type $mol_button_major__click_hyoo_iq_15 = $mol_type_enforce<
+	type $mol_button_major__click_hyoo_iq_17 = $mol_type_enforce<
 		ReturnType< $hyoo_iq['right'] >
 		,
 		ReturnType< $mol_button_major['click'] >
 	>
-	type $mol_view__sub_hyoo_iq_16 = $mol_type_enforce<
+	type $mol_view__sub_hyoo_iq_18 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $mol_view__sub_hyoo_iq_17 = $mol_type_enforce<
+	type $mol_view__sub_hyoo_iq_19 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_view['sub'] >
 	>
 	export class $hyoo_iq extends $mol_page {
-		Brain( ): $hyoo_iq_neuron
+		Brain( ): $hyoo_iq_neuron<number>
 		score( ): number
 		Theme( ): $mol_theme_auto
 		Hotkey( ): $mol_hotkey
+		Score( ): $mol_chip
 		Lights( ): $mol_lights_toggle
 		Sources( ): $mol_link_source
 		Score_line( ): $mol_plot_line
 		Score_fill( ): $mol_plot_fill
 		score_series( next?: readonly(number)[] ): readonly(number)[]
-		Score( ): $mol_plot_group
+		Score_log( ): $mol_plot_group
 		Frame( ): $mol_plot_line
 		Ruler_vert( ): $mol_plot_ruler_vert
 		Ruler_hor( ): $mol_plot_ruler_hor
@@ -3067,10 +3095,9 @@ declare namespace $ {
 		Choices( ): $mol_view
 		description( ): string
 		Description( ): $mol_view
-		title_result( ): string
-		title_wait( ): string
+		title( ): string
 		required( ): number
-		history( next?: readonly(boolean)[] ): readonly(boolean)[]
+		history( next?: readonly(number)[] ): readonly(number)[]
 		auto( ): readonly(any)[]
 		plugins( ): readonly(any)[]
 		tools( ): readonly(any)[]
@@ -3082,10 +3109,9 @@ declare namespace $ {
 //# sourceMappingURL=iq.view.tree.d.ts.map
 declare namespace $.$$ {
     class $hyoo_iq extends $.$hyoo_iq {
-        title(): string;
         right(): void;
         left(): void;
-        choice(next: boolean): void;
+        choice(next: number): void;
         history_log(): string;
         wins(next?: number): number;
         score(): number;
