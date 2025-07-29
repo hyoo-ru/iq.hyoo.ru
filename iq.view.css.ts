@@ -6,9 +6,7 @@ namespace $ {
 		
 		Score: {
 			color: $mol_theme.special,
-			text: {
-				shadow: '0 0',
-			},
+			textShadow: '0 0',
 		},
 		
 		Body_content: {

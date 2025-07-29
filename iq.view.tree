@@ -3,7 +3,7 @@ $hyoo_iq $mol_page
 	required 200
 	history?val /number
 	auto /
-		<= Brain $hyoo_iq_neuron / 0
+		<= Brain $hyoo_iq_neuron<number> / 0
 		<= score 0
 	plugins /
 		<= Theme $mol_theme_auto
