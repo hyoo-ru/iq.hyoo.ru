@@ -54,8 +54,8 @@ namespace $.$$ {
 			const score = this.score()
 			if( score >= +75 ) return this.ranks().XL
 			if( score >= +25 ) return this.ranks().L
-			if( score <= -25 ) return this.ranks().S
 			if( score <= -75 ) return this.ranks().XS
+			if( score <= -25 ) return this.ranks().S
 			return this.ranks().M
 		}
 
