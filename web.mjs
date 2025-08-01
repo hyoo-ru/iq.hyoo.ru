@@ -8635,7 +8635,7 @@ var $;
                 return Math.round(this.wins() / (this.history().length + 1) * 200 - 100);
             }
             score_final() {
-                if (this.history().length !== 100)
+                if (this.history().length !== 101)
                     return $mol_mem_cached(() => this.score_final()) || '';
                 return this.score().toLocaleString(undefined, { signDisplay: "exceptZero" }) + ' ' + this.rank();
             }
