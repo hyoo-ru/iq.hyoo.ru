@@ -45,7 +45,7 @@ namespace $.$$ {
 		
 		@ $mol_mem
 		score_final(): string {
-			if( this.history().length !== 100 ) return $mol_mem_cached( ()=> this.score_final() ) || ''
+			if( this.history().length !== 101 ) return $mol_mem_cached( ()=> this.score_final() ) || ''
 			return this.score().toLocaleString( undefined, { signDisplay: "exceptZero" } ) + ' ' + this.rank()
 		}
 		
