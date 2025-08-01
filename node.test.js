@@ -8587,6 +8587,8 @@ var $;
                 const history = this.history();
                 let prediction = brain.predict(history);
                 let teach = next;
+                if (this.score() > 0 && Math.random() < .02)
+                    teach = 1 - teach;
                 brain.learn(teach, history);
                 this.history([...history, teach]);
                 if (next !== prediction)
