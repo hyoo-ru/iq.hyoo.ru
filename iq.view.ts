@@ -18,7 +18,7 @@ namespace $.$$ {
 			let prediction = brain.predict( history )
 			let teach = next
 			
-			// if( Math.random() < .1 ) teach = !teach
+			if( this.score() > 0 && Math.random() < .02 ) teach = 1-teach
 			brain.learn( teach , history )
 			
 			this.history([ ... history , teach ])
