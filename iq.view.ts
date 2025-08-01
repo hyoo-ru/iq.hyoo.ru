@@ -46,7 +46,17 @@ namespace $.$$ {
 		@ $mol_mem
 		score_final(): string {
 			if( this.history().length !== 100 ) return $mol_mem_cached( ()=> this.score_final() ) || ''
-			return this.score().toLocaleString( undefined, { signDisplay: "exceptZero" } )
+			return this.score().toLocaleString( undefined, { signDisplay: "exceptZero" } ) + ' ' + this.rank()
+		}
+		
+		@ $mol_mem
+		rank() {
+			const score = this.score()
+			if( score >= +75 ) return this.ranks().XL
+			if( score >= +25 ) return this.ranks().L
+			if( score <= -25 ) return this.ranks().S
+			if( score <= -75 ) return this.ranks().XS
+			return this.ranks().M
 		}
 
 	}

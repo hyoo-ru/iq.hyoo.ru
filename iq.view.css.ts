@@ -40,14 +40,13 @@ namespace $ {
 		},
 		
 		Score_final: {
-			opacity: .5,
 			lineHeight: '1.5em',
 			justify: {
 				self: 'center',
 			},
 			font: {
 				family: 'monospace',
-				size: `33vmin`,
+				size: `8vmin`,
 			},
 		},
 
