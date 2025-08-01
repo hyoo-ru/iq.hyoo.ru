@@ -30,7 +30,7 @@ namespace $.$$ {
 		
 		@ $mol_mem
 		history_log() {
-			return this.history().map( val => val ? '▶' : '◀' ).join( '' ) || 'Жми кнопки, чтобы увеличить счёт!'
+			return this.history().map( val => val ? '▶' : '◀' ).join( '' ) || this.description()
 		}
 
 		@ $mol_mem

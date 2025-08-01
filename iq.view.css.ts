@@ -15,11 +15,6 @@ namespace $ {
 			},
 		},
 
-		Description: {
-			margin: 'auto',
-			padding: rem(.75),
-		},
-		
 		History_log: {
 			display: 'flex',
 			padding: $mol_gap.block,
