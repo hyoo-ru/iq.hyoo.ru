@@ -8509,26 +8509,16 @@ var $;
 			(obj.series_y) = () => ((this.score_series()));
 			return obj;
 		}
-		Frame(){
-			const obj = new this.$.$mol_plot_line();
-			(obj.series_x) = () => ([
-				0, 
-				0, 
-				100, 
-				100, 
-				0, 
-				0, 
-				100
-			]);
-			(obj.series_y) = () => ([
-				-100, 
-				+100, 
-				+100, 
-				-100, 
-				-100, 
-				+0, 
-				+0
-			]);
+		Bad(){
+			const obj = new this.$.$mol_plot_fill();
+			(obj.series_x) = () => ([+0, +100]);
+			(obj.series_y) = () => ([-100, -100]);
+			return obj;
+		}
+		Good(){
+			const obj = new this.$.$mol_plot_fill();
+			(obj.series_x) = () => ([+0, +100]);
+			(obj.series_y) = () => ([+100, +100]);
 			return obj;
 		}
 		Ruler_vert(){
@@ -8546,7 +8536,8 @@ var $;
 			(obj.Legend) = () => (null);
 			(obj.graphs) = () => ([
 				(this.Score_log()), 
-				(this.Frame()), 
+				(this.Bad()), 
+				(this.Good()), 
 				(this.Ruler_vert()), 
 				(this.Ruler_hor())
 			]);
@@ -8639,7 +8630,8 @@ var $;
 	($mol_mem(($.$hyoo_iq.prototype), "Score_fill"));
 	($mol_mem(($.$hyoo_iq.prototype), "score_series"));
 	($mol_mem(($.$hyoo_iq.prototype), "Score_log"));
-	($mol_mem(($.$hyoo_iq.prototype), "Frame"));
+	($mol_mem(($.$hyoo_iq.prototype), "Bad"));
+	($mol_mem(($.$hyoo_iq.prototype), "Good"));
 	($mol_mem(($.$hyoo_iq.prototype), "Ruler_vert"));
 	($mol_mem(($.$hyoo_iq.prototype), "Ruler_hor"));
 	($mol_mem(($.$hyoo_iq.prototype), "Stats"));

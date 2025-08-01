@@ -3045,62 +3045,72 @@ declare namespace $ {
 		,
 		ReturnType< $mol_plot_group['series_y'] >
 	>
-	type $mol_plot_line__series_x_hyoo_iq_8 = $mol_type_enforce<
+	type $mol_plot_fill__series_x_hyoo_iq_8 = $mol_type_enforce<
 		readonly(number)[]
 		,
-		ReturnType< $mol_plot_line['series_x'] >
+		ReturnType< $mol_plot_fill['series_x'] >
 	>
-	type $mol_plot_line__series_y_hyoo_iq_9 = $mol_type_enforce<
+	type $mol_plot_fill__series_y_hyoo_iq_9 = $mol_type_enforce<
 		readonly(number)[]
 		,
-		ReturnType< $mol_plot_line['series_y'] >
+		ReturnType< $mol_plot_fill['series_y'] >
 	>
-	type $mol_plot_ruler_vert__title_hyoo_iq_10 = $mol_type_enforce<
+	type $mol_plot_fill__series_x_hyoo_iq_10 = $mol_type_enforce<
+		readonly(number)[]
+		,
+		ReturnType< $mol_plot_fill['series_x'] >
+	>
+	type $mol_plot_fill__series_y_hyoo_iq_11 = $mol_type_enforce<
+		readonly(number)[]
+		,
+		ReturnType< $mol_plot_fill['series_y'] >
+	>
+	type $mol_plot_ruler_vert__title_hyoo_iq_12 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_plot_ruler_vert['title'] >
 	>
-	type $mol_plot_ruler_hor__title_hyoo_iq_11 = $mol_type_enforce<
+	type $mol_plot_ruler_hor__title_hyoo_iq_13 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_plot_ruler_hor['title'] >
 	>
-	type $mol_chart__Legend_hyoo_iq_12 = $mol_type_enforce<
+	type $mol_chart__Legend_hyoo_iq_14 = $mol_type_enforce<
 		any
 		,
 		ReturnType< $mol_chart['Legend'] >
 	>
-	type $mol_chart__graphs_hyoo_iq_13 = $mol_type_enforce<
+	type $mol_chart__graphs_hyoo_iq_15 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_chart['graphs'] >
 	>
-	type $mol_scroll__sub_hyoo_iq_14 = $mol_type_enforce<
+	type $mol_scroll__sub_hyoo_iq_16 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_scroll['sub'] >
 	>
-	type $mol_button_major__title_hyoo_iq_15 = $mol_type_enforce<
+	type $mol_button_major__title_hyoo_iq_17 = $mol_type_enforce<
 		ReturnType< $hyoo_iq['left_title'] >
 		,
 		ReturnType< $mol_button_major['title'] >
 	>
-	type $mol_button_major__click_hyoo_iq_16 = $mol_type_enforce<
+	type $mol_button_major__click_hyoo_iq_18 = $mol_type_enforce<
 		ReturnType< $hyoo_iq['left'] >
 		,
 		ReturnType< $mol_button_major['click'] >
 	>
-	type $mol_button_major__title_hyoo_iq_17 = $mol_type_enforce<
+	type $mol_button_major__title_hyoo_iq_19 = $mol_type_enforce<
 		ReturnType< $hyoo_iq['right_title'] >
 		,
 		ReturnType< $mol_button_major['title'] >
 	>
-	type $mol_button_major__click_hyoo_iq_18 = $mol_type_enforce<
+	type $mol_button_major__click_hyoo_iq_20 = $mol_type_enforce<
 		ReturnType< $hyoo_iq['right'] >
 		,
 		ReturnType< $mol_button_major['click'] >
 	>
-	type $mol_row__sub_hyoo_iq_19 = $mol_type_enforce<
+	type $mol_row__sub_hyoo_iq_21 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_row['sub'] >
@@ -3119,7 +3129,8 @@ declare namespace $ {
 		Score_fill( ): $mol_plot_fill
 		score_series( next?: readonly(number)[] ): readonly(number)[]
 		Score_log( ): $mol_plot_group
-		Frame( ): $mol_plot_line
+		Bad( ): $mol_plot_fill
+		Good( ): $mol_plot_fill
 		Ruler_vert( ): $mol_plot_ruler_vert
 		Ruler_hor( ): $mol_plot_ruler_hor
 		Stats( ): $mol_chart
