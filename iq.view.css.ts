@@ -41,9 +41,7 @@ namespace $ {
 		
 		Score_final: {
 			opacity: .5,
-			line: {
-				height: '1.5em',
-			},
+			lineHeight: '1.5em',
 			justify: {
 				self: 'center',
 			},
