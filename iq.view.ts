@@ -30,7 +30,7 @@ namespace $.$$ {
 		
 		@ $mol_mem
 		history_log() {
-			return this.history().map( val => val ? '▶' : '◀' ).join( '' )
+			return this.history().map( val => val ? '▶' : '◀' ).join( '' ) || 'Жми кнопки, чтобы увеличить счёт!'
 		}
 
 		@ $mol_mem
@@ -44,8 +44,9 @@ namespace $.$$ {
 		}
 		
 		@ $mol_mem
-		score_final(): number | null {
-			return $mol_mem_cached( ()=> this.score_final() ) ?? ( this.history().length === 100 ? this.score() : null )
+		score_final(): string {
+			if( this.history().length !== 100 ) return $mol_mem_cached( ()=> this.score_final() ) || ''
+			return this.score().toLocaleString( undefined, { signDisplay: "exceptZero" } )
 		}
 
 	}

@@ -10,7 +10,6 @@ namespace $ {
 		},
 		
 		Body_content: {
-			padding: 0,
 			align: {
 				self: 'stretch',
 			},
@@ -23,23 +22,24 @@ namespace $ {
 		
 		History_log: {
 			display: 'flex',
-			margin: $mol_gap.block,
 			padding: $mol_gap.block,
 			flex: {
 				direction: 'row-reverse',
 			},
+			align: {
+				self: 'center'
+			},
 		},
 
 		Choices: {
-			margin: [ 0 , rem(.75) ],
 			'>': {
 				$mol_button: {
 					flex: {
-						basis: per(50),
+						basis: per(10),
 						shrink: 1,
+						grow: 1,
 					},
 					justifyContent: 'center',
-					margin: [ 0 , rem(.75) ],
 				},
 			},
 		},
@@ -53,7 +53,8 @@ namespace $ {
 				self: 'center',
 			},
 			font: {
-				size: `50vmin`,
+				family: 'monospace',
+				size: `33vmin`,
 			},
 		},
 

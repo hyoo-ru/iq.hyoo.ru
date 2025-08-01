@@ -17,7 +17,7 @@ $hyoo_iq $mol_page
 		<= Sources $mol_link_source
 			uri \https://github.com/hyoo-ru/iq.hyoo.ru/
 	body_content /
-		<= Score_final $mol_paragraph sub / <= score_final null
+		<= Score_final $mol_paragraph sub / <= score_final \
 		<= Body_content
 	body /
 		<= Stats $mol_chart
@@ -50,7 +50,7 @@ $hyoo_iq $mol_page
 				<= Ruler_hor $mol_plot_ruler_hor
 					title \
 		<= History_log $mol_scroll sub / <= history_log \
-		<= Choices $mol_view
+		<= Choices $mol_row
 			sub /
 				<= Left $mol_button_major
 					title <= left_title @ \Left
@@ -58,6 +58,4 @@ $hyoo_iq $mol_page
 				<= Right $mol_button_major
 					title <= right_title @ \Right
 					click?event <=> right?event null
-		<= Description $mol_view
-			sub /
-				<= description @ \Click buttons to maximize your score!
+	description @ \Click buttons to maximize your score!
