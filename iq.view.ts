@@ -42,6 +42,11 @@ namespace $.$$ {
 		score() {
 			return Math.round( this.wins() / ( this.history().length + 1 ) * 200 - 100 )
 		}
+		
+		@ $mol_mem
+		score_final(): number | null {
+			return $mol_mem_cached( ()=> this.score_final() ) ?? ( this.history().length === 100 ? this.score() : null )
+		}
 
 	}
 

@@ -16,6 +16,9 @@ $hyoo_iq $mol_page
 		<= Lights $mol_lights_toggle
 		<= Sources $mol_link_source
 			uri \https://github.com/hyoo-ru/iq.hyoo.ru/
+	body_content /
+		<= Score_final $mol_paragraph sub / <= score_final null
+		<= Body_content
 	body /
 		<= Stats $mol_chart
 			Legend null
