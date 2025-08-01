@@ -13,6 +13,7 @@ $hyoo_iq $mol_page
 				right?event <=> right?event
 	tools /
 		<= Score $mol_chip sub / <= score
+		<= Share $mol_button_share
 		<= Lights $mol_lights_toggle
 		<= Sources $mol_link_source
 			uri \https://github.com/hyoo-ru/iq.hyoo.ru/
