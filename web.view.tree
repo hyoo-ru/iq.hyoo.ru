@@ -173,6 +173,13 @@ $mol_link_source $mol_link
 	sub /
 		<= Icon $mol_icon_script_text
 
+$mol_paragraph $mol_view
+	line_height 24
+	letter_width 7
+	width_limit +Infinity
+	row_width 0
+	sub / <= title
+
 $mol_svg_group $mol_svg
 	dom_name \g
 
@@ -543,6 +550,8 @@ $mol_chart $mol_view
 $mol_button_major $mol_button_minor
 	theme \$mol_theme_base
 
+$mol_row $mol_view
+
 $hyoo_iq $mol_page
 	title @ \Hyper IQ
 	required 200
@@ -561,6 +570,9 @@ $hyoo_iq $mol_page
 		<= Lights $mol_lights_toggle
 		<= Sources $mol_link_source
 			uri \https://github.com/hyoo-ru/iq.hyoo.ru/
+	body_content /
+		<= Score_final $mol_paragraph sub / <= score_final \
+		<= Body_content
 	body /
 		<= Stats $mol_chart
 			Legend null
@@ -592,7 +604,7 @@ $hyoo_iq $mol_page
 				<= Ruler_hor $mol_plot_ruler_hor
 					title \
 		<= History_log $mol_scroll sub / <= history_log \
-		<= Choices $mol_view
+		<= Choices $mol_row
 			sub /
 				<= Left $mol_button_major
 					title <= left_title @ \Left
@@ -600,6 +612,4 @@ $hyoo_iq $mol_page
 				<= Right $mol_button_major
 					title <= right_title @ \Right
 					click?event <=> right?event null
-		<= Description $mol_view
-			sub /
-				<= description @ \Click buttons to maximize your score!
+	description @ \Click buttons to maximize your score!

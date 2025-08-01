@@ -1885,6 +1885,32 @@ declare namespace $ {
 //# sourceMappingURL=source.view.tree.d.ts.map
 declare namespace $ {
 
+	export class $mol_paragraph extends $mol_view {
+		line_height( ): number
+		letter_width( ): number
+		width_limit( ): number
+		row_width( ): number
+		sub( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=paragraph.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $mol_paragraph extends $.$mol_paragraph {
+        maximal_width(): number;
+        width_limit(): number;
+        minimal_width(): number;
+        row_width(): number;
+        minimal_height(): number;
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+
 	export class $mol_svg_group extends $mol_svg {
 		dom_name( ): string
 	}
@@ -2958,6 +2984,17 @@ declare namespace $ {
 
 //# sourceMappingURL=major.view.tree.d.ts.map
 declare namespace $ {
+}
+
+declare namespace $ {
+
+	export class $mol_row extends $mol_view {
+	}
+	
+}
+
+//# sourceMappingURL=row.view.tree.d.ts.map
+declare namespace $ {
     function $mol_offline(): void;
 }
 
@@ -2993,80 +3030,80 @@ declare namespace $ {
 		,
 		ReturnType< $mol_link_source['uri'] >
 	>
-	type $mol_plot_group__graphs_hyoo_iq_5 = $mol_type_enforce<
+	type $mol_paragraph__sub_hyoo_iq_5 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_paragraph['sub'] >
+	>
+	type $mol_plot_group__graphs_hyoo_iq_6 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_plot_group['graphs'] >
 	>
-	type $mol_plot_group__series_y_hyoo_iq_6 = $mol_type_enforce<
+	type $mol_plot_group__series_y_hyoo_iq_7 = $mol_type_enforce<
 		ReturnType< $hyoo_iq['score_series'] >
 		,
 		ReturnType< $mol_plot_group['series_y'] >
 	>
-	type $mol_plot_line__series_x_hyoo_iq_7 = $mol_type_enforce<
+	type $mol_plot_line__series_x_hyoo_iq_8 = $mol_type_enforce<
 		readonly(number)[]
 		,
 		ReturnType< $mol_plot_line['series_x'] >
 	>
-	type $mol_plot_line__series_y_hyoo_iq_8 = $mol_type_enforce<
+	type $mol_plot_line__series_y_hyoo_iq_9 = $mol_type_enforce<
 		readonly(number)[]
 		,
 		ReturnType< $mol_plot_line['series_y'] >
 	>
-	type $mol_plot_ruler_vert__title_hyoo_iq_9 = $mol_type_enforce<
+	type $mol_plot_ruler_vert__title_hyoo_iq_10 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_plot_ruler_vert['title'] >
 	>
-	type $mol_plot_ruler_hor__title_hyoo_iq_10 = $mol_type_enforce<
+	type $mol_plot_ruler_hor__title_hyoo_iq_11 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_plot_ruler_hor['title'] >
 	>
-	type $mol_chart__Legend_hyoo_iq_11 = $mol_type_enforce<
+	type $mol_chart__Legend_hyoo_iq_12 = $mol_type_enforce<
 		any
 		,
 		ReturnType< $mol_chart['Legend'] >
 	>
-	type $mol_chart__graphs_hyoo_iq_12 = $mol_type_enforce<
+	type $mol_chart__graphs_hyoo_iq_13 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_chart['graphs'] >
 	>
-	type $mol_scroll__sub_hyoo_iq_13 = $mol_type_enforce<
+	type $mol_scroll__sub_hyoo_iq_14 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_scroll['sub'] >
 	>
-	type $mol_button_major__title_hyoo_iq_14 = $mol_type_enforce<
+	type $mol_button_major__title_hyoo_iq_15 = $mol_type_enforce<
 		ReturnType< $hyoo_iq['left_title'] >
 		,
 		ReturnType< $mol_button_major['title'] >
 	>
-	type $mol_button_major__click_hyoo_iq_15 = $mol_type_enforce<
+	type $mol_button_major__click_hyoo_iq_16 = $mol_type_enforce<
 		ReturnType< $hyoo_iq['left'] >
 		,
 		ReturnType< $mol_button_major['click'] >
 	>
-	type $mol_button_major__title_hyoo_iq_16 = $mol_type_enforce<
+	type $mol_button_major__title_hyoo_iq_17 = $mol_type_enforce<
 		ReturnType< $hyoo_iq['right_title'] >
 		,
 		ReturnType< $mol_button_major['title'] >
 	>
-	type $mol_button_major__click_hyoo_iq_17 = $mol_type_enforce<
+	type $mol_button_major__click_hyoo_iq_18 = $mol_type_enforce<
 		ReturnType< $hyoo_iq['right'] >
 		,
 		ReturnType< $mol_button_major['click'] >
 	>
-	type $mol_view__sub_hyoo_iq_18 = $mol_type_enforce<
+	type $mol_row__sub_hyoo_iq_19 = $mol_type_enforce<
 		readonly(any)[]
 		,
-		ReturnType< $mol_view['sub'] >
-	>
-	type $mol_view__sub_hyoo_iq_19 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_view['sub'] >
+		ReturnType< $mol_row['sub'] >
 	>
 	export class $hyoo_iq extends $mol_page {
 		Brain( ): $hyoo_iq_neuron<number>
@@ -3076,6 +3113,8 @@ declare namespace $ {
 		Score( ): $mol_chip
 		Lights( ): $mol_lights_toggle
 		Sources( ): $mol_link_source
+		score_final( ): string
+		Score_final( ): $mol_paragraph
 		Score_line( ): $mol_plot_line
 		Score_fill( ): $mol_plot_fill
 		score_series( next?: readonly(number)[] ): readonly(number)[]
@@ -3092,16 +3131,16 @@ declare namespace $ {
 		right_title( ): string
 		right( next?: any ): any
 		Right( ): $mol_button_major
-		Choices( ): $mol_view
-		description( ): string
-		Description( ): $mol_view
+		Choices( ): $mol_row
 		title( ): string
 		required( ): number
 		history( next?: readonly(number)[] ): readonly(number)[]
 		auto( ): readonly(any)[]
 		plugins( ): readonly(any)[]
 		tools( ): readonly(any)[]
+		body_content( ): readonly(any)[]
 		body( ): readonly(any)[]
+		description( ): string
 	}
 	
 }
@@ -3115,6 +3154,7 @@ declare namespace $.$$ {
         history_log(): string;
         wins(next?: number): number;
         score(): number;
+        score_final(): string;
     }
 }
 

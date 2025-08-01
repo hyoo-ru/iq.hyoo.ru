@@ -5640,6 +5640,84 @@ var $;
 "use strict";
 
 ;
+	($.$mol_paragraph) = class $mol_paragraph extends ($.$mol_view) {
+		line_height(){
+			return 24;
+		}
+		letter_width(){
+			return 7;
+		}
+		width_limit(){
+			return +Infinity;
+		}
+		row_width(){
+			return 0;
+		}
+		sub(){
+			return [(this.title())];
+		}
+	};
+
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $mol_paragraph extends $.$mol_paragraph {
+            maximal_width() {
+                let width = 0;
+                const letter = this.letter_width();
+                for (const kid of this.sub()) {
+                    if (!kid)
+                        continue;
+                    if (kid instanceof $mol_view) {
+                        width += kid.maximal_width();
+                    }
+                    else if (typeof kid !== 'object') {
+                        width += String(kid).length * letter;
+                    }
+                }
+                return width;
+            }
+            width_limit() {
+                return this.$.$mol_window.size().width;
+            }
+            minimal_width() {
+                return this.letter_width();
+            }
+            row_width() {
+                return Math.max(Math.min(this.width_limit(), this.maximal_width()), this.letter_width());
+            }
+            minimal_height() {
+                return Math.max(1, Math.ceil(this.maximal_width() / this.row_width())) * this.line_height();
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $mol_paragraph.prototype, "maximal_width", null);
+        __decorate([
+            $mol_mem
+        ], $mol_paragraph.prototype, "row_width", null);
+        __decorate([
+            $mol_mem
+        ], $mol_paragraph.prototype, "minimal_height", null);
+        $$.$mol_paragraph = $mol_paragraph;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/paragraph/paragraph.view.css", ":where([mol_paragraph]) {\n\tmargin: 0;\n\tmax-width: 100%;\n}\n");
+})($ || ($ = {}));
+
+;
 	($.$mol_svg_group) = class $mol_svg_group extends ($.$mol_svg) {
 		dom_name(){
 			return "g";
@@ -7882,6 +7960,20 @@ var $;
 "use strict";
 
 ;
+	($.$mol_row) = class $mol_row extends ($.$mol_view) {};
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/row/row.view.css", "[mol_row] {\n\tdisplay: flex;\n\tflex-wrap: wrap;\n\talign-items: flex-start;\n\talign-content: flex-start;\n\tjustify-content: flex-start;\n\tpadding: var(--mol_gap_block);\n\tgap: var(--mol_gap_block);\n\tflex: 0 0 auto;\n\tbox-sizing: border-box;\n\tmax-width: 100%;\n}\n\n[mol_row] > * {\n\tmax-width: 100%;\n}\n");
+})($ || ($ = {}));
+
+;
+"use strict";
+
+;
 	($.$hyoo_iq) = class $hyoo_iq extends ($.$mol_page) {
 		Brain(){
 			const obj = new this.$.$hyoo_iq_neuron(0);
@@ -7911,6 +8003,14 @@ var $;
 		Sources(){
 			const obj = new this.$.$mol_link_source();
 			(obj.uri) = () => ("https://github.com/hyoo-ru/iq.hyoo.ru/");
+			return obj;
+		}
+		score_final(){
+			return "";
+		}
+		Score_final(){
+			const obj = new this.$.$mol_paragraph();
+			(obj.sub) = () => ([(this.score_final())]);
 			return obj;
 		}
 		Score_line(){
@@ -8009,16 +8109,8 @@ var $;
 			return obj;
 		}
 		Choices(){
-			const obj = new this.$.$mol_view();
+			const obj = new this.$.$mol_row();
 			(obj.sub) = () => ([(this.Left()), (this.Right())]);
-			return obj;
-		}
-		description(){
-			return (this.$.$mol_locale.text("$hyoo_iq_description"));
-		}
-		Description(){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([(this.description())]);
 			return obj;
 		}
 		title(){
@@ -8044,13 +8136,18 @@ var $;
 				(this.Sources())
 			];
 		}
+		body_content(){
+			return [(this.Score_final()), (this.Body_content())];
+		}
 		body(){
 			return [
 				(this.Stats()), 
 				(this.History_log()), 
-				(this.Choices()), 
-				(this.Description())
+				(this.Choices())
 			];
+		}
+		description(){
+			return (this.$.$mol_locale.text("$hyoo_iq_description"));
 		}
 	};
 	($mol_mem(($.$hyoo_iq.prototype), "Brain"));
@@ -8059,6 +8156,7 @@ var $;
 	($mol_mem(($.$hyoo_iq.prototype), "Score"));
 	($mol_mem(($.$hyoo_iq.prototype), "Lights"));
 	($mol_mem(($.$hyoo_iq.prototype), "Sources"));
+	($mol_mem(($.$hyoo_iq.prototype), "Score_final"));
 	($mol_mem(($.$hyoo_iq.prototype), "Score_line"));
 	($mol_mem(($.$hyoo_iq.prototype), "Score_fill"));
 	($mol_mem(($.$hyoo_iq.prototype), "score_series"));
@@ -8073,7 +8171,6 @@ var $;
 	($mol_mem(($.$hyoo_iq.prototype), "right"));
 	($mol_mem(($.$hyoo_iq.prototype), "Right"));
 	($mol_mem(($.$hyoo_iq.prototype), "Choices"));
-	($mol_mem(($.$hyoo_iq.prototype), "Description"));
 	($mol_mem(($.$hyoo_iq.prototype), "history"));
 
 
@@ -8220,13 +8317,18 @@ var $;
                 this.score_series([...this.score_series(), this.score()]);
             }
             history_log() {
-                return this.history().map(val => val ? '▶' : '◀').join('');
+                return this.history().map(val => val ? '▶' : '◀').join('') || this.description();
             }
             wins(next = 0) {
                 return next;
             }
             score() {
                 return Math.round(this.wins() / (this.history().length + 1) * 200 - 100);
+            }
+            score_final() {
+                if (this.history().length !== 100)
+                    return $mol_mem_cached(() => this.score_final()) || '';
+                return this.score().toLocaleString(undefined, { signDisplay: "exceptZero" });
             }
         }
         __decorate([
@@ -8238,6 +8340,9 @@ var $;
         __decorate([
             $mol_mem
         ], $hyoo_iq.prototype, "score", null);
+        __decorate([
+            $mol_mem
+        ], $hyoo_iq.prototype, "score_final", null);
         $$.$hyoo_iq = $hyoo_iq;
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
@@ -8253,34 +8358,41 @@ var $;
             textShadow: '0 0',
         },
         Body_content: {
-            padding: 0,
             align: {
                 self: 'stretch',
             },
         },
-        Description: {
-            margin: 'auto',
-            padding: rem(.75),
-        },
         History_log: {
             display: 'flex',
-            margin: $mol_gap.block,
             padding: $mol_gap.block,
             flex: {
                 direction: 'row-reverse',
             },
+            align: {
+                self: 'center'
+            },
         },
         Choices: {
-            margin: [0, rem(.75)],
             '>': {
                 $mol_button: {
                     flex: {
-                        basis: per(50),
+                        basis: per(10),
                         shrink: 1,
+                        grow: 1,
                     },
                     justifyContent: 'center',
-                    margin: [0, rem(.75)],
                 },
+            },
+        },
+        Score_final: {
+            opacity: .5,
+            lineHeight: '1.5em',
+            justify: {
+                self: 'center',
+            },
+            font: {
+                family: 'monospace',
+                size: `33vmin`,
             },
         },
     });

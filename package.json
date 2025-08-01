@@ -167,6 +167,7 @@
     "$mol_link",
     "$mol_icon_script_text",
     "$mol_icon_script",
+    "$mol_paragraph",
     "$mol_plot_line",
     "$mol_plot",
     "$mol_plot_graph",
@@ -189,6 +190,7 @@
     "$mol_plot_pane",
     "$mol_touch",
     "$mol_button_major",
+    "$mol_row",
     "$mol_offline_install",
     "$mol_offline"
   ],
