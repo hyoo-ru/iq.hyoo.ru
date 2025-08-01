@@ -3226,7 +3226,8 @@ declare namespace $ {
 		Ruler_vert( ): $mol_plot_ruler_vert
 		Ruler_hor( ): $mol_plot_ruler_hor
 		Stats( ): $mol_chart
-		history_log( ): string
+		description( ): string
+		history_log( ): ReturnType< $hyoo_iq['description'] >
 		History_log( ): $mol_scroll
 		left_title( ): string
 		left( next?: any ): any
@@ -3242,8 +3243,14 @@ declare namespace $ {
 		plugins( ): readonly(any)[]
 		tools( ): readonly(any)[]
 		body_content( ): readonly(any)[]
+		ranks( ): ({ 
+			'XL': string,
+			'L': string,
+			'M': string,
+			'S': string,
+			'XS': string,
+		}) 
 		body( ): readonly(any)[]
-		description( ): string
 	}
 	
 }
@@ -3258,6 +3265,7 @@ declare namespace $.$$ {
         wins(next?: number): number;
         score(): number;
         score_final(): string;
+        rank(): string;
     }
 }
 

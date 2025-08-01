@@ -8371,8 +8371,11 @@ var $;
 			]);
 			return obj;
 		}
+		description(){
+			return (this.$.$mol_locale.text("$hyoo_iq_description"));
+		}
 		history_log(){
-			return "";
+			return (this.description());
 		}
 		History_log(){
 			const obj = new this.$.$mol_scroll();
@@ -8437,15 +8440,21 @@ var $;
 		body_content(){
 			return [(this.Score_final()), (this.Body_content())];
 		}
+		ranks(){
+			return {
+				"XL": (this.$.$mol_locale.text("$hyoo_iq_ranks_XL")), 
+				"L": (this.$.$mol_locale.text("$hyoo_iq_ranks_L")), 
+				"M": (this.$.$mol_locale.text("$hyoo_iq_ranks_M")), 
+				"S": (this.$.$mol_locale.text("$hyoo_iq_ranks_S")), 
+				"XS": (this.$.$mol_locale.text("$hyoo_iq_ranks_XS"))
+			};
+		}
 		body(){
 			return [
 				(this.Stats()), 
 				(this.History_log()), 
 				(this.Choices())
 			];
-		}
-		description(){
-			return (this.$.$mol_locale.text("$hyoo_iq_description"));
 		}
 	};
 	($mol_mem(($.$hyoo_iq.prototype), "Brain"));
@@ -8628,7 +8637,19 @@ var $;
             score_final() {
                 if (this.history().length !== 100)
                     return $mol_mem_cached(() => this.score_final()) || '';
-                return this.score().toLocaleString(undefined, { signDisplay: "exceptZero" });
+                return this.score().toLocaleString(undefined, { signDisplay: "exceptZero" }) + ' ' + this.rank();
+            }
+            rank() {
+                const score = this.score();
+                if (score >= +75)
+                    return this.ranks().XL;
+                if (score >= +25)
+                    return this.ranks().L;
+                if (score <= -25)
+                    return this.ranks().S;
+                if (score <= -75)
+                    return this.ranks().XS;
+                return this.ranks().M;
             }
         }
         __decorate([
@@ -8643,6 +8664,9 @@ var $;
         __decorate([
             $mol_mem
         ], $hyoo_iq.prototype, "score_final", null);
+        __decorate([
+            $mol_mem
+        ], $hyoo_iq.prototype, "rank", null);
         $$.$hyoo_iq = $hyoo_iq;
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
@@ -8685,14 +8709,13 @@ var $;
             },
         },
         Score_final: {
-            opacity: .5,
             lineHeight: '1.5em',
             justify: {
                 self: 'center',
             },
             font: {
                 family: 'monospace',
-                size: `33vmin`,
+                size: `8vmin`,
             },
         },
     });
