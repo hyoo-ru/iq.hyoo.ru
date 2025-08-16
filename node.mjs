@@ -9093,6 +9093,7 @@ var $;
                         grow: 1,
                     },
                     justifyContent: 'center',
+                    touchAction: 'none',
                 },
             },
         },
