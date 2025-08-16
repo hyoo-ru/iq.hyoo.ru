@@ -35,7 +35,7 @@ namespace $ {
 						grow: 1,
 					},
 					justifyContent: 'center',
-					userSelection: 'none',
+					userSelect: 'none',
 				},
 			},
 		},
