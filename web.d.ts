@@ -1171,6 +1171,16 @@ declare namespace $ {
     function $mol_style_define<Component extends $mol_view, Config extends $mol_style_guard<Component, Config>>(Component: new () => Component, config: Config): HTMLStyleElement | null;
 }
 
+declare namespace $.$$ {
+    class $mol_scroll extends $.$mol_scroll {
+        scroll_top(next?: number, cache?: 'cache'): number;
+        scroll_left(next?: number, cache?: 'cache'): number;
+        event_scroll(next?: Event): void;
+        minimal_height(): number;
+        minimal_width(): number;
+    }
+}
+
 declare namespace $ {
 
 	export class $mol_scroll extends $mol_view {
@@ -1189,16 +1199,6 @@ declare namespace $ {
 }
 
 //# sourceMappingURL=scroll.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $mol_scroll extends $.$mol_scroll {
-        scroll_top(next?: number, cache?: 'cache'): number;
-        scroll_left(next?: number, cache?: 'cache'): number;
-        event_scroll(next?: Event): void;
-        minimal_height(): number;
-        minimal_width(): number;
-    }
-}
-
 declare namespace $.$$ {
 }
 
@@ -1314,6 +1314,12 @@ declare namespace $ {
     }
 }
 
+declare namespace $.$$ {
+    class $mol_theme_auto extends $.$mol_theme_auto {
+        theme(): string;
+    }
+}
+
 declare namespace $ {
 
 	export class $mol_theme_auto extends $mol_plugin {
@@ -1329,8 +1335,9 @@ declare namespace $ {
 
 //# sourceMappingURL=auto.view.tree.d.ts.map
 declare namespace $.$$ {
-    class $mol_theme_auto extends $.$mol_theme_auto {
-        theme(): string;
+    class $mol_hotkey extends $.$mol_hotkey {
+        key(): { [key in keyof typeof $mol_keyboard_code]?: (event: KeyboardEvent) => void; };
+        keydown(event?: KeyboardEvent): void;
     }
 }
 
@@ -1350,13 +1357,6 @@ declare namespace $ {
 }
 
 //# sourceMappingURL=hotkey.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $mol_hotkey extends $.$mol_hotkey {
-        key(): { [key in keyof typeof $mol_keyboard_code]?: (event: KeyboardEvent) => void; };
-        keydown(event?: KeyboardEvent): void;
-    }
-}
-
 declare namespace $ {
 
 	export class $mol_chip extends $mol_view {
@@ -1395,6 +1395,22 @@ declare namespace $ {
 }
 
 //# sourceMappingURL=speck.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $mol_button extends $.$mol_button {
+        status(next?: any[]): any[];
+        disabled(): boolean;
+        event_activate(next: Event): void;
+        event_key_press(event: KeyboardEvent): any;
+        tab_index(): number;
+        error(): string;
+        hint_safe(): string;
+        sub_visible(): ($mol_view_content | $mol_speck)[];
+    }
+}
+
+declare namespace $ {
+}
+
 declare namespace $ {
 
 	type $mol_speck__value_mol_button_1 = $mol_type_enforce<
@@ -1434,22 +1450,6 @@ declare namespace $ {
 }
 
 //# sourceMappingURL=button.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $mol_button extends $.$mol_button {
-        status(next?: any[]): any[];
-        disabled(): boolean;
-        event_activate(next: Event): void;
-        event_key_press(event: KeyboardEvent): any;
-        tab_index(): number;
-        error(): string;
-        hint_safe(): string;
-        sub_visible(): ($mol_view_content | $mol_speck)[];
-    }
-}
-
-declare namespace $ {
-}
-
 declare namespace $ {
 }
 
@@ -1481,6 +1481,14 @@ declare namespace $ {
     }
 }
 
+declare namespace $.$$ {
+    class $mol_svg extends $.$mol_svg {
+        computed_style(): Record<string, any>;
+        font_size(): number;
+        font_family(): any;
+    }
+}
+
 declare namespace $ {
 
 	export class $mol_svg extends $mol_view {
@@ -1494,14 +1502,6 @@ declare namespace $ {
 }
 
 //# sourceMappingURL=svg.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $mol_svg extends $.$mol_svg {
-        computed_style(): Record<string, any>;
-        font_size(): number;
-        font_family(): any;
-    }
-}
-
 declare namespace $ {
 }
 
@@ -1593,10 +1593,9 @@ declare namespace $ {
     function $mol_charset_decode(buffer: AllowSharedBufferSource, encoding?: $mol_charset_encoding): string;
 }
 
-declare var $node: any;
-
 declare namespace $ {
-    function $mol_charset_encode(value: string): Uint8Array<ArrayBuffer>;
+    function $mol_charset_encode(str: string): Uint8Array<ArrayBuffer>;
+    function $mol_charset_encode_to(str: string, buf: Uint8Array<ArrayBuffer>, from?: number): number;
 }
 
 declare namespace $ {
@@ -1801,6 +1800,14 @@ declare namespace $ {
     function $mol_dom_capture_canvas(el: Element): Promise<HTMLCanvasElement>;
 }
 
+declare namespace $.$$ {
+    class $mol_button_share extends $.$mol_button_share {
+        capture(): any;
+        uri(): string;
+        click(): Promise<void>;
+    }
+}
+
 declare namespace $ {
 
 	export class $mol_button_share extends $mol_button_minor {
@@ -1815,15 +1822,16 @@ declare namespace $ {
 }
 
 //# sourceMappingURL=share.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $mol_button_share extends $.$mol_button_share {
-        capture(): any;
-        uri(): string;
-        click(): Promise<void>;
-    }
+declare namespace $ {
 }
 
-declare namespace $ {
+declare namespace $.$$ {
+    class $mol_check extends $.$mol_check {
+        click(next?: Event): void;
+        sub(): readonly $mol_view_content[];
+        label(): readonly any[];
+        aria_checked(): string;
+    }
 }
 
 declare namespace $ {
@@ -1852,15 +1860,6 @@ declare namespace $ {
 }
 
 //# sourceMappingURL=check.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $mol_check extends $.$mol_check {
-        click(next?: Event): void;
-        sub(): readonly $mol_view_content[];
-        label(): readonly any[];
-        aria_checked(): string;
-    }
-}
-
 declare namespace $ {
 }
 
@@ -1881,6 +1880,12 @@ declare namespace $ {
 }
 
 //# sourceMappingURL=4.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $mol_lights_toggle extends $.$mol_lights_toggle {
+        lights(next?: boolean): boolean;
+    }
+}
+
 declare namespace $ {
 
 	export class $mol_lights_toggle extends $mol_check_icon {
@@ -1895,8 +1900,17 @@ declare namespace $ {
 
 //# sourceMappingURL=toggle.view.tree.d.ts.map
 declare namespace $.$$ {
-    class $mol_lights_toggle extends $.$mol_lights_toggle {
-        lights(next?: boolean): boolean;
+    class $mol_link extends $.$mol_link {
+        uri_toggle(): string;
+        uri(): string;
+        uri_off(): string;
+        uri_native(): URL;
+        current(): boolean;
+        file_name(): string;
+        minimal_height(): number;
+        external(): boolean;
+        target(): '_self' | '_blank' | '_top' | '_parent' | string;
+        hint_safe(): string;
     }
 }
 
@@ -1935,21 +1949,6 @@ declare namespace $ {
 }
 
 //# sourceMappingURL=link.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $mol_link extends $.$mol_link {
-        uri_toggle(): string;
-        uri(): string;
-        uri_off(): string;
-        uri_native(): URL;
-        current(): boolean;
-        file_name(): string;
-        minimal_height(): number;
-        external(): boolean;
-        target(): '_self' | '_blank' | '_top' | '_parent' | string;
-        hint_safe(): string;
-    }
-}
-
 declare namespace $ {
 }
 
@@ -1982,19 +1981,6 @@ declare namespace $ {
 }
 
 //# sourceMappingURL=source.view.tree.d.ts.map
-declare namespace $ {
-
-	export class $mol_paragraph extends $mol_view {
-		line_height( ): number
-		letter_width( ): number
-		width_limit( ): number
-		row_width( ): number
-		sub( ): readonly(any)[]
-	}
-	
-}
-
-//# sourceMappingURL=paragraph.view.tree.d.ts.map
 declare namespace $.$$ {
     class $mol_paragraph extends $.$mol_paragraph {
         maximal_width(): number;
@@ -2008,6 +1994,19 @@ declare namespace $.$$ {
 declare namespace $ {
 }
 
+declare namespace $ {
+
+	export class $mol_paragraph extends $mol_view {
+		line_height( ): number
+		letter_width( ): number
+		width_limit( ): number
+		row_width( ): number
+		sub( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=paragraph.view.tree.d.ts.map
 declare namespace $ {
 
 	export class $mol_svg_group extends $mol_svg {
@@ -2105,6 +2104,23 @@ declare namespace $ {
 }
 
 //# sourceMappingURL=title.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $mol_plot_graph extends $.$mol_plot_graph {
+        viewport(): $mol_vector_2d<$mol_vector_range<number>>;
+        indexes(): readonly number[];
+        repos_x(val: number): number;
+        repos_y(val: number): number;
+        points(): readonly (readonly number[])[];
+        series_x(): readonly number[];
+        dimensions(): $mol_vector_2d<$mol_vector_range<number>>;
+        color(): string;
+        front(): readonly $.$mol_svg[];
+    }
+}
+
+declare namespace $ {
+}
+
 declare namespace $ {
 
 	type $mol_vector_range__mol_plot_graph_1 = $mol_type_enforce<
@@ -2237,16 +2253,10 @@ declare namespace $ {
 
 //# sourceMappingURL=graph.view.tree.d.ts.map
 declare namespace $.$$ {
-    class $mol_plot_graph extends $.$mol_plot_graph {
-        viewport(): $mol_vector_2d<$mol_vector_range<number>>;
-        indexes(): readonly number[];
-        repos_x(val: number): number;
-        repos_y(val: number): number;
-        points(): readonly (readonly number[])[];
-        series_x(): readonly number[];
-        dimensions(): $mol_vector_2d<$mol_vector_range<number>>;
-        color(): string;
-        front(): readonly $.$mol_svg[];
+    class $mol_plot_line extends $.$mol_plot_line {
+        sub(): readonly any[];
+        indexes(): number[];
+        curve(): string;
     }
 }
 
@@ -2282,10 +2292,10 @@ declare namespace $ {
 
 //# sourceMappingURL=line.view.tree.d.ts.map
 declare namespace $.$$ {
-    class $mol_plot_line extends $.$mol_plot_line {
-        sub(): readonly any[];
-        indexes(): number[];
+    class $mol_plot_fill extends $.$mol_plot_fill {
         curve(): string;
+        front(): never[];
+        back(): this[];
     }
 }
 
@@ -2302,14 +2312,13 @@ declare namespace $ {
 
 //# sourceMappingURL=fill.view.tree.d.ts.map
 declare namespace $.$$ {
-    class $mol_plot_fill extends $.$mol_plot_fill {
-        curve(): string;
-        front(): never[];
-        back(): this[];
+    class $mol_plot_group extends $.$mol_plot_group {
+        graphs_enriched(): readonly $.$mol_plot_graph[];
+        dimensions(): $mol_vector_2d<$mol_vector_range<number>>;
+        graph_samples(): any[];
+        back(): $mol_plot_graph[];
+        front(): $mol_plot_graph[];
     }
-}
-
-declare namespace $ {
 }
 
 declare namespace $ {
@@ -2331,12 +2340,9 @@ declare namespace $ {
 
 //# sourceMappingURL=group.view.tree.d.ts.map
 declare namespace $.$$ {
-    class $mol_plot_group extends $.$mol_plot_group {
-        graphs_enriched(): readonly $.$mol_plot_graph[];
-        dimensions(): $mol_vector_2d<$mol_vector_range<number>>;
-        graph_samples(): any[];
-        back(): $mol_plot_graph[];
-        front(): $mol_plot_graph[];
+    class $mol_svg_rect extends $.$mol_svg_rect {
+        pos_x(): any;
+        pos_y(): any;
     }
 }
 
@@ -2361,10 +2367,13 @@ declare namespace $ {
 
 //# sourceMappingURL=rect.view.tree.d.ts.map
 declare namespace $.$$ {
-    class $mol_svg_rect extends $.$mol_svg_rect {
+    class $mol_svg_text extends $.$mol_svg_text {
         pos_x(): any;
         pos_y(): any;
     }
+}
+
+declare namespace $ {
 }
 
 declare namespace $ {
@@ -2390,18 +2399,25 @@ declare namespace $ {
 }
 
 //# sourceMappingURL=text.view.tree.d.ts.map
+declare namespace $ {
+    function $mol_math_round_expand(val: number, gap?: number): number;
+}
+
 declare namespace $.$$ {
-    class $mol_svg_text extends $.$mol_svg_text {
-        pos_x(): any;
-        pos_y(): any;
+    class $mol_plot_ruler extends $.$mol_plot_ruler {
+        labels_formatted(): $.$mol_svg_text[];
+        step(): number;
+        snap_to_grid(coord: number): number;
+        axis_points(): number[];
+        precision(): number;
+        label_text(index: number): string;
+        font_size(): number;
+        back(): $mol_svg_path[];
+        front(): readonly $.$mol_svg[];
     }
 }
 
 declare namespace $ {
-}
-
-declare namespace $ {
-    function $mol_math_round_expand(val: number, gap?: number): number;
 }
 
 declare namespace $ {
@@ -2511,16 +2527,15 @@ declare namespace $ {
 
 //# sourceMappingURL=ruler.view.tree.d.ts.map
 declare namespace $.$$ {
-    class $mol_plot_ruler extends $.$mol_plot_ruler {
-        labels_formatted(): $.$mol_svg_text[];
-        step(): number;
-        snap_to_grid(coord: number): number;
-        axis_points(): number[];
-        precision(): number;
-        label_text(index: number): string;
-        font_size(): number;
-        back(): $mol_svg_path[];
-        front(): readonly $.$mol_svg[];
+    class $mol_plot_ruler_vert extends $.$mol_plot_ruler_vert {
+        dimensions_axis(): $mol_vector_range<number>;
+        viewport_axis(): $mol_vector_range<number>;
+        scale_axis(): number;
+        scale_step(): number;
+        shift_axis(): number;
+        curve(): string;
+        title_pos_x(): string;
+        label_pos_y(index: number): string;
     }
 }
 
@@ -2542,15 +2557,17 @@ declare namespace $ {
 
 //# sourceMappingURL=vert.view.tree.d.ts.map
 declare namespace $.$$ {
-    class $mol_plot_ruler_vert extends $.$mol_plot_ruler_vert {
+    class $mol_plot_ruler_hor extends $.$mol_plot_ruler_hor {
         dimensions_axis(): $mol_vector_range<number>;
         viewport_axis(): $mol_vector_range<number>;
         scale_axis(): number;
         scale_step(): number;
         shift_axis(): number;
         curve(): string;
-        title_pos_x(): string;
-        label_pos_y(index: number): string;
+        label_pos_x(index: number): string;
+        background_y(): string;
+        title_pos_y(): string;
+        background_height(): string;
     }
 }
 
@@ -2572,17 +2589,10 @@ declare namespace $ {
 
 //# sourceMappingURL=hor.view.tree.d.ts.map
 declare namespace $.$$ {
-    class $mol_plot_ruler_hor extends $.$mol_plot_ruler_hor {
-        dimensions_axis(): $mol_vector_range<number>;
-        viewport_axis(): $mol_vector_range<number>;
-        scale_axis(): number;
-        scale_step(): number;
-        shift_axis(): number;
-        curve(): string;
-        label_pos_x(index: number): string;
-        background_y(): string;
-        title_pos_y(): string;
-        background_height(): string;
+    class $mol_gallery extends $.$mol_gallery {
+        sub(): readonly $mol_view[];
+        side_items(id: number): $mol_view[];
+        side_size(id: number): string;
     }
 }
 
@@ -2615,10 +2625,11 @@ declare namespace $ {
 
 //# sourceMappingURL=gallery.view.tree.d.ts.map
 declare namespace $.$$ {
-    class $mol_gallery extends $.$mol_gallery {
-        sub(): readonly $mol_view[];
-        side_items(id: number): $mol_view[];
-        side_size(id: number): string;
+    class $mol_chart_legend extends $.$mol_chart_legend {
+        graphs_front(): readonly $mol_plot_graph[];
+        graph_legends(): readonly $mol_view[];
+        graph_title(index: number): string;
+        Graph_sample(index: number): any;
     }
 }
 
@@ -2664,15 +2675,24 @@ declare namespace $ {
 
 //# sourceMappingURL=legend.view.tree.d.ts.map
 declare namespace $.$$ {
-    class $mol_chart_legend extends $.$mol_chart_legend {
-        graphs_front(): readonly $mol_plot_graph[];
-        graph_legends(): readonly $mol_view[];
-        graph_title(index: number): string;
-        Graph_sample(index: number): any;
+    class $mol_touch extends $.$mol_touch {
+        auto(): void;
+        pointer_events(next?: readonly PointerEvent[]): readonly PointerEvent[];
+        pointer_coords(): $mol_vector<$mol_vector_2d<number>, number>;
+        pointer_center(): $mol_vector_2d<number>;
+        event_coords(event: PointerEvent | WheelEvent): $mol_vector_2d<number>;
+        action_point(): $mol_vector_2d<number>;
+        event_eat(event: PointerEvent | WheelEvent): string;
+        event_start(event: PointerEvent): void;
+        event_move(event: PointerEvent): void;
+        event_end(event: PointerEvent): void;
+        event_leave(event: PointerEvent): void;
+        swipe_left(event: PointerEvent): void;
+        swipe_right(event: PointerEvent): void;
+        swipe_top(event: PointerEvent): void;
+        swipe_bottom(event: PointerEvent): void;
+        event_wheel(event: WheelEvent): void;
     }
-}
-
-declare namespace $ {
 }
 
 declare namespace $ {
@@ -2743,24 +2763,32 @@ declare namespace $ {
 
 //# sourceMappingURL=touch.view.tree.d.ts.map
 declare namespace $.$$ {
-    class $mol_touch extends $.$mol_touch {
-        auto(): void;
-        pointer_events(next?: readonly PointerEvent[]): readonly PointerEvent[];
-        pointer_coords(): $mol_vector<$mol_vector_2d<number>, number>;
-        pointer_center(): $mol_vector_2d<number>;
-        event_coords(event: PointerEvent | WheelEvent): $mol_vector_2d<number>;
-        action_point(): $mol_vector_2d<number>;
-        event_eat(event: PointerEvent | WheelEvent): string;
-        event_start(event: PointerEvent): void;
-        event_move(event: PointerEvent): void;
-        event_end(event: PointerEvent): void;
-        event_leave(event: PointerEvent): void;
-        swipe_left(event: PointerEvent): void;
-        swipe_right(event: PointerEvent): void;
-        swipe_top(event: PointerEvent): void;
-        swipe_bottom(event: PointerEvent): void;
-        event_wheel(event: WheelEvent): void;
+    class $mol_plot_pane extends $.$mol_plot_pane {
+        dimensions(): $mol_vector_2d<$mol_vector_range<number>>;
+        size(): $mol_vector_2d<number>;
+        graph_hue(index: number): number;
+        graphs_colored(): $.$mol_plot_graph[];
+        size_real(): $mol_vector_2d<number>;
+        view_box(): string;
+        scale_limit(): $mol_vector_2d<$mol_vector_range<number>>;
+        scale_default(): $mol_vector_2d<number>;
+        scale(next?: $mol_vector_2d<number>): $mol_vector_2d<number>;
+        scale_x(next?: number): number;
+        scale_y(next?: number): number;
+        shift_limit(): $mol_vector_2d<$mol_vector_range<number>>;
+        shift_default(): $mol_vector_2d<number>;
+        graph_touched: boolean;
+        shift(next?: $mol_vector_2d<number>): $mol_vector_2d<number>;
+        reset(event?: Event): void;
+        graphs_visible(): $.$mol_plot_graph[];
+        graphs_positioned(): readonly $.$mol_plot_graph[];
+        dimensions_viewport(): $mol_vector<$mol_vector_range<number>, 2>;
+        viewport(): $mol_vector_2d<$mol_vector_range<number>>;
+        graphs_sorted(): $.$mol_svg[];
     }
+}
+
+declare namespace $ {
 }
 
 declare namespace $ {
@@ -2966,35 +2994,6 @@ declare namespace $ {
 }
 
 //# sourceMappingURL=pane.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $mol_plot_pane extends $.$mol_plot_pane {
-        dimensions(): $mol_vector_2d<$mol_vector_range<number>>;
-        size(): $mol_vector_2d<number>;
-        graph_hue(index: number): number;
-        graphs_colored(): $.$mol_plot_graph[];
-        size_real(): $mol_vector_2d<number>;
-        view_box(): string;
-        scale_limit(): $mol_vector_2d<$mol_vector_range<number>>;
-        scale_default(): $mol_vector_2d<number>;
-        scale(next?: $mol_vector_2d<number>): $mol_vector_2d<number>;
-        scale_x(next?: number): number;
-        scale_y(next?: number): number;
-        shift_limit(): $mol_vector_2d<$mol_vector_range<number>>;
-        shift_default(): $mol_vector_2d<number>;
-        graph_touched: boolean;
-        shift(next?: $mol_vector_2d<number>): $mol_vector_2d<number>;
-        reset(event?: Event): void;
-        graphs_visible(): $.$mol_plot_graph[];
-        graphs_positioned(): readonly $.$mol_plot_graph[];
-        dimensions_viewport(): $mol_vector<$mol_vector_range<number>, 2>;
-        viewport(): $mol_vector_2d<$mol_vector_range<number>>;
-        graphs_sorted(): $.$mol_svg[];
-    }
-}
-
-declare namespace $ {
-}
-
 declare namespace $ {
 }
 
